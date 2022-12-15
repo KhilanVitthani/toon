@@ -1,11 +1,8 @@
-import 'package:all_dogs/app/constants/api_constants.dart';
-import 'package:all_dogs/app/utilities/progress_dialog_utils.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
-
 import '../../main.dart';
+import 'api_constants.dart';
 
 class MySize {
   static late MediaQueryData _mediaQueryData;
@@ -265,19 +262,9 @@ CachedNetworkImage getImageByLink(
       ),
     ),
     errorWidget: (context, url, error) => Image(
-        image: AssetImage(imagePath + imagePlaceHolder),
+        image: NetworkImage(imagePath + imagePlaceHolder),
         height: height,
         width: width,
         fit: boxFit),
   );
-}
-
-urlLauncher({required Uri url}) async {
-  await launchUrl(url).catchError((error) async {
-    await getIt<CustomDialogs>().getDialog(
-        title: "Failed", desc: "Unable to find whatsapp in your device");
-    return await false;
-  }).then((value) async {
-    return await true;
-  });
 }

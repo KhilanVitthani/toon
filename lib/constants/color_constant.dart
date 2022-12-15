@@ -1,4 +1,4 @@
-import 'package:all_dogs/app/constants/sizeConstant.dart';
+import 'package:ai_image_enlarger/constants/sizeConstant.dart';
 import 'package:flutter/material.dart';
 
 class BaseTheme {
