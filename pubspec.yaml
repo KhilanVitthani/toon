@@ -1,0 +1,34 @@
+name: ai_image_enlarger
+version: 1.0.0+1
+publish_to: none
+description: A new Flutter project.
+environment: 
+  sdk: '>=2.17.6 <3.0.0'
+
+dependencies: 
+  cupertino_icons: ^1.0.2
+  connectivity_plus:
+  cached_network_image:
+  get_it:
+  get_storage:
+  dio:
+  http:
+  image_picker: ^0.8.0
+  fluttertoast:
+  image_cropper: ^3.0.1
+  screenshot:
+  image_gallery_saver:
+  permission_handler:
+
+  get: 4.6.5
+  flutter: 
+    sdk: flutter
+
+dev_dependencies: 
+  flutter_lints: ^2.0.0
+  flutter_test: 
+    sdk: flutter
+
+flutter: 
+  uses-material-design: true
+
