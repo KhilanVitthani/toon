@@ -74,6 +74,132 @@ class HomeView extends GetView<HomeController> {
               ),
             ),
           )),
+          Center(
+              child: GestureDetector(
+            onTap: () {
+              controller.isFromAnime.value = true;
+              uploadImage(context);
+            },
+            child: Container(
+              width: MySize.getWidth(100),
+              height: MySize.getHeight(50),
+              alignment: Alignment.center,
+              child: Text(
+                "AI Anime",
+                style: TextStyle(
+                    fontSize: MySize.getHeight(15),
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          )),
+          Center(
+              child: GestureDetector(
+            onTap: () {
+              controller.isFromImageEnlarger.value = true;
+              uploadImage(context);
+            },
+            child: Container(
+              width: MySize.getWidth(100),
+              height: MySize.getHeight(50),
+              alignment: Alignment.center,
+              child: Text(
+                "AI Image Enlarger",
+                style: TextStyle(
+                    fontSize: MySize.getHeight(15),
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          )),
+          Center(
+              child: GestureDetector(
+            onTap: () {
+              controller.isFromImageUpscaler.value = true;
+              uploadImage(context);
+            },
+            child: Container(
+              width: MySize.getWidth(100),
+              height: MySize.getHeight(50),
+              alignment: Alignment.center,
+              child: Text(
+                "AI Image Upscaler",
+                style: TextStyle(
+                    fontSize: MySize.getHeight(15),
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          )),
+          Center(
+              child: GestureDetector(
+            onTap: () {
+              controller.isFromSharpener.value = true;
+              uploadImage(context);
+            },
+            child: Container(
+              width: MySize.getWidth(100),
+              height: MySize.getHeight(50),
+              alignment: Alignment.center,
+              child: Text(
+                "AI Sharpener",
+                style: TextStyle(
+                    fontSize: MySize.getHeight(15),
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          )),
+          Center(
+              child: GestureDetector(
+            onTap: () {
+              controller.isFromFaceRetouch.value = true;
+              uploadImage(context);
+            },
+            child: Container(
+              width: MySize.getWidth(100),
+              height: MySize.getHeight(50),
+              alignment: Alignment.center,
+              child: Text(
+                "AI Face Retouch",
+                style: TextStyle(
+                    fontSize: MySize.getHeight(15),
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          )),
+          Center(
+              child: GestureDetector(
+            onTap: () {
+              controller.isFromBGRemover.value = true;
+              uploadImage(context);
+            },
+            child: Container(
+              width: MySize.getWidth(100),
+              height: MySize.getHeight(50),
+              alignment: Alignment.center,
+              child: Text(
+                "AI BG Remover",
+                style: TextStyle(
+                    fontSize: MySize.getHeight(15),
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          )),
+          Center(
+              child: GestureDetector(
+            onTap: () {
+              controller.isFromColorizer.value = true;
+              uploadImage(context);
+            },
+            child: Container(
+              width: MySize.getWidth(100),
+              height: MySize.getHeight(50),
+              alignment: Alignment.center,
+              child: Text(
+                "AI Colorizer",
+                style: TextStyle(
+                    fontSize: MySize.getHeight(15),
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          )),
         ],
       ),
     );

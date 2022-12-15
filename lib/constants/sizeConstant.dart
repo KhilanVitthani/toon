@@ -262,7 +262,8 @@ CachedNetworkImage getImageByLink(
       ),
     ),
     errorWidget: (context, url, error) => Image(
-        image: NetworkImage(imagePath + imagePlaceHolder),
+        image: NetworkImage(
+            "https://img.freepik.com/free-vector/oops-404-error-with-broken-robot-concept-illustration_114360-1932.jpg?w=740&t=st=1671101893~exp=1671102493~hmac=9c13ac4d975b5a7fe887c35c0cd6429483008d20d370099b6c0a40a8417427dd"),
         height: height,
         width: width,
         fit: boxFit),

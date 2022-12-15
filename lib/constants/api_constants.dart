@@ -17,6 +17,13 @@ class ArgumentConstant {
   static const isFromCatoonizer = "isFromCatoonizer";
   static const isFromEnhancer = "isFromEnhancer";
   static const isFromDenoiser = "isFromDenoiser";
+  static const isFromAnime = "isFromAnime";
+  static const isFromImageEnlarger = "isFromImageEnlarger";
+  static const isFromImageUpscaler = "isFromImageUpscaler";
+  static const isFromSharpener = "isFromSharpener";
+  static const isFromFaceRetouch = "isFromFaceRetouch";
+  static const isFromBGRemover = "isFromBGRemover";
+  static const isFromColorizer = "isFromColorizer";
 
   static const password = "password";
 }

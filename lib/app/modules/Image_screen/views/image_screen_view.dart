@@ -28,6 +28,12 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
           child: Scaffold(
             appBar: AppBar(
               actions: [
+                IconButton(
+                    onPressed: () {
+                      Get.offAndToNamed(Routes.HOME);
+                    },
+                    icon: Icon(Icons.arrow_back)),
+                Spacer(),
                 GestureDetector(
                   onTap: () {
                     controller.screenshotController
