@@ -19,6 +19,8 @@ dependencies:
   screenshot:
   image_gallery_saver:
   permission_handler:
+  flutter_svg:
+  google_fonts:
 
   get: 4.6.5
   flutter: 
@@ -31,4 +33,5 @@ dev_dependencies:
 
 flutter: 
   uses-material-design: true
-
+  assets:
+    - assets/images/

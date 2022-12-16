@@ -1,4 +1,7 @@
+import 'package:ai_image_enlarger/constants/api_constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 import '../constants/color_constant.dart';
 import '../constants/sizeConstant.dart';
@@ -12,26 +15,44 @@ Widget getButton({
   Color? textColor,
   FontWeight? fontWeight,
   double? borderRadius,
+  String? image,
   Widget? widget,
 }) {
   return Container(
-    height: MySize.getHeight(height ?? 47),
-    width: MySize.getWidth(width ?? 150),
-    alignment: Alignment.center,
-    decoration: BoxDecoration(
-      color: backColor ?? appTheme.primaryTheme,
-      borderRadius: BorderRadius.circular(MySize.getHeight(borderRadius ?? 5)),
-    ),
-    child: (!isNullEmptyOrFalse(widget))
-        ? widget
-        : Text(
-            title,
-            style: TextStyle(
-                color: textColor ?? Colors.white,
-                fontSize: MySize.getHeight(textSize ?? 17),
-                fontWeight: fontWeight ?? FontWeight.w500),
-          ),
-  );
+      height: MySize.getHeight(height ?? 47),
+      width: MySize.getWidth(width ?? 150),
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: backColor ?? appTheme.buttonColor,
+        borderRadius:
+            BorderRadius.circular(MySize.getHeight(borderRadius ?? 5)),
+      ),
+      child: (!isNullEmptyOrFalse(widget))
+          ? widget
+          : (image!.isEmpty)
+              ? Text(
+                  title,
+                  style: TextStyle(
+                      color: textColor ?? Colors.white,
+                      fontSize: MySize.getHeight(textSize ?? 17),
+                      fontWeight: fontWeight ?? FontWeight.w500),
+                )
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SvgPicture.asset(imagePath + image),
+                    SizedBox(
+                      width: MySize.getWidth(12),
+                    ),
+                    Text(
+                      title,
+                      style: TextStyle(
+                          color: textColor ?? Colors.white,
+                          fontSize: MySize.getHeight(textSize ?? 17),
+                          fontWeight: fontWeight ?? FontWeight.w500),
+                    ),
+                  ],
+                ));
 }
 
 String? validateEmail(String? value) {

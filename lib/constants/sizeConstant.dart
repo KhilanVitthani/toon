@@ -31,7 +31,7 @@ class MySize {
     safeWidth = (screenWidth - _safeAreaWidth);
     safeHeight = (screenHeight - _safeAreaHeight);
 
-    scaleFactorHeight = (safeHeight! / 748);
+    scaleFactorHeight = (safeHeight! / 800);
     if (scaleFactorHeight < 1) {
       double diff = (1 - scaleFactorHeight) * (1 - scaleFactorHeight);
       scaleFactorHeight += diff;
