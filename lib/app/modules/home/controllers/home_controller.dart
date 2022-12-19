@@ -22,6 +22,7 @@ class HomeController extends GetxController {
   RxBool isFromFaceRetouch = false.obs;
   RxBool isFromBGRemover = false.obs;
   RxBool isFromColorizer = false.obs;
+  RxBool isFromMagicEraser = false.obs;
   @override
   void onInit() {
     super.onInit();

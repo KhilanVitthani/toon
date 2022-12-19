@@ -8,6 +8,10 @@ import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login_screen/bindings/login_screen_binding.dart';
 import '../modules/login_screen/views/login_screen_view.dart';
+import '../modules/magic_remove_page/bindings/magic_remove_page_binding.dart';
+import '../modules/magic_remove_page/bindings/magic_remove_page_binding.dart';
+import '../modules/magic_remove_page/views/magic_remove_page_view.dart';
+import '../modules/magic_remove_page/views/magic_remove_page_view.dart';
 import '../modules/signup_screen/bindings/signup_screen_binding.dart';
 import '../modules/signup_screen/views/signup_screen_view.dart';
 
@@ -43,6 +47,18 @@ class AppPages {
       name: _Paths.IMAGE_SCREEN,
       page: () => const ImageScreenView(),
       binding: ImageScreenBinding(),
+    ),
+    GetPage(
+      name: _Paths.MAGIC_REMOVE_PAGE,
+      page: () => const MagicRemovePageView(),
+      binding: MagicRemovePageBinding(),
+      children: [
+        GetPage(
+          name: _Paths.MAGIC_REMOVE_PAGE,
+          page: () => const MagicRemovePageView(),
+          binding: MagicRemovePageBinding(),
+        ),
+      ],
     ),
   ];
 }

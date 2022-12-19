@@ -8,6 +8,7 @@ abstract class Routes {
   static const SIGNUP_SCREEN = _Paths.SIGNUP_SCREEN;
   static const FORGET_PASSWORD = _Paths.FORGET_PASSWORD;
   static const IMAGE_SCREEN = _Paths.IMAGE_SCREEN;
+  static const MAGIC_REMOVE_PAGE = _Paths.MAGIC_REMOVE_PAGE;
 }
 
 abstract class _Paths {
@@ -17,4 +18,5 @@ abstract class _Paths {
   static const SIGNUP_SCREEN = '/signup-screen';
   static const FORGET_PASSWORD = '/forget-password';
   static const IMAGE_SCREEN = '/image-screen';
+  static const MAGIC_REMOVE_PAGE = '/magic-remove-page';
 }

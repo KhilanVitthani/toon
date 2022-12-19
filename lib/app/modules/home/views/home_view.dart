@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:ai_image_enlarger/app/routes/app_pages.dart';
 import 'package:ai_image_enlarger/constants/api_constants.dart';
 import 'package:ai_image_enlarger/constants/color_constant.dart';
 import 'package:ai_image_enlarger/constants/sizeConstant.dart';
@@ -46,12 +47,12 @@ class HomeView extends GetView<HomeController> {
               ),
               ImageButton(
                   onTap: () {
-                    controller.isFromSharpener.value = true;
+                    controller.isFromEnhancer.value = true;
                     uploadImage(context);
                   },
                   context: context,
-                  title: "AI Sharpener",
-                  image: "AiSharpener.png"),
+                  title: "AI Enhancer",
+                  image: "AiEnhancer.png"),
               SizedBox(
                 height: MySize.getHeight(20),
               ),
@@ -79,102 +80,67 @@ class HomeView extends GetView<HomeController> {
               ),
               ImageButton(
                   onTap: () {
-                    controller.isFromEnhancer.value = true;
+                    controller.isFromImageUpscaler.value = true;
                     uploadImage(context);
                   },
                   context: context,
-                  title: "AI Enhancer",
-                  image: "AiEnhancer.png"),
-              Center(
-                  child: GestureDetector(
-                onTap: () {
-                  controller.isFromDenoiser.value = true;
-                  uploadImage(context);
-                },
-                child: Container(
-                  width: MySize.getWidth(100),
-                  height: MySize.getHeight(50),
-                  alignment: Alignment.center,
-                  child: Text(
-                    "AI Denoiser",
-                    style: TextStyle(
-                        fontSize: MySize.getHeight(15),
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-              )),
-              Center(
-                  child: GestureDetector(
-                onTap: () {
-                  controller.isFromAnime.value = true;
-                  uploadImage(context);
-                },
-                child: Container(
-                  width: MySize.getWidth(100),
-                  height: MySize.getHeight(50),
-                  alignment: Alignment.center,
-                  child: Text(
-                    "AI Anime",
-                    style: TextStyle(
-                        fontSize: MySize.getHeight(15),
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-              )),
-              Center(
-                  child: GestureDetector(
-                onTap: () {
-                  controller.isFromImageEnlarger.value = true;
-                  uploadImage(context);
-                },
-                child: Container(
-                  width: MySize.getWidth(100),
-                  height: MySize.getHeight(50),
-                  alignment: Alignment.center,
-                  child: Text(
-                    "AI Image Enlarger",
-                    style: TextStyle(
-                        fontSize: MySize.getHeight(15),
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-              )),
-              Center(
-                  child: GestureDetector(
-                onTap: () {
-                  controller.isFromImageUpscaler.value = true;
-                  uploadImage(context);
-                },
-                child: Container(
-                  width: MySize.getWidth(100),
-                  height: MySize.getHeight(50),
-                  alignment: Alignment.center,
-                  child: Text(
-                    "AI Image Upscaler",
-                    style: TextStyle(
-                        fontSize: MySize.getHeight(15),
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-              )),
-              Center(
-                  child: GestureDetector(
-                onTap: () {
-                  controller.isFromFaceRetouch.value = true;
-                  uploadImage(context);
-                },
-                child: Container(
-                  width: MySize.getWidth(100),
-                  height: MySize.getHeight(50),
-                  alignment: Alignment.center,
-                  child: Text(
-                    "AI Face Retouch",
-                    style: TextStyle(
-                        fontSize: MySize.getHeight(15),
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-              )),
+                  title: "AI Upscaler",
+                  image: "AiUpscaler.png"),
+              SizedBox(
+                height: MySize.getHeight(20),
+              ),
+              ImageButton(
+                  onTap: () {
+                    controller.isFromAnime.value = true;
+                    uploadImage(context);
+                  },
+                  context: context,
+                  title: "AI Anime16K",
+                  image: "AiAnime16K.png"),
+              SizedBox(
+                height: MySize.getHeight(20),
+              ),
+              ImageButton(
+                  onTap: () {
+                    controller.isFromDenoiser.value = true;
+                    uploadImage(context);
+                  },
+                  context: context,
+                  title: "AI Denoiser",
+                  image: "AiDenoiser.png"),
+              SizedBox(
+                height: MySize.getHeight(20),
+              ),
+              ImageButton(
+                  onTap: () {
+                    controller.isFromImageEnlarger.value = true;
+                    uploadImage(context);
+                  },
+                  context: context,
+                  title: "AI Image Enlarger",
+                  image: "AiImageEnlarger.png"),
+              SizedBox(
+                height: MySize.getHeight(20),
+              ),
+              ImageButton(
+                  onTap: () {
+                    controller.isFromSharpener.value = true;
+                    uploadImage(context);
+                  },
+                  context: context,
+                  title: "AI Sharpener",
+                  image: "AiSharpener.png"),
+              SizedBox(
+                height: MySize.getHeight(20),
+              ),
+              ImageButton(
+                  onTap: () {
+                    controller.isFromFaceRetouch.value = true;
+                    uploadImage(context);
+                  },
+                  context: context,
+                  title: "AI Face Retouch",
+                  image: "AiFaceRetouch.png"),
             ],
           ),
         ),
@@ -198,7 +164,7 @@ class HomeView extends GetView<HomeController> {
                 color: Color(0xff38383a),
                 borderRadius: BorderRadius.circular(MySize.getHeight(16))),
             width: MySize.getWidth(320),
-            height: MySize.getHeight(185),
+            height: MySize.getHeight(160),
             child: ClipRRect(
                 child: Image.asset(
               imagePath + image,
@@ -265,8 +231,13 @@ class HomeView extends GetView<HomeController> {
                     GestureDetector(
                       onTap: () {
                         openCamera().then((value) {
-                          controller.cropImage(
-                              pickedFile: value, context: context);
+                          if (controller.isFromMagicEraser.isFalse) {
+                            controller.cropImage(
+                                pickedFile: value, context: context);
+                          } else {
+                            Get.offAndToNamed(Routes.MAGIC_REMOVE_PAGE);
+                          }
+                          ;
                         });
                         Navigator.of(context).pop();
                       },
@@ -278,8 +249,13 @@ class HomeView extends GetView<HomeController> {
                     GestureDetector(
                       onTap: () {
                         openGallery().then((value) {
-                          controller.cropImage(
-                              pickedFile: value, context: context);
+                          if (controller.isFromMagicEraser.isFalse) {
+                            controller.cropImage(
+                                pickedFile: value, context: context);
+                          } else {
+                            Get.offAndToNamed(Routes.MAGIC_REMOVE_PAGE);
+                          }
+                          ;
                         });
                         Navigator.of(context).pop();
                       },
