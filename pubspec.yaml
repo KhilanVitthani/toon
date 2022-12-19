@@ -20,7 +20,9 @@ dependencies:
   image_gallery_saver:
   permission_handler:
   flutter_svg:
+#  image_painter: ^0.4.6
   google_fonts:
+  vector_math:
 
   get: 4.6.5
   flutter: 

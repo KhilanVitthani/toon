@@ -64,6 +64,17 @@ class HomeView extends GetView<HomeController> {
                   context: context,
                   title: "AI Photo colorizer",
                   image: "AiPhotocolorizer.png"),
+              // SizedBox(
+              //   height: MySize.getHeight(20),
+              // ),
+              // ImageButton(
+              //     onTap: () {
+              //       controller.isFromMagicEraser.value = true;
+              //       uploadImage(context);
+              //     },
+              //     context: context,
+              //     title: "Magic Eraser",
+              //     image: "MagicEraser.png"),
               SizedBox(
                 height: MySize.getHeight(20),
               ),
@@ -235,7 +246,10 @@ class HomeView extends GetView<HomeController> {
                             controller.cropImage(
                                 pickedFile: value, context: context);
                           } else {
-                            Get.offAndToNamed(Routes.MAGIC_REMOVE_PAGE);
+                            Get.offAndToNamed(Routes.MAGIC_REMOVE_PAGE,
+                                arguments: {
+                                  ArgumentConstant.imageFile: value,
+                                });
                           }
                           ;
                         });
@@ -253,7 +267,10 @@ class HomeView extends GetView<HomeController> {
                             controller.cropImage(
                                 pickedFile: value, context: context);
                           } else {
-                            Get.offAndToNamed(Routes.MAGIC_REMOVE_PAGE);
+                            Get.offAndToNamed(Routes.MAGIC_REMOVE_PAGE,
+                                arguments: {
+                                  ArgumentConstant.imageFile: value,
+                                });
                           }
                           ;
                         });

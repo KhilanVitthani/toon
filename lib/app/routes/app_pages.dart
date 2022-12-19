@@ -50,15 +50,8 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.MAGIC_REMOVE_PAGE,
-      page: () => const MagicRemovePageView(),
+      page: () => MagicRemovePageView(),
       binding: MagicRemovePageBinding(),
-      children: [
-        GetPage(
-          name: _Paths.MAGIC_REMOVE_PAGE,
-          page: () => const MagicRemovePageView(),
-          binding: MagicRemovePageBinding(),
-        ),
-      ],
     ),
   ];
 }
