@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:ai_image_enlarger/app/routes/app_pages.dart';
 import 'package:ai_image_enlarger/constants/api_constants.dart';
+import 'package:ai_image_enlarger/constants/color_constant.dart';
 import 'package:ai_image_enlarger/main.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:flutter/material.dart';
@@ -47,10 +48,16 @@ class HomeController extends GetxController {
         uiSettings: [
           AndroidUiSettings(
               toolbarTitle: 'Edit Photo',
-              toolbarColor: Colors.deepOrange,
+              toolbarColor: appTheme.primaryTheme,
               toolbarWidgetColor: Colors.white,
+              dimmedLayerColor: appTheme.primaryTheme,
+              backgroundColor: appTheme.primaryTheme,
+              activeControlsWidgetColor: appTheme.buttonColor,
               initAspectRatio: CropAspectRatioPreset.original,
               lockAspectRatio: false),
+          IOSUiSettings(
+            title: 'Edit Photo',
+          ),
         ],
       );
       if (croppedFile != null) {

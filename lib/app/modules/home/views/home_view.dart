@@ -175,7 +175,8 @@ class HomeView extends GetView<HomeController> {
                 color: Color(0xff38383a),
                 borderRadius: BorderRadius.circular(MySize.getHeight(16))),
             width: MySize.getWidth(320),
-            height: MySize.getHeight(160),
+            height:
+                (MySize.isMini) ? MySize.getHeight(200) : MySize.getHeight(160),
             child: ClipRRect(
                 child: Image.asset(
               imagePath + image,

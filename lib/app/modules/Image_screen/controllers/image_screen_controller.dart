@@ -252,7 +252,7 @@ class ImageScreenController extends GetxController {
     var request = http.MultipartRequest(
         'POST', Uri.parse('https://access.imglarger.com:8998/upload'));
     request.fields.addAll({'scaleRadio': '2'});
-    request.files.add(await http.MultipartFile.fromPath('myfile', image));
+    request.files.add(await http.MultipartFile.fromPath('myfile', image!));
 
     http.StreamedResponse response = await request.send();
     if (response.statusCode == 200) {

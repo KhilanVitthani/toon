@@ -5,6 +5,7 @@ import 'package:ai_image_enlarger/app/routes/app_pages.dart';
 import 'package:ai_image_enlarger/constants/sizeConstant.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 
 import 'package:get/get.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
@@ -48,6 +49,8 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
                     });
                   },
                   child: Container(
+                    width: MySize.getWidth(70),
+                    height: MySize.getHeight(50),
                     padding:
                         EdgeInsets.symmetric(horizontal: MySize.getHeight(8.0)),
                     alignment: Alignment.center,
@@ -166,61 +169,67 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
               padding: EdgeInsets.symmetric(horizontal: MySize.getHeight(10)),
               child: GestureDetector(
                 onTap: () async {
-                  final image = await controller.screenshotController
-                      .captureFromWidget(Container(
-                    color: Colors.white,
-                    child: Stack(
-                      children: [
-                        (controller.is2d.isTrue)
-                            ? getImageByLink(
-                                url: "${controller.image2D}",
-                                height: MySize.getHeight(350),
-                                boxFit: BoxFit.contain,
-                                width: MySize.getHeight(500))
-                            : getImageByLink(
-                                url: "${controller.image3D}",
-                                height: MySize.getHeight(350),
-                                width: MySize.getHeight(500)),
-                        (controller.isSwitched.value)
-                            ? Positioned(
-                                left: MySize.getWidth(10),
-                                bottom: MySize.getHeight(5),
-                                child: Container(
-                                  height: MySize.getHeight(100),
-                                  width: MySize.getHeight(100),
-                                  decoration: BoxDecoration(
-                                      color: Colors.black,
-                                      borderRadius: BorderRadius.circular(
-                                          MySize.getHeight(75))),
-                                  child: ClipOval(
-                                    child: Image.file(
-                                        File(controller.imagePath),
-                                        fit: BoxFit.fitWidth),
-                                  ),
-                                ),
-                              )
-                            : Container(),
-                      ],
-                    ),
-                  ));
+                  // final image = await controller.screenshotController
+                  //     .captureFromWidget(Container(
+                  //   height: MySize.getHeight(350),
+                  //   width: MySize.getHeight(500),
+                  //   child: Stack(
+                  //     children: [
+                  //       (controller.is2d.isTrue)
+                  //           ? getImageByLink(
+                  //               url: "${controller.image2D}",
+                  //               height: MySize.getHeight(350),
+                  //               boxFit: BoxFit.contain,
+                  //               width: MySize.getHeight(500))
+                  //           : getImageByLink(
+                  //               url: "${controller.image3D}",
+                  //               height: MySize.getHeight(350),
+                  //               width: MySize.getHeight(500)),
+                  //       (controller.isSwitched.value)
+                  //           ? Positioned(
+                  //               left: MySize.getWidth(10),
+                  //               bottom: MySize.getHeight(5),
+                  //               child: Container(
+                  //                 height: MySize.getHeight(100),
+                  //                 width: MySize.getHeight(100),
+                  //                 decoration: BoxDecoration(
+                  //                     color: Colors.black,
+                  //                     borderRadius: BorderRadius.circular(
+                  //                         MySize.getHeight(75))),
+                  //                 child: ClipOval(
+                  //                   child: Image.file(
+                  //                       File(controller.imagePath),
+                  //                       fit: BoxFit.fitWidth),
+                  //                 ),
+                  //               ),
+                  //             )
+                  //           : Container(),
+                  //     ],
+                  //   ),
+                  // ));
 
                   if (capturedImage.isNotEmpty) {
-                    await [Permission.storage].request();
+                    Uint8List imageInUnit8List = capturedImage;
+                    final tempDir = await getTemporaryDirectory();
                     final time = DateTime.now();
-                    final name = "Screenshot${time}";
-                    final result =
-                        await ImageGallerySaver.saveImage(image, name: name);
-                    Fluttertoast.showToast(
-                        msg: "Success!",
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.BOTTOM,
-                        timeInSecForIosWeb: 1,
-                        textColor: Colors.white,
-                        fontSize: 16.0);
-                    print("Path===============${result['filePath']}");
+
+                    File file =
+                        await File('${tempDir.path}/Screenshot${time}.png')
+                            .create();
+
+                    GallerySaver.saveImage(file.path).then((value) {
+                      Fluttertoast.showToast(
+                          msg: "Success!",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.BOTTOM,
+                          timeInSecForIosWeb: 1,
+                          textColor: Colors.white,
+                          fontSize: 16.0);
+                    });
+                    file.writeAsBytesSync(imageInUnit8List);
                   }
                 },
-                child: Icon(Icons.download),
+                child: Icon(Icons.download, size: MySize.getHeight(30)),
               ),
             ),
           ],

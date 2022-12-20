@@ -14,6 +14,7 @@ dependencies:
   dio:
   http:
   image_picker:
+  gallery_saver: ^2.3.2
   fluttertoast:
   image_cropper: ^3.0.1
   screenshot:
