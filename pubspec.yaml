@@ -13,7 +13,7 @@ dependencies:
   get_storage:
   dio:
   http:
-  image_picker: ^0.8.0
+  image_picker:
   fluttertoast:
   image_cropper: ^3.0.1
   screenshot:
@@ -23,6 +23,8 @@ dependencies:
 #  image_painter: ^0.4.6
   google_fonts:
   vector_math:
+  share_plus:
+  path_provider:
 
   get: 4.6.5
   flutter: 

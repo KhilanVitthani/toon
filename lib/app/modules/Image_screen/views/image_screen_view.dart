@@ -8,8 +8,10 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:get/get.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:screenshot/screenshot.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../controllers/image_screen_controller.dart';
 
@@ -158,7 +160,7 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
       context: context,
       builder: (context) => Scaffold(
         appBar: AppBar(
-          title: Text("Screenshot of your Drawing"),
+          title: Text("your Image"),
           actions: [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: MySize.getHeight(10)),
@@ -227,6 +229,58 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
             child: capturedImage != null
                 ? Image.memory(capturedImage)
                 : Container()),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () async {
+            final image = await controller.screenshotController
+                .captureFromWidget(Container(
+              color: Colors.white,
+              child: Stack(
+                children: [
+                  (controller.is2d.isTrue)
+                      ? getImageByLink(
+                          url: "${controller.image2D}",
+                          height: MySize.getHeight(350),
+                          boxFit: BoxFit.contain,
+                          width: MySize.getHeight(500))
+                      : getImageByLink(
+                          url: "${controller.image3D}",
+                          height: MySize.getHeight(350),
+                          width: MySize.getHeight(500)),
+                  (controller.isSwitched.value)
+                      ? Positioned(
+                          left: MySize.getWidth(10),
+                          bottom: MySize.getHeight(5),
+                          child: Container(
+                            height: MySize.getHeight(100),
+                            width: MySize.getHeight(100),
+                            decoration: BoxDecoration(
+                                color: Colors.black,
+                                borderRadius: BorderRadius.circular(
+                                    MySize.getHeight(75))),
+                            child: ClipOval(
+                              child: Image.file(File(controller.imagePath),
+                                  fit: BoxFit.fitWidth),
+                            ),
+                          ),
+                        )
+                      : Container(),
+                ],
+              ),
+            ));
+
+            if (capturedImage.isNotEmpty) {
+              Uint8List imageInUnit8List = capturedImage;
+              final tempDir = await getTemporaryDirectory();
+              final time = DateTime.now();
+
+              File file =
+                  await File('${tempDir.path}/Screenshot${time}.png').create();
+              file.writeAsBytesSync(imageInUnit8List);
+              await Share.shareFiles([file.path]);
+            }
+          },
+          child: Icon(Icons.share),
+        ),
       ),
     );
   }

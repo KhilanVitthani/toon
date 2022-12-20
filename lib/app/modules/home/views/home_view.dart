@@ -207,7 +207,7 @@ class HomeView extends GetView<HomeController> {
                     ),
                     (subtitle != "")
                         ? Text(
-                            subtitle ?? "",
+                            subtitle,
                             style: GoogleFonts.karla(
                               color: Colors.white,
                               fontSize: MySize.getHeight(12),
@@ -251,7 +251,6 @@ class HomeView extends GetView<HomeController> {
                                   ArgumentConstant.imageFile: value,
                                 });
                           }
-                          ;
                         });
                         Navigator.of(context).pop();
                       },
@@ -290,13 +289,14 @@ class HomeView extends GetView<HomeController> {
   }
 
   Future<File> openCamera() async {
-    var imgCamera =
-        await imgPicker.pickImage(source: ImageSource.camera).then((value) {
-      controller.imgFile = File(value!.path).obs;
-      controller.imgFile!.refresh();
-    }).catchError((error) {
-      print(error);
+    var imgCamera;
+    await imgPicker.pickImage(source: ImageSource.camera).then((value) {
+      imgCamera = value;
+      print(imgCamera);
     });
+
+    controller.imgFile = File(imgCamera!.path).obs;
+
     return controller.imgFile!.value;
   }
 

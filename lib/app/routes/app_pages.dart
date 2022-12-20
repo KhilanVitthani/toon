@@ -45,7 +45,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.IMAGE_SCREEN,
-      page: () => const ImageScreenView(),
+      page: () => ImageScreenView(),
       binding: ImageScreenBinding(),
     ),
     GetPage(

@@ -46,7 +46,7 @@ class HomeController extends GetxController {
         compressQuality: 100,
         uiSettings: [
           AndroidUiSettings(
-              toolbarTitle: 'Cropper',
+              toolbarTitle: 'Edit Photo',
               toolbarColor: Colors.deepOrange,
               toolbarWidgetColor: Colors.white,
               initAspectRatio: CropAspectRatioPreset.original,
