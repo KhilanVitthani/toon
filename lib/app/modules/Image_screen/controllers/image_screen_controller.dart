@@ -93,17 +93,6 @@ class ImageScreenController extends GetxController {
   callApiForCartoonImage({
     required BuildContext context,
   }) async {
-    FocusManager.instance.primaryFocus!.unfocus();
-    getIt.get<CustomDialogs>().showCircularDialog(context);
-    Map<String, dynamic> dict = {};
-    dict["Alg"] = "slow";
-    dict["scaleRadio"] = "0";
-    String fileName = p.basenameWithoutExtension(imagePath);
-    List<int> imageData = await File(imagePath).readAsBytes();
-    // dict["myfile"] = (!isNullEmptyOrFalse(File(imagePath!)))
-    //     ? await MultipartFile.fr(imagePath!, filename: fileName)
-    //     : "";
-    FormData formData = new FormData.fromMap(dict);
     print("Image path : = ${imagePath}");
     var request = http.MultipartRequest(
         'POST', Uri.parse('https://access2.imglarger.com:8997/upload'));
@@ -389,7 +378,6 @@ class ImageScreenController extends GetxController {
         image2D.value =
             "http://access1.imagecolorizer.com:8663/results/${imageID}.jpg";
         getIt<CustomDialogs>().hideCircularDialog(context);
-
         hasDate.value = true;
       });
     } else {

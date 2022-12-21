@@ -252,6 +252,8 @@ class HomeView extends GetView<HomeController> {
                                   ArgumentConstant.imageFile: value,
                                 });
                           }
+                        }).catchError((error) {
+                          print(error);
                         });
                         Navigator.of(context).pop();
                       },
@@ -289,25 +291,34 @@ class HomeView extends GetView<HomeController> {
         });
   }
 
-  Future<File> openCamera() async {
-    var imgCamera;
+  Future<File?> openCamera() async {
+    String? imgCamera;
     await imgPicker.pickImage(source: ImageSource.camera).then((value) {
-      imgCamera = value;
+      imgCamera = value!.path;
       print(imgCamera);
+      controller.imgFile = File(imgCamera!).obs;
+      return controller.imgFile!.value;
+    }).catchError((error) {
+      print(error);
     });
 
-    controller.imgFile = File(imgCamera!.path).obs;
-
-    return controller.imgFile!.value;
+    return (isNullEmptyOrFalse(controller.imgFile!.value))
+        ? null
+        : controller.imgFile!.value;
   }
 
-  Future<File> openGallery() async {
-    var imgGallery =
-        await imgPicker.pickImage(source: ImageSource.gallery).then((value) {
-      controller.imgFile = File(value!.path).obs;
+  Future<File?> openGallery() async {
+    String? imgGallery;
+    await imgPicker.pickImage(source: ImageSource.gallery).then((value) {
+      imgGallery = value!.path;
+
+      controller.imgFile = File(imgGallery!).obs;
       print(controller.imgFile);
       controller.imgFile!.refresh();
     });
-    return controller.imgFile!.value;
+
+    return (isNullEmptyOrFalse(controller.imgFile!.value))
+        ? null
+        : controller.imgFile!.value;
   }
 }
