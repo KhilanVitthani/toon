@@ -224,7 +224,7 @@ class ImageScreenController extends GetxController {
       imageID.value = await response.stream.bytesToString();
       Future.delayed(Duration(seconds: 15)).then((value) {
         image2D.value =
-            "http://access.imglarger.com:8889/results/${imageID}_4x.jpg";
+            "http://get2.imglarger.com:8889/results/${imageID}_4x.jpg";
         getIt<CustomDialogs>().hideCircularDialog(context);
 
         hasDate.value = true;
