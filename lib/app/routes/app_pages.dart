@@ -12,6 +12,8 @@ import '../modules/magic_remove_page/bindings/magic_remove_page_binding.dart';
 import '../modules/magic_remove_page/bindings/magic_remove_page_binding.dart';
 import '../modules/magic_remove_page/views/magic_remove_page_view.dart';
 import '../modules/magic_remove_page/views/magic_remove_page_view.dart';
+import '../modules/share_file/bindings/share_file_binding.dart';
+import '../modules/share_file/views/share_file_view.dart';
 import '../modules/signup_screen/bindings/signup_screen_binding.dart';
 import '../modules/signup_screen/views/signup_screen_view.dart';
 
@@ -52,6 +54,11 @@ class AppPages {
       name: _Paths.MAGIC_REMOVE_PAGE,
       page: () => MagicRemovePageView(),
       binding: MagicRemovePageBinding(),
+    ),
+    GetPage(
+      name: _Paths.SHARE_FILE,
+      page: () => const ShareFileView(),
+      binding: ShareFileBinding(),
     ),
   ];
 }

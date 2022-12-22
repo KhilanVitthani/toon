@@ -64,7 +64,7 @@ class HomeController extends GetxController {
         _croppedFile = croppedFile;
         print("CropFile ${_croppedFile!.path}");
         if (isFromEnhancer.isTrue) {
-          Get.offAndToNamed(Routes.IMAGE_SCREEN, arguments: {
+          Get.toNamed(Routes.IMAGE_SCREEN, arguments: {
             ArgumentConstant.imageFile: _croppedFile!.path,
             ArgumentConstant.isFromEnhancer: true,
             ArgumentConstant.isFromCatoonizer: false,
@@ -78,7 +78,7 @@ class HomeController extends GetxController {
             ArgumentConstant.isFromBGRemover: false,
           });
         } else if (isFromDenoiser.isTrue) {
-          Get.offAndToNamed(Routes.IMAGE_SCREEN, arguments: {
+          Get.toNamed(Routes.IMAGE_SCREEN, arguments: {
             ArgumentConstant.imageFile: _croppedFile!.path,
             ArgumentConstant.isFromEnhancer: false,
             ArgumentConstant.isFromCatoonizer: false,
@@ -92,7 +92,7 @@ class HomeController extends GetxController {
             ArgumentConstant.isFromBGRemover: false,
           });
         } else if (isFromAnime.isTrue) {
-          Get.offAndToNamed(Routes.IMAGE_SCREEN, arguments: {
+          Get.toNamed(Routes.IMAGE_SCREEN, arguments: {
             ArgumentConstant.imageFile: _croppedFile!.path,
             ArgumentConstant.isFromEnhancer: false,
             ArgumentConstant.isFromCatoonizer: false,
@@ -106,7 +106,7 @@ class HomeController extends GetxController {
             ArgumentConstant.isFromBGRemover: false,
           });
         } else if (isFromImageEnlarger.isTrue) {
-          Get.offAndToNamed(Routes.IMAGE_SCREEN, arguments: {
+          Get.toNamed(Routes.IMAGE_SCREEN, arguments: {
             ArgumentConstant.imageFile: _croppedFile!.path,
             ArgumentConstant.isFromEnhancer: false,
             ArgumentConstant.isFromCatoonizer: false,
@@ -120,7 +120,7 @@ class HomeController extends GetxController {
             ArgumentConstant.isFromColorizer: false,
           });
         } else if (isFromImageUpscaler.isTrue) {
-          Get.offAndToNamed(Routes.IMAGE_SCREEN, arguments: {
+          Get.toNamed(Routes.IMAGE_SCREEN, arguments: {
             ArgumentConstant.imageFile: _croppedFile!.path,
             ArgumentConstant.isFromEnhancer: false,
             ArgumentConstant.isFromCatoonizer: false,
@@ -134,7 +134,7 @@ class HomeController extends GetxController {
             ArgumentConstant.isFromBGRemover: false,
           });
         } else if (isFromSharpener.isTrue) {
-          Get.offAndToNamed(Routes.IMAGE_SCREEN, arguments: {
+          Get.toNamed(Routes.IMAGE_SCREEN, arguments: {
             ArgumentConstant.imageFile: _croppedFile!.path,
             ArgumentConstant.isFromEnhancer: false,
             ArgumentConstant.isFromCatoonizer: false,
@@ -148,7 +148,7 @@ class HomeController extends GetxController {
             ArgumentConstant.isFromColorizer: false,
           });
         } else if (isFromFaceRetouch.isTrue) {
-          Get.offAndToNamed(Routes.IMAGE_SCREEN, arguments: {
+          Get.toNamed(Routes.IMAGE_SCREEN, arguments: {
             ArgumentConstant.imageFile: _croppedFile!.path,
             ArgumentConstant.isFromEnhancer: false,
             ArgumentConstant.isFromCatoonizer: false,
@@ -162,7 +162,7 @@ class HomeController extends GetxController {
             ArgumentConstant.isFromColorizer: false,
           });
         } else if (isFromBGRemover.isTrue) {
-          Get.offAndToNamed(Routes.IMAGE_SCREEN, arguments: {
+          Get.toNamed(Routes.IMAGE_SCREEN, arguments: {
             ArgumentConstant.imageFile: _croppedFile!.path,
             ArgumentConstant.isFromEnhancer: false,
             ArgumentConstant.isFromCatoonizer: false,
@@ -176,7 +176,7 @@ class HomeController extends GetxController {
             ArgumentConstant.isFromColorizer: false,
           });
         } else if (isFromColorizer.isTrue) {
-          Get.offAndToNamed(Routes.IMAGE_SCREEN, arguments: {
+          Get.toNamed(Routes.IMAGE_SCREEN, arguments: {
             ArgumentConstant.imageFile: _croppedFile!.path,
             ArgumentConstant.isFromEnhancer: false,
             ArgumentConstant.isFromCatoonizer: false,
@@ -190,7 +190,7 @@ class HomeController extends GetxController {
             ArgumentConstant.isFromColorizer: true,
           });
         } else {
-          Get.offAndToNamed(Routes.IMAGE_SCREEN, arguments: {
+          Get.toNamed(Routes.IMAGE_SCREEN, arguments: {
             ArgumentConstant.imageFile: _croppedFile!.path,
             ArgumentConstant.isFromEnhancer: false,
             ArgumentConstant.isFromCatoonizer: true,

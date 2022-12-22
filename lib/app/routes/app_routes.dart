@@ -9,6 +9,7 @@ abstract class Routes {
   static const FORGET_PASSWORD = _Paths.FORGET_PASSWORD;
   static const IMAGE_SCREEN = _Paths.IMAGE_SCREEN;
   static const MAGIC_REMOVE_PAGE = _Paths.MAGIC_REMOVE_PAGE;
+  static const SHARE_FILE = _Paths.SHARE_FILE;
 }
 
 abstract class _Paths {
@@ -19,4 +20,5 @@ abstract class _Paths {
   static const FORGET_PASSWORD = '/forget-password';
   static const IMAGE_SCREEN = '/image-screen';
   static const MAGIC_REMOVE_PAGE = '/magic-remove-page';
+  static const SHARE_FILE = '/share-file';
 }

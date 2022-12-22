@@ -13,7 +13,8 @@ dependencies:
   get_storage:
   dio:
   http:
-  image_picker:
+  image_picker: ^0.8.0+4
+  whatsapp: ^2.0.0
   gallery_saver: ^2.3.2
   fluttertoast:
   image_cropper: ^3.0.1

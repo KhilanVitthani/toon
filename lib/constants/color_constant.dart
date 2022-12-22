@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class BaseTheme {
   Color get primaryTheme => fromHex('#23262F');
   Color get buttonColor => fromHex('#FE9013');
-  Color get textGrayColor => fromHex("#26232F");
+  Color get textGrayColor => fromHex("#4A454B");
 
   List<BoxShadow> get getShadow {
     return [

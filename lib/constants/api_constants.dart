@@ -24,7 +24,7 @@ class ArgumentConstant {
   static const isFromFaceRetouch = "isFromFaceRetouch";
   static const isFromBGRemover = "isFromBGRemover";
   static const isFromColorizer = "isFromColorizer";
-
+  static const capuredImage = "capuredImage";
   static const password = "password";
 }
 
