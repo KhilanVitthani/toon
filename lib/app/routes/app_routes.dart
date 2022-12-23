@@ -10,6 +10,8 @@ abstract class Routes {
   static const IMAGE_SCREEN = _Paths.IMAGE_SCREEN;
   static const MAGIC_REMOVE_PAGE = _Paths.MAGIC_REMOVE_PAGE;
   static const SHARE_FILE = _Paths.SHARE_FILE;
+  static const SETTING_PAGE = _Paths.SETTING_PAGE;
+  static const MY_COLLECTION_PAGE = _Paths.MY_COLLECTION_PAGE;
 }
 
 abstract class _Paths {
@@ -21,4 +23,6 @@ abstract class _Paths {
   static const IMAGE_SCREEN = '/image-screen';
   static const MAGIC_REMOVE_PAGE = '/magic-remove-page';
   static const SHARE_FILE = '/share-file';
+  static const SETTING_PAGE = '/setting-page';
+  static const MY_COLLECTION_PAGE = '/my-collection-page';
 }

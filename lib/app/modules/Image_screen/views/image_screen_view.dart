@@ -5,7 +5,9 @@ import 'package:ai_image_enlarger/app/routes/app_pages.dart';
 import 'package:ai_image_enlarger/constants/api_constants.dart';
 import 'package:ai_image_enlarger/constants/color_constant.dart';
 import 'package:ai_image_enlarger/constants/sizeConstant.dart';
+import 'package:ai_image_enlarger/models/categoriesModels.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 
@@ -18,6 +20,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
 
+import '../../../../utilities/buttons.dart';
 import '../controllers/image_screen_controller.dart';
 
 class ImageScreenView extends GetWidget<ImageScreenController> {
@@ -30,8 +33,17 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
         builder: (controller) {
           return WillPopScope(
             onWillPop: () async {
-              Get.offAllNamed(Routes.HOME);
-              controller.selectedImagePath.value = "";
+              showConfirmationDialog(
+                  context: context,
+                  text: "Are you sure you want to lost your progress!.",
+                  submitText: "Yes",
+                  cancelText: "Cancel",
+                  submitCallBack: () {
+                    Get.offAllNamed(Routes.HOME);
+                  },
+                  cancelCallback: () {
+                    Get.back();
+                  });
               return await true;
             },
             child: Obx(() {
@@ -55,26 +67,39 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
                                     Uint8List imageInUnit8List = value;
                                     final tempDir =
                                         await getTemporaryDirectory();
+                                    await [Permission.storage].request();
                                     final time = DateTime.now();
-
+                                    final name = "Screenshot${time}";
                                     File file = await File(
                                             '${tempDir.path}/Screenshot${time}.png')
                                         .create();
-
-                                    GallerySaver.saveImage(file.path)
-                                        .then((value) {
-                                      Fluttertoast.showToast(
-                                          msg: "Success!",
-                                          toastLength: Toast.LENGTH_SHORT,
-                                          gravity: ToastGravity.BOTTOM,
-                                          timeInSecForIosWeb: 1,
-                                          textColor: Colors.white,
-                                          fontSize: 16.0);
-                                    });
-
-                                    Get.toNamed(Routes.SHARE_FILE, arguments: {
-                                      ArgumentConstant.capuredImage: file,
-                                    });
+                                    await ImageGallerySaver.saveImage(value,
+                                        name: name);
+                                    Fluttertoast.showToast(
+                                        msg: "Success!",
+                                        toastLength: Toast.LENGTH_SHORT,
+                                        gravity: ToastGravity.BOTTOM,
+                                        timeInSecForIosWeb: 1,
+                                        textColor: Colors.white,
+                                        fontSize: 16.0);
+                                    // GallerySaver.saveImage(file.path)
+                                    //     .then((value) {
+                                    //   Fluttertoast.showToast(
+                                    //       msg: "Success!",
+                                    //       toastLength: Toast.LENGTH_SHORT,
+                                    //       gravity: ToastGravity.BOTTOM,
+                                    //       timeInSecForIosWeb: 1,
+                                    //       textColor: Colors.white,
+                                    //       fontSize: 16.0);
+                                    // });
+                                    controller.addImageToDataBase(
+                                        imageFile: file.path);
+                                    Get.offAndToNamed(Routes.SHARE_FILE,
+                                        arguments: {
+                                          ArgumentConstant.capuredImage: file,
+                                          ArgumentConstant.isFromMyCollection:
+                                              false,
+                                        });
                                     file.writeAsBytesSync(imageInUnit8List);
                                   }
                                 });
@@ -141,37 +166,68 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
                                 ],
                               ),
                             )
-                          : Container(
-                              height: MySize.screenHeight -
-                                  MediaQuery.of(context).padding.top,
-                              decoration: BoxDecoration(
-                                color: Colors.transparent.withOpacity(0.9),
-                                image: DecorationImage(
-                                  image: FileImage(
-                                      File(controller.selectedImagePath.value)),
-                                  fit: BoxFit.fill,
-                                  opacity: 0.2,
-                                ),
-                              ),
-                              child: Center(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      "We are drawing your Cartoon!",
-                                      style: GoogleFonts.karla(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: MySize.getHeight(18)),
+                          : Stack(
+                              children: [
+                                Container(
+                                  height: MySize.screenHeight -
+                                      MediaQuery.of(context).padding.top,
+                                  decoration: BoxDecoration(
+                                    color: Colors.transparent.withOpacity(0.9),
+                                    image: DecorationImage(
+                                      image: FileImage(File(
+                                          controller.selectedImagePath.value)),
+                                      fit: BoxFit.contain,
+                                      opacity: 0.2,
                                     ),
-                                    Container(
-                                      child: Image.asset(
-                                        imagePath + "loading.gif",
-                                      ),
-                                    )
-                                  ],
+                                  ),
+                                  child: Center(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "We are drawing your Cartoon!",
+                                          style: GoogleFonts.karla(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: MySize.getHeight(18)),
+                                        ),
+                                        Container(
+                                          child: Image.asset(
+                                            imagePath + "loading.gif",
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
                                 ),
-                              ),
+                                Positioned(
+                                  left: MySize.getWidth(24.17),
+                                  top: MySize.getHeight(31.17),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      showConfirmationDialog(
+                                          context: context,
+                                          text:
+                                              "Are you sure you want to lost your progress!.",
+                                          submitText: "Yes",
+                                          cancelText: "Cancel",
+                                          submitCallBack: () {
+                                            Get.offAllNamed(Routes.HOME);
+                                          },
+                                          cancelCallback: () {
+                                            Get.back();
+                                          });
+                                    },
+                                    child: Container(
+                                      child: SvgPicture.asset(
+                                          imagePath + "close.svg",
+                                          height: MySize.getHeight(20),
+                                          width: MySize.getWidth(20)),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                       (controller.hasDate.isTrue)
                           ? Row(

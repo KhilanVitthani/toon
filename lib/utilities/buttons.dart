@@ -15,7 +15,7 @@ Widget getButton({
   Color? textColor,
   FontWeight? fontWeight,
   double? borderRadius,
-  String? image,
+  String? image = "",
   Widget? widget,
 }) {
   return Container(
@@ -29,7 +29,7 @@ Widget getButton({
       ),
       child: (!isNullEmptyOrFalse(widget))
           ? widget
-          : (image!.isEmpty)
+          : (image == "")
               ? Text(
                   title,
                   style: TextStyle(
@@ -40,7 +40,7 @@ Widget getButton({
               : Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SvgPicture.asset(imagePath + image),
+                    SvgPicture.asset(imagePath + image!),
                     SizedBox(
                       width: MySize.getWidth(12),
                     ),

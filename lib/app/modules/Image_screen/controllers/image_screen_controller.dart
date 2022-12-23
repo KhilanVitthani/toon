@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:ai_image_enlarger/main.dart';
+import 'package:ai_image_enlarger/models/categoriesModels.dart';
 import 'package:ai_image_enlarger/utilities/progress_dialog_utils.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +10,7 @@ import 'package:get/get.dart' hide MultipartFile, FormData;
 import 'package:http/http.dart' as http;
 import 'package:screenshot/screenshot.dart';
 import '../../../../constants/api_constants.dart';
+import '../../../../constants/sizeConstant.dart';
 import '../../../routes/app_pages.dart';
 import 'package:path/path.dart' as p;
 
@@ -17,6 +20,7 @@ class ImageScreenController extends GetxController {
   RxString image2D = "".obs;
   RxString image3D = "".obs;
   RxBool isSwitched = false.obs;
+  RxList imageList = RxList([]);
   ScreenshotController screenshotController = ScreenshotController();
   var image;
   RxBool hasDate = false.obs;
@@ -48,6 +52,9 @@ class ImageScreenController extends GetxController {
           Get.arguments[ArgumentConstant.isFromFaceRetouch];
       isFromBGRemover.value = Get.arguments[ArgumentConstant.isFromBGRemover];
       isFromColorizer.value = Get.arguments[ArgumentConstant.isFromColorizer];
+    }
+    if (!isNullEmptyOrFalse(box.read(ArgumentConstant.myCollection))) {
+      imageList.value = jsonDecode(box.read(ArgumentConstant.myCollection));
     }
     print(selectedImagePath);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
@@ -86,6 +93,12 @@ class ImageScreenController extends GetxController {
   @override
   void onClose() {
     super.onClose();
+  }
+
+  addImageToDataBase({required String imageFile}) {
+    imageList.add(imageFile);
+    box.write(ArgumentConstant.myCollection, jsonEncode(imageList));
+    print("DataBase Collection ${box.read(ArgumentConstant.myCollection)}");
   }
 
   callApiForCartoonImage({
@@ -425,6 +438,7 @@ class ImageScreenController extends GetxController {
     required String urlId,
     bool isFrombgRemover = false,
     bool isFromAnime = false,
+    int count = 1,
   }) async {
     var url = (isFrombgRemover)
         ? Uri.parse("https://access2.bgeraser.com:8558/status/$imageID")
@@ -435,18 +449,31 @@ class ImageScreenController extends GetxController {
     var request = http.Request('GET', url);
 
     http.StreamedResponse response = await request.send();
-
     if (response.statusCode == 200) {
       RxString imageResponse = "".obs;
       imageResponse.value = await response.stream.bytesToString();
       print(imageResponse.value);
       if (imageResponse.value == "waiting") {
-        isImageDone(
+        print(count);
+        if (count <= 40) {
+          isImageDone(
             imageId: imageId,
             context: context,
             urlId: urlId,
             isFromAnime: isFromAnime,
-            isFrombgRemover: isFrombgRemover);
+            isFrombgRemover: isFrombgRemover,
+            count: count + 1,
+          );
+        } else {
+          getIt<CustomDialogs>().getDialog(
+            title: "Something Went Wrong, Please Try Again",
+            desc: "",
+            onTap: () {
+              Get.offAllNamed(Routes.HOME);
+              selectedImagePath.value = "";
+            },
+          );
+        }
       } else if (imageResponse.value == "not found" ||
           imageResponse.value == "Not Found") {
         getIt<CustomDialogs>().getDialog(

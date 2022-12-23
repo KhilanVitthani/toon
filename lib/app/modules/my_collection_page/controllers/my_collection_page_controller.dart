@@ -1,17 +1,18 @@
-import 'dart:io';
+import 'dart:convert';
 
 import 'package:ai_image_enlarger/constants/api_constants.dart';
 import 'package:ai_image_enlarger/constants/sizeConstant.dart';
 import 'package:get/get.dart';
 
-class MagicRemovePageController extends GetxController {
-  File? image;
+import '../../../../main.dart';
+
+class MyCollectionPageController extends GetxController {
+  RxList myImage = RxList([]);
   @override
   void onInit() {
-    if (Get.arguments != null) {
-      if (!isNullEmptyOrFalse(Get.arguments[ArgumentConstant.imageFile])) {
-        image = Get.arguments[ArgumentConstant.imageFile];
-      }
+    if (!isNullEmptyOrFalse(box.read(ArgumentConstant.myCollection))) {
+      myImage.value = jsonDecode(box.read(ArgumentConstant.myCollection));
+      print(myImage);
     }
     super.onInit();
   }

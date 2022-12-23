@@ -11,7 +11,6 @@ import 'package:image_picker/image_picker.dart';
 import '../../../../utilities/progress_dialog_utils.dart';
 
 class HomeController extends GetxController {
-  File? _lastCropped;
   CroppedFile? _croppedFile;
   Rx<File>? imgFile;
   RxBool isFromEnhancer = false.obs;

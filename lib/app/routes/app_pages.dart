@@ -2,20 +2,14 @@ import 'package:get/get.dart';
 
 import '../modules/Image_screen/bindings/image_screen_binding.dart';
 import '../modules/Image_screen/views/image_screen_view.dart';
-import '../modules/forget_password/bindings/forget_password_binding.dart';
-import '../modules/forget_password/views/forget_password_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
-import '../modules/login_screen/bindings/login_screen_binding.dart';
-import '../modules/login_screen/views/login_screen_view.dart';
-import '../modules/magic_remove_page/bindings/magic_remove_page_binding.dart';
-import '../modules/magic_remove_page/bindings/magic_remove_page_binding.dart';
-import '../modules/magic_remove_page/views/magic_remove_page_view.dart';
-import '../modules/magic_remove_page/views/magic_remove_page_view.dart';
+import '../modules/my_collection_page/bindings/my_collection_page_binding.dart';
+import '../modules/my_collection_page/views/my_collection_page_view.dart';
+import '../modules/setting_page/bindings/setting_page_binding.dart';
+import '../modules/setting_page/views/setting_page_view.dart';
 import '../modules/share_file/bindings/share_file_binding.dart';
 import '../modules/share_file/views/share_file_view.dart';
-import '../modules/signup_screen/bindings/signup_screen_binding.dart';
-import '../modules/signup_screen/views/signup_screen_view.dart';
 
 part 'app_routes.dart';
 
@@ -31,34 +25,24 @@ class AppPages {
       binding: HomeBinding(),
     ),
     GetPage(
-      name: _Paths.LOGIN_SCREEN,
-      page: () => const LoginScreenView(),
-      binding: LoginScreenBinding(),
-    ),
-    GetPage(
-      name: _Paths.SIGNUP_SCREEN,
-      page: () => const SignupScreenView(),
-      binding: SignupScreenBinding(),
-    ),
-    GetPage(
-      name: _Paths.FORGET_PASSWORD,
-      page: () => const ForgetPasswordView(),
-      binding: ForgetPasswordBinding(),
-    ),
-    GetPage(
       name: _Paths.IMAGE_SCREEN,
       page: () => ImageScreenView(),
       binding: ImageScreenBinding(),
     ),
     GetPage(
-      name: _Paths.MAGIC_REMOVE_PAGE,
-      page: () => MagicRemovePageView(),
-      binding: MagicRemovePageBinding(),
-    ),
-    GetPage(
       name: _Paths.SHARE_FILE,
       page: () => const ShareFileView(),
       binding: ShareFileBinding(),
+    ),
+    GetPage(
+      name: _Paths.SETTING_PAGE,
+      page: () => const SettingPageView(),
+      binding: SettingPageBinding(),
+    ),
+    GetPage(
+      name: _Paths.MY_COLLECTION_PAGE,
+      page: () => const MyCollectionPageView(),
+      binding: MyCollectionPageBinding(),
     ),
   ];
 }
