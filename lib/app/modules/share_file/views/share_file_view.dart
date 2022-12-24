@@ -5,6 +5,7 @@ import 'package:ai_image_enlarger/app/routes/app_pages.dart';
 import 'package:ai_image_enlarger/constants/api_constants.dart';
 import 'package:ai_image_enlarger/constants/sizeConstant.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_share_me/file_type.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
@@ -81,8 +82,53 @@ class ShareFileView extends GetView<ShareFileController> {
                     height: MySize.getHeight(25),
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
+                      Spacer(),
+                      GestureDetector(
+                        onTap: () async {
+                          if (!isNullEmptyOrFalse(
+                              controller.capturedImage!.path)) {
+                            await controller.flutterShareMe.shareToInstagram(
+                                filePath: controller.capturedImage!.path,
+                                fileType: FileType.image);
+                          } else {
+                            print(" insta not install");
+                          }
+                        },
+                        child: SvgPicture.asset(
+                          imagePath + "insta.svg",
+                          height: MySize.getHeight(70),
+                          width: MySize.getWidth(70),
+                        ),
+                      ),
+                      Spacer(),
+                      GestureDetector(
+                        onTap: () {},
+                        child: SvgPicture.asset(
+                          imagePath + "fb.svg",
+                          height: MySize.getHeight(70),
+                          width: MySize.getWidth(70),
+                        ),
+                      ),
+                      Spacer(),
+                      GestureDetector(
+                        onTap: () async {
+                          if (!isNullEmptyOrFalse(
+                              controller.capturedImage!.path)) {
+                            await controller.flutterShareMe.shareToWhatsApp(
+                                imagePath: controller.capturedImage!.path,
+                                fileType: FileType.image);
+                          } else {
+                            print(" whatsapp not install");
+                          }
+                        },
+                        child: SvgPicture.asset(
+                          imagePath + "whatsapp.svg",
+                          height: MySize.getHeight(70),
+                          width: MySize.getWidth(70),
+                        ),
+                      ),
+                      Spacer(),
                       GestureDetector(
                         onTap: () {
                           Share.shareFiles([controller.capturedImage!.path]);
@@ -93,8 +139,9 @@ class ShareFileView extends GetView<ShareFileController> {
                           width: MySize.getWidth(70),
                         ),
                       ),
+                      Spacer(),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),

@@ -2,11 +2,13 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:ai_image_enlarger/constants/api_constants.dart';
+import 'package:flutter_share_me/flutter_share_me.dart';
 import 'package:get/get.dart';
 
 class ShareFileController extends GetxController {
   File? capturedImage;
   RxBool isFromMyCollection = false.obs;
+  final FlutterShareMe flutterShareMe = FlutterShareMe();
   @override
   void onInit() {
     if (Get.arguments != null) {

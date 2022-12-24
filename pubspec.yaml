@@ -22,7 +22,7 @@ dependencies:
   image_gallery_saver:
   permission_handler:
   flutter_svg:
-#  image_painter: ^0.4.6
+  flutter_share_me: ^1.4.0
   google_fonts:
   vector_math:
   share_plus:
