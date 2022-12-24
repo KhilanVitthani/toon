@@ -42,6 +42,7 @@ class MyCollectionPageView extends GetWidget<MyCollectionPageController> {
             padding: EdgeInsets.only(bottom: MySize.getHeight(9)),
             height: MySize.safeHeight! - AppBar().preferredSize.height,
             child: GridView.builder(
+
               padding: EdgeInsets.only(bottom: 10),
               itemCount: controller.myImage.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

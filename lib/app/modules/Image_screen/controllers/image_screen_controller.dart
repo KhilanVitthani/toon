@@ -150,6 +150,7 @@ class ImageScreenController extends GetxController {
       imageID.value = await response.stream.bytesToString();
       print(imageID);
       image2D.value = "http://get.imglarger.com:8887/results/${imageID}.jpg";
+      image3D.value = "http://get.imglarger.com:8887/results/${imageID}.jpg";
       print(image2D);
       isImageDone(imageId: imageID.value, context: context, urlId: "8558");
     } else {
@@ -183,6 +184,7 @@ class ImageScreenController extends GetxController {
     if (response.statusCode == 200) {
       imageID.value = await response.stream.bytesToString();
       image2D.value = "http://get.imglarger.com:8662/results/${imageID}.jpg";
+      image3D.value = "http://get.imglarger.com:8662/results/${imageID}.jpg";
       isImageDone(imageId: imageID.value, context: context, urlId: "8552");
     } else {
       getIt<CustomDialogs>().getDialog(
@@ -216,6 +218,8 @@ class ImageScreenController extends GetxController {
       imageID.value = await response.stream.bytesToString();
       print(imageID);
       image2D.value =
+          "http://access.imglarger.com:8889/results/${imageID}_4x.jpg";
+      image3D.value =
           "http://access.imglarger.com:8889/results/${imageID}_4x.jpg";
       isImageDone(
           imageId: imageID.value,
@@ -253,6 +257,7 @@ class ImageScreenController extends GetxController {
       imageID.value = await response.stream.bytesToString();
       print(imageID);
       image2D.value = "http://get.imglarger.com:8889/results/${imageID}_2x.jpg";
+      image3D.value = "http://get.imglarger.com:8889/results/${imageID}_2x.jpg";
       isImageDone(imageId: imageID.value, context: context, urlId: "8999");
     } else {
       getIt<CustomDialogs>().getDialog(
@@ -286,6 +291,7 @@ class ImageScreenController extends GetxController {
       imageID.value = await response.stream.bytesToString();
       print(imageID);
       image2D.value = "http://get.imglarger.com:8888/db_results/${imageID}.png";
+      image3D.value = "http://get.imglarger.com:8888/db_results/${imageID}.png";
       isImageDone(imageId: imageID.value, context: context, urlId: "8559");
     } else {
       getIt<CustomDialogs>().getDialog(
@@ -319,6 +325,7 @@ class ImageScreenController extends GetxController {
       imageID.value = await response.stream.bytesToString();
       print(imageID);
       image2D.value = "http://get.imglarger.com:8664/results/${imageID}.jpg";
+      image3D.value = "http://get.imglarger.com:8664/results/${imageID}.jpg";
       isImageDone(imageId: imageID.value, context: context, urlId: "8995");
     } else {
       getIt<CustomDialogs>().getDialog(
@@ -353,6 +360,8 @@ class ImageScreenController extends GetxController {
 
       print(imageID);
       image2D.value =
+          "https://access2.bgeraser.com:8889/results/${imageID}.png";
+      image3D.value =
           "https://access2.bgeraser.com:8889/results/${imageID}.png";
       isImageDone(
           imageId: imageID.value,
@@ -393,6 +402,8 @@ class ImageScreenController extends GetxController {
       print(imageID);
       image2D.value =
           "http://access1.imagecolorizer.com:8663/results/${imageID}.jpg";
+      image3D.value =
+          "http://access1.imagecolorizer.com:8663/results/${imageID}.jpg";
       isImageDone(imageId: imageID.value, context: context, urlId: "8661");
     } else {
       getIt<CustomDialogs>().getDialog(
@@ -425,6 +436,7 @@ class ImageScreenController extends GetxController {
       imageID.value = await response.stream.bytesToString();
 
       image2D.value = "http://get.imglarger.com:8889/results/${imageID}_2x.jpg";
+      image3D.value = "http://get.imglarger.com:8889/results/${imageID}_2x.jpg";
       isImageDone(imageId: imageID.value, context: context, urlId: "8999");
     } else {
       Get.offAndToNamed(Routes.HOME);

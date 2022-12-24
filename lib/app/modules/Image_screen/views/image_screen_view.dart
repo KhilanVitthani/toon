@@ -128,7 +128,7 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
                               controller: controller.screenshotController,
                               child: Stack(
                                 children: [
-                                  (controller.is2d.isTrue)
+                                  (controller.is2d.isFalse)
                                       ? getImageByLink(
                                           url: "${controller.image2D}",
                                           height: MySize.getHeight(400),
@@ -261,11 +261,11 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
                                     children: [
                                       cartoonImage(
                                         onTap: () {
-                                          controller.is2d.value = true;
+                                          controller.is2d.value = false;
                                         },
                                         url:
                                             "http://get.imglarger.com:8889/results/${controller.imageID}_a.jpg",
-                                        color: (controller.is2d.isTrue)
+                                        color: (controller.is2d.isFalse)
                                             ? appTheme.buttonColor
                                             : appTheme.textGrayColor,
                                         name: "Art-01",
@@ -273,11 +273,11 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
                                       ),
                                       cartoonImage(
                                         onTap: () {
-                                          controller.is2d.value = false;
+                                          controller.is2d.value = true;
                                         },
                                         url:
                                             "http://get.imglarger.com:8889/results/${controller.imageID}_t.jpg",
-                                        color: (controller.is2d.isFalse)
+                                        color: (controller.is2d.isTrue)
                                             ? appTheme.buttonColor
                                             : appTheme.textGrayColor,
                                         name: "Art-02",

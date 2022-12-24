@@ -11,8 +11,11 @@ class MyCollectionPageController extends GetxController {
   @override
   void onInit() {
     if (!isNullEmptyOrFalse(box.read(ArgumentConstant.myCollection))) {
-      myImage.value = jsonDecode(box.read(ArgumentConstant.myCollection));
+      RxList myImage1 = RxList([]);
+
+      myImage1.value = jsonDecode(box.read(ArgumentConstant.myCollection));
       print(myImage);
+      myImage.value =myImage1.reversed.toList();
     }
     super.onInit();
   }
