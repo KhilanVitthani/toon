@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import '../../main.dart';
+
 import '../app/routes/app_pages.dart';
 
 const imagePath = "assets/images/";
@@ -25,6 +25,7 @@ class ArgumentConstant {
   static const isFromBGRemover = "isFromBGRemover";
   static const isFromColorizer = "isFromColorizer";
   static const isFromMyCollection = "isFromMyCollection";
+  static const isFromHome = "isFromHome";
   static const capuredImage = "capuredImage";
   static const password = "password";
   static const myCollection = "myCollection";

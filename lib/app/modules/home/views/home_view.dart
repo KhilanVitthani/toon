@@ -6,13 +6,10 @@ import 'package:ai_image_enlarger/constants/color_constant.dart';
 import 'package:ai_image_enlarger/constants/sizeConstant.dart';
 import 'package:ai_image_enlarger/utilities/buttons.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../../../main.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -21,158 +18,156 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     MySize().init(context);
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: appTheme.primaryTheme,
-        appBar: AppBar(
-          title: const Text('Name'),
-          leading: GestureDetector(
-            onTap: () {
-              Get.offAllNamed(Routes.MY_COLLECTION_PAGE);
-              // box.erase();
-            },
-            child: Container(
-              child: Icon(Icons.perm_media_outlined),
-            ),
-          ),
-          actions: [
-            IconButton(
-              onPressed: () {
-                Get.offAndToNamed(Routes.SETTING_PAGE);
-              },
-              icon: Icon(Icons.settings),
-            )
-          ],
-          centerTitle: true,
+    return WillPopScope(
+      onWillPop: () async {
+        Get.offAndToNamed(Routes.MAIN_SCREEN);
+        return await true;
+      },
+      child: SafeArea(
+        child: Scaffold(
           backgroundColor: appTheme.primaryTheme,
-          elevation: 0,
-        ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: MySize.getWidth(20),
-                vertical: MySize.getHeight(10)),
-            child: Column(
-              children: [
-                ImageButton(
-                    onTap: () {
-                      uploadImage(context);
-                    },
-                    context: context,
-                    title: "AI Cartoonizer",
-                    subtitle: "Turn everything into a cartoon!",
-                    image: "AiCartoonizer.png"),
-                SizedBox(
-                  height: MySize.getHeight(20),
-                ),
-                ImageButton(
-                    onTap: () {
-                      controller.isFromEnhancer.value = true;
-                      uploadImage(context);
-                    },
-                    context: context,
-                    title: "AI Enhancer",
-                    image: "AiEnhancer.png"),
-                SizedBox(
-                  height: MySize.getHeight(20),
-                ),
-                ImageButton(
-                    onTap: () {
-                      controller.isFromColorizer.value = true;
-                      uploadImage(context);
-                    },
-                    context: context,
-                    title: "AI Photo colorizer",
-                    image: "AiPhotocolorizer.png"),
-                // SizedBox(
-                //   height: MySize.getHeight(20),
-                // ),
-                // ImageButton(
-                //     onTap: () {
-                //       controller.isFromMagicEraser.value = true;
-                //       uploadImage(context);
-                //     },
-                //     context: context,
-                //     title: "Magic Eraser",
-                //     image: "MagicEraser.png"),
-                SizedBox(
-                  height: MySize.getHeight(20),
-                ),
-                ImageButton(
-                    onTap: () {
-                      controller.isFromBGRemover.value = true;
-                      uploadImage(context);
-                    },
-                    context: context,
-                    title: "AI Bg remover",
-                    image: "AiBgremover.png"),
-                SizedBox(
-                  height: MySize.getHeight(20),
-                ),
-                ImageButton(
-                    onTap: () {
-                      controller.isFromImageUpscaler.value = true;
-                      uploadImage(context);
-                    },
-                    context: context,
-                    title: "AI Upscaler",
-                    image: "AiUpscaler.png"),
-                // SizedBox(
-                //   height: MySize.getHeight(20),
-                // ),
-                // ImageButton(
-                //     onTap: () {
-                //       controller.isFromAnime.value = true;
-                //       uploadImage(context);
-                //     },
-                //     context: context,
-                //     title: "AI Anime16K",
-                //     image: "AiAnime16K.png"),
-                SizedBox(
-                  height: MySize.getHeight(20),
-                ),
-                ImageButton(
-                    onTap: () {
-                      controller.isFromDenoiser.value = true;
-                      uploadImage(context);
-                    },
-                    context: context,
-                    title: "AI Denoiser",
-                    image: "AiDenoiser.png"),
-                SizedBox(
-                  height: MySize.getHeight(20),
-                ),
-                ImageButton(
-                    onTap: () {
-                      controller.isFromImageEnlarger.value = true;
-                      uploadImage(context);
-                    },
-                    context: context,
-                    title: "AI Image Enlarger",
-                    image: "AiImageEnlarger.png"),
-                SizedBox(
-                  height: MySize.getHeight(20),
-                ),
-                ImageButton(
-                    onTap: () {
-                      controller.isFromSharpener.value = true;
-                      uploadImage(context);
-                    },
-                    context: context,
-                    title: "AI Sharpener",
-                    image: "AiSharpener.png"),
-                SizedBox(
-                  height: MySize.getHeight(20),
-                ),
-                ImageButton(
-                    onTap: () {
-                      controller.isFromFaceRetouch.value = true;
-                      uploadImage(context);
-                    },
-                    context: context,
-                    title: "AI Face Retouch",
-                    image: "AiFaceRetouch.png"),
-              ],
+          appBar: AppBar(
+            title: const Text('Name'),
+            leading: GestureDetector(
+              onTap: () {
+                Get.offAllNamed(Routes.MAIN_SCREEN);
+                // box.erase();
+              },
+              child: Container(
+                child: Icon(Icons.arrow_back),
+              ),
+            ),
+            centerTitle: true,
+            backgroundColor: appTheme.primaryTheme,
+            elevation: 0,
+          ),
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: MySize.getWidth(20),
+                  vertical: MySize.getHeight(10)),
+              child: Column(
+                children: [
+                  ImageButton(
+                      onTap: () {
+                        uploadImage(context);
+                      },
+                      context: context,
+                      title: "AI Cartoonizer",
+                      subtitle: "Turn everything into a cartoon!",
+                      image: "AiCartoonizer.png"),
+                  SizedBox(
+                    height: MySize.getHeight(20),
+                  ),
+                  ImageButton(
+                      onTap: () {
+                        controller.isFromEnhancer.value = true;
+                        uploadImage(context);
+                      },
+                      context: context,
+                      title: "AI Enhancer",
+                      image: "AiEnhancer.png"),
+                  SizedBox(
+                    height: MySize.getHeight(20),
+                  ),
+                  ImageButton(
+                      onTap: () {
+                        controller.isFromColorizer.value = true;
+                        uploadImage(context);
+                      },
+                      context: context,
+                      title: "AI Photo colorizer",
+                      image: "AiPhotocolorizer.png"),
+                  // SizedBox(
+                  //   height: MySize.getHeight(20),
+                  // ),
+                  // ImageButton(
+                  //     onTap: () {
+                  //       controller.isFromMagicEraser.value = true;
+                  //       uploadImage(context);
+                  //     },
+                  //     context: context,
+                  //     title: "Magic Eraser",
+                  //     image: "MagicEraser.png"),
+                  SizedBox(
+                    height: MySize.getHeight(20),
+                  ),
+                  ImageButton(
+                      onTap: () {
+                        controller.isFromBGRemover.value = true;
+                        uploadImage(context);
+                      },
+                      context: context,
+                      title: "AI Bg remover",
+                      image: "AiBgremover.png"),
+                  SizedBox(
+                    height: MySize.getHeight(20),
+                  ),
+                  ImageButton(
+                      onTap: () {
+                        controller.isFromImageUpscaler.value = true;
+                        uploadImage(context);
+                      },
+                      context: context,
+                      title: "AI Upscaler",
+                      image: "AiUpscaler.png"),
+                  // SizedBox(
+                  //   height: MySize.getHeight(20),
+                  // ),
+                  // ImageButton(
+                  //     onTap: () {
+                  //       controller.isFromAnime.value = true;
+                  //       uploadImage(context);
+                  //     },
+                  //     context: context,
+                  //     title: "AI Anime16K",
+                  //     image: "AiAnime16K.png"),
+                  SizedBox(
+                    height: MySize.getHeight(20),
+                  ),
+                  ImageButton(
+                      onTap: () {
+                        controller.isFromDenoiser.value = true;
+                        uploadImage(context);
+                      },
+                      context: context,
+                      title: "AI Denoiser",
+                      image: "AiDenoiser.png"),
+                  SizedBox(
+                    height: MySize.getHeight(20),
+                  ),
+                  ImageButton(
+                      onTap: () {
+                        controller.isFromImageEnlarger.value = true;
+                        uploadImage(context);
+                      },
+                      context: context,
+                      title: "AI Image Enlarger",
+                      image: "AiImageEnlarger.png"),
+                  SizedBox(
+                    height: MySize.getHeight(20),
+                  ),
+                  ImageButton(
+                      onTap: () {
+                        controller.isFromSharpener.value = true;
+                        uploadImage(context);
+                      },
+                      context: context,
+                      title: "AI Sharpener",
+                      image: "AiSharpener.png"),
+                  SizedBox(
+                    height: MySize.getHeight(20),
+                  ),
+                  ImageButton(
+                      onTap: () {
+                        controller.isFromFaceRetouch.value = true;
+                        uploadImage(context);
+                      },
+                      context: context,
+                      title: "AI Face Retouch",
+                      image: "AiFaceRetouch.png"),
+                ],
+              ),
             ),
           ),
         ),

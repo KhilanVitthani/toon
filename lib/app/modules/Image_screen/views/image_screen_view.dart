@@ -5,20 +5,15 @@ import 'package:ai_image_enlarger/app/routes/app_pages.dart';
 import 'package:ai_image_enlarger/constants/api_constants.dart';
 import 'package:ai_image_enlarger/constants/color_constant.dart';
 import 'package:ai_image_enlarger/constants/sizeConstant.dart';
-import 'package:ai_image_enlarger/models/categoriesModels.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:gallery_saver/gallery_saver.dart';
-
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:screenshot/screenshot.dart';
-import 'package:share_plus/share_plus.dart';
 
 import '../../../../utilities/buttons.dart';
 import '../controllers/image_screen_controller.dart';
@@ -39,7 +34,7 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
                   submitText: "Yes",
                   cancelText: "Cancel",
                   submitCallBack: () {
-                    Get.offAllNamed(Routes.HOME);
+                    Get.offAllNamed(Routes.MAIN_SCREEN);
                   },
                   cancelCallback: () {
                     Get.back();
@@ -54,6 +49,25 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
                       ? AppBar(
                           backgroundColor: appTheme.primaryTheme,
                           elevation: 0,
+                          leading:  GestureDetector(
+                            onTap: () {
+                              showConfirmationDialog(
+                                  context: context,
+                                  text: "Are you sure you want to lost your progress!.",
+                                  submitText: "Yes",
+                                  cancelText: "Cancel",
+                                  submitCallBack: () {
+                                    Get.offAllNamed(Routes.MAIN_SCREEN);
+                                  },
+                                  cancelCallback: () {
+                                    Get.back();
+                                  });
+                            },
+                            child: Container(
+                              padding: EdgeInsets.only(left: MySize.getWidth(10)),
+                              child: Icon(Icons.arrow_back),
+                            ),
+                          ),
                           actions: [
                             GestureDetector(
                               onTap: () {
@@ -99,6 +113,7 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
                                           ArgumentConstant.capuredImage: file,
                                           ArgumentConstant.isFromMyCollection:
                                               false,
+                                          ArgumentConstant.isFromHome: false,
                                         });
                                     file.writeAsBytesSync(imageInUnit8List);
                                   }
@@ -213,7 +228,7 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
                                           submitText: "Yes",
                                           cancelText: "Cancel",
                                           submitCallBack: () {
-                                            Get.offAllNamed(Routes.HOME);
+                                            Get.offAllNamed(Routes.MAIN_SCREEN);
                                           },
                                           cancelCallback: () {
                                             Get.back();

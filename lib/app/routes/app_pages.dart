@@ -4,6 +4,8 @@ import '../modules/Image_screen/bindings/image_screen_binding.dart';
 import '../modules/Image_screen/views/image_screen_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/main_screen/bindings/main_screen_binding.dart';
+import '../modules/main_screen/views/main_screen_view.dart';
 import '../modules/my_collection_page/bindings/my_collection_page_binding.dart';
 import '../modules/my_collection_page/views/my_collection_page_view.dart';
 import '../modules/setting_page/bindings/setting_page_binding.dart';
@@ -16,7 +18,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.HOME;
+  static const INITIAL = Routes.MAIN_SCREEN;
 
   static final routes = [
     GetPage(
@@ -43,6 +45,11 @@ class AppPages {
       name: _Paths.MY_COLLECTION_PAGE,
       page: () => const MyCollectionPageView(),
       binding: MyCollectionPageBinding(),
+    ),
+    GetPage(
+      name: _Paths.MAIN_SCREEN,
+      page: () => const MainScreenView(),
+      binding: MainScreenBinding(),
     ),
   ];
 }

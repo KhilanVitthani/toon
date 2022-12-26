@@ -12,6 +12,7 @@ abstract class Routes {
   static const SHARE_FILE = _Paths.SHARE_FILE;
   static const SETTING_PAGE = _Paths.SETTING_PAGE;
   static const MY_COLLECTION_PAGE = _Paths.MY_COLLECTION_PAGE;
+  static const MAIN_SCREEN = _Paths.MAIN_SCREEN;
 }
 
 abstract class _Paths {
@@ -25,4 +26,5 @@ abstract class _Paths {
   static const SHARE_FILE = '/share-file';
   static const SETTING_PAGE = '/setting-page';
   static const MY_COLLECTION_PAGE = '/my-collection-page';
+  static const MAIN_SCREEN = '/main-screen';
 }

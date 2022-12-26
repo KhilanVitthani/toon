@@ -4,7 +4,6 @@ import 'package:ai_image_enlarger/app/routes/app_pages.dart';
 import 'package:ai_image_enlarger/constants/api_constants.dart';
 import 'package:ai_image_enlarger/constants/color_constant.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 
 import '../../../../constants/sizeConstant.dart';
@@ -16,7 +15,7 @@ class MyCollectionPageView extends GetWidget<MyCollectionPageController> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        Get.offAndToNamed(Routes.HOME);
+        Get.offAndToNamed(Routes.MAIN_SCREEN);
         return await true;
       },
       child: Scaffold(
@@ -27,7 +26,7 @@ class MyCollectionPageView extends GetWidget<MyCollectionPageController> {
           centerTitle: true,
           leading: GestureDetector(
             onTap: () {
-              Get.offAndToNamed(Routes.HOME);
+              Get.offAndToNamed(Routes.MAIN_SCREEN);
             },
             child: Container(
               padding: EdgeInsets.only(left: MySize.getWidth(10)),
@@ -42,7 +41,6 @@ class MyCollectionPageView extends GetWidget<MyCollectionPageController> {
             padding: EdgeInsets.only(bottom: MySize.getHeight(9)),
             height: MySize.safeHeight! - AppBar().preferredSize.height,
             child: GridView.builder(
-
               padding: EdgeInsets.only(bottom: 10),
               itemCount: controller.myImage.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -56,6 +54,7 @@ class MyCollectionPageView extends GetWidget<MyCollectionPageController> {
                       ArgumentConstant.capuredImage:
                           File(controller.myImage[index]),
                       ArgumentConstant.isFromMyCollection: true,
+                      ArgumentConstant.isFromHome: false,
                     });
                   },
                   child: Container(

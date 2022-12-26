@@ -1,18 +1,15 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:ai_image_enlarger/main.dart';
-import 'package:ai_image_enlarger/models/categoriesModels.dart';
 import 'package:ai_image_enlarger/utilities/progress_dialog_utils.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide MultipartFile, FormData;
 import 'package:http/http.dart' as http;
 import 'package:screenshot/screenshot.dart';
+
 import '../../../../constants/api_constants.dart';
 import '../../../../constants/sizeConstant.dart';
 import '../../../routes/app_pages.dart';
-import 'package:path/path.dart' as p;
 
 class ImageScreenController extends GetxController {
   RxString selectedImagePath = "".obs;
@@ -124,7 +121,7 @@ class ImageScreenController extends GetxController {
         title: "Something Went Wrong, Please Try Again",
         desc: "${response.reasonPhrase}",
         onTap: () {
-          Get.offAllNamed(Routes.HOME);
+          Get.offAllNamed(Routes.MAIN_SCREEN);
           selectedImagePath.value = "";
         },
       );
@@ -158,7 +155,7 @@ class ImageScreenController extends GetxController {
         title: "Something Went Wrong, Please Try Again",
         desc: "${response.reasonPhrase}",
         onTap: () {
-          Get.offAllNamed(Routes.HOME);
+          Get.offAllNamed(Routes.MAIN_SCREEN);
           selectedImagePath.value = "";
         },
       );
@@ -191,7 +188,7 @@ class ImageScreenController extends GetxController {
         title: "Something Went Wrong, Please Try Again",
         desc: "${response.reasonPhrase}",
         onTap: () {
-          Get.offAllNamed(Routes.HOME);
+          Get.offAllNamed(Routes.MAIN_SCREEN);
           selectedImagePath.value = "";
         },
       );
@@ -231,7 +228,7 @@ class ImageScreenController extends GetxController {
         title: "Something Went Wrong, Please Try Again",
         desc: "${response.reasonPhrase}",
         onTap: () {
-          Get.offAllNamed(Routes.HOME);
+          Get.offAllNamed(Routes.MAIN_SCREEN);
           selectedImagePath.value = "";
         },
       );
@@ -264,7 +261,7 @@ class ImageScreenController extends GetxController {
         title: "Something Went Wrong, Please Try Again",
         desc: "${response.reasonPhrase}",
         onTap: () {
-          Get.offAllNamed(Routes.HOME);
+          Get.offAllNamed(Routes.MAIN_SCREEN);
           selectedImagePath.value = "";
         },
       );
@@ -298,7 +295,7 @@ class ImageScreenController extends GetxController {
         title: "Something Went Wrong, Please Try Again",
         desc: "${response.reasonPhrase}",
         onTap: () {
-          Get.offAllNamed(Routes.HOME);
+          Get.offAllNamed(Routes.MAIN_SCREEN);
           selectedImagePath.value = "";
         },
       );
@@ -332,7 +329,7 @@ class ImageScreenController extends GetxController {
         title: "Something Went Wrong, Please Try Again",
         desc: "${response.reasonPhrase}",
         onTap: () {
-          Get.offAllNamed(Routes.HOME);
+          Get.offAllNamed(Routes.MAIN_SCREEN);
           selectedImagePath.value = "";
         },
       );
@@ -373,7 +370,7 @@ class ImageScreenController extends GetxController {
         title: "Something Went Wrong, Please Try Again",
         desc: "${response.reasonPhrase}",
         onTap: () {
-          Get.offAllNamed(Routes.HOME);
+          Get.offAllNamed(Routes.MAIN_SCREEN);
           selectedImagePath.value = "";
         },
       );
@@ -410,7 +407,7 @@ class ImageScreenController extends GetxController {
         title: "Something Went Wrong, Please Try Again",
         desc: "${response.reasonPhrase}",
         onTap: () {
-          Get.offAllNamed(Routes.HOME);
+          Get.offAllNamed(Routes.MAIN_SCREEN);
           selectedImagePath.value = "";
         },
       );
@@ -439,7 +436,7 @@ class ImageScreenController extends GetxController {
       image3D.value = "http://get.imglarger.com:8889/results/${imageID}_2x.jpg";
       isImageDone(imageId: imageID.value, context: context, urlId: "8999");
     } else {
-      Get.offAndToNamed(Routes.HOME);
+      Get.offAndToNamed(Routes.MAIN_SCREEN);
       print(response.reasonPhrase);
     }
   }
@@ -481,7 +478,7 @@ class ImageScreenController extends GetxController {
             title: "Something Went Wrong, Please Try Again",
             desc: "",
             onTap: () {
-              Get.offAllNamed(Routes.HOME);
+              Get.offAllNamed(Routes.MAIN_SCREEN);
               selectedImagePath.value = "";
             },
           );
@@ -492,7 +489,7 @@ class ImageScreenController extends GetxController {
           title: "Something Went Wrong, Please Try Again",
           desc: "",
           onTap: () {
-            Get.offAllNamed(Routes.HOME);
+            Get.offAllNamed(Routes.MAIN_SCREEN);
             selectedImagePath.value = "";
           },
         );
@@ -501,7 +498,7 @@ class ImageScreenController extends GetxController {
           title: "Something Went Wrong, Please Try Again",
           desc: "Face not detected",
           onTap: () {
-            Get.offAllNamed(Routes.HOME);
+            Get.offAllNamed(Routes.MAIN_SCREEN);
             selectedImagePath.value = "";
           },
         );

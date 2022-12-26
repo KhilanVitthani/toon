@@ -4,7 +4,6 @@ import 'package:ai_image_enlarger/constants/color_constant.dart';
 import 'package:ai_image_enlarger/constants/sizeConstant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -16,7 +15,7 @@ class SettingPageView extends GetView<SettingPageController> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        Get.offAndToNamed(Routes.HOME);
+        Get.offAndToNamed(Routes.MAIN_SCREEN);
         return await true;
       },
       child: SafeArea(
@@ -27,7 +26,7 @@ class SettingPageView extends GetView<SettingPageController> {
               elevation: 0,
               leading: GestureDetector(
                 onTap: () {
-                  Get.offAndToNamed(Routes.HOME);
+                  Get.offAndToNamed(Routes.MAIN_SCREEN);
                 },
                 child: Container(
                   padding: EdgeInsets.only(left: MySize.getWidth(10)),
