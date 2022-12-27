@@ -22,7 +22,6 @@ class MyHttpOverrides extends HttpOverrides {
 final getIt = GetIt.instance;
 GetStorage box = GetStorage();
 Future<void> main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
   HttpOverrides.global = new MyHttpOverrides();
   await GetStorage.init();

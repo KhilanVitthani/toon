@@ -21,25 +21,24 @@ class MainScreenView extends GetWidget<MainScreenController> {
   Widget build(BuildContext context) {
     MySize().init(context);
     return Obx(() {
-      return Scaffold(
-        backgroundColor: appTheme.primaryTheme,
-        appBar: AppBar(
+      return SafeArea(
+        child: Scaffold(
           backgroundColor: appTheme.primaryTheme,
-          elevation: 0,
-          title: const Text('Name'),
-          centerTitle: true,
-        ),
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: MySize.getWidth(8)),
-          child: Column(
+          appBar: AppBar(
+            backgroundColor: appTheme.primaryTheme,
+            elevation: 0,
+            title: const Text('Name'),
+            centerTitle: true,
+          ),
+          body: Column(
             children: [
               CarouselSlider.builder(
                 itemCount: controller.image.length,
                 options: CarouselOptions(
-                  height: MySize.getHeight(160),
+                  height: MySize.getHeight(170),
                   enlargeCenterPage: true,
                   autoPlay: true,
-                  autoPlayInterval: Duration(seconds: 4),
+                  autoPlayInterval: Duration(seconds: 2),
                   reverse: false,
                   viewportFraction: 1.0,
                   onPageChanged: (val, _) {
@@ -89,7 +88,7 @@ class MainScreenView extends GetWidget<MainScreenController> {
                 child: CarouselSlider.builder(
                   itemCount: controller.effectImage.length,
                   options: CarouselOptions(
-                    height: MySize.getHeight(160),
+                    height: MySize.getHeight(175),
                     enlargeCenterPage: true,
                     autoPlay: true,
                     autoPlayInterval: Duration(seconds: 4),
@@ -117,7 +116,7 @@ class MainScreenView extends GetWidget<MainScreenController> {
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: Text(
-                    "Recent",
+                    "My Collection",
                     style: GoogleFonts.karla(
                       fontSize: MySize.getHeight(20),
                       fontWeight: FontWeight.w500,
@@ -135,7 +134,7 @@ class MainScreenView extends GetWidget<MainScreenController> {
                             width: MySize.getWidth(215)),
                       )
                     : Container(
-                        height: MySize.getHeight(155),
+                        height: MySize.getHeight(130),
                         child: GridView.builder(
                           padding: EdgeInsets.only(bottom: 10),
                           itemCount: controller.myImage.length,

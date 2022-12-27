@@ -1,16 +1,21 @@
 import 'dart:convert';
+import 'dart:io';
 
-import 'package:ai_image_enlarger/main.dart';
 import 'package:ai_image_enlarger/utilities/progress_dialog_utils.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart' hide MultipartFile, FormData;
 import 'package:http/http.dart' as http;
 import 'package:screenshot/screenshot.dart';
+import 'package:yodo1mas/Yodo1MAS.dart';
 
 import '../../../../constants/api_constants.dart';
 import '../../../../constants/connectivityHelper.dart';
 import '../../../../constants/sizeConstant.dart';
+import '../../../../main.dart';
+import '../../../../utilities/ad_service.dart';
+import '../../../../utilities/timer_service.dart';
 import '../../../routes/app_pages.dart';
 
 class ImageScreenController extends GetxController {
@@ -34,6 +39,8 @@ class ImageScreenController extends GetxController {
   RxBool isFromFaceRetouch = false.obs;
   RxBool isFromBGRemover = false.obs;
   RxBool isFromColorizer = false.obs;
+  RxString saveImage = "".obs;
+  RxBool isFromHome = false.obs;
   Map source = {ConnectivityResult.none: false};
   final ConnetctivityHelper connectivity = ConnetctivityHelper.instance;
   @override
@@ -53,10 +60,33 @@ class ImageScreenController extends GetxController {
           Get.arguments[ArgumentConstant.isFromFaceRetouch];
       isFromBGRemover.value = Get.arguments[ArgumentConstant.isFromBGRemover];
       isFromColorizer.value = Get.arguments[ArgumentConstant.isFromColorizer];
+      isFromHome.value = Get.arguments[ArgumentConstant.isFromHome];
     }
     if (!isNullEmptyOrFalse(box.read(ArgumentConstant.myCollection))) {
       imageList.value = jsonDecode(box.read(ArgumentConstant.myCollection));
     }
+    Yodo1MAS.instance.setInterstitialListener((event, message) {
+      switch (event) {
+        case Yodo1MAS.AD_EVENT_OPENED:
+          print('Interstitial AD_EVENT_OPENED');
+          break;
+        case Yodo1MAS.AD_EVENT_ERROR:
+          print('Interstitial AD_EVENT_ERROR' + message);
+          break;
+        case Yodo1MAS.AD_EVENT_CLOSED:
+          getIt<TimerService>().verifyTimer();
+          SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+          (isFromHome.isTrue)
+              ? Get.offAllNamed(Routes.MAIN_SCREEN)
+              : Get.offAndToNamed(Routes.SHARE_FILE, arguments: {
+                  ArgumentConstant.capuredImage: File(saveImage.value),
+                  ArgumentConstant.isFromMyCollection: false,
+                  ArgumentConstant.isFromHome: false,
+                });
+          break;
+      }
+    });
+
     print(selectedImagePath);
     connectivity.initialise();
     connectivity.myStream.listen((event) {
@@ -114,6 +144,19 @@ class ImageScreenController extends GetxController {
     imageList.add(imageFile);
     box.write(ArgumentConstant.myCollection, jsonEncode(imageList));
     print("DataBase Collection ${box.read(ArgumentConstant.myCollection)}");
+    saveImage.value = imageFile;
+    getIt<AdService>().getAd(adType: AdService.interstitialAd).then((value) {
+      // if (!value) {
+      //   getIt<TimerService>().verifyTimer();
+      //   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+      //
+      //   Get.offAndToNamed(Routes.SHARE_FILE, arguments: {
+      //     ArgumentConstant.capuredImage: File(imageFile),
+      //     ArgumentConstant.isFromMyCollection: false,
+      //     ArgumentConstant.isFromHome: false,
+      //   });
+      // }
+    });
   }
 
   callApiForCartoonImage({

@@ -15,6 +15,7 @@ class ApiConstant {
 class ArgumentConstant {
   static const userId = "userId";
   static const imageFile = "imageFile";
+  static const isFirstTime = "isFirstTime";
   static const isFromCatoonizer = "isFromCatoonizer";
   static const isFromEnhancer = "isFromEnhancer";
   static const isFromDenoiser = "isFromDenoiser";

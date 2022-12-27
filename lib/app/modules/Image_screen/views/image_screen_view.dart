@@ -6,6 +6,7 @@ import 'package:ai_image_enlarger/constants/api_constants.dart';
 import 'package:ai_image_enlarger/constants/color_constant.dart';
 import 'package:ai_image_enlarger/constants/sizeConstant.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -15,7 +16,10 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:screenshot/screenshot.dart';
 
+import '../../../../main.dart';
+import '../../../../utilities/ad_service.dart';
 import '../../../../utilities/buttons.dart';
+import '../../../../utilities/timer_service.dart';
 import '../controllers/image_screen_controller.dart';
 
 class ImageScreenView extends GetWidget<ImageScreenController> {
@@ -33,8 +37,21 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
                   text: "Are you sure you want to lost your progress!.",
                   submitText: "Yes",
                   cancelText: "Cancel",
-                  submitCallBack: () {
-                    Get.offAllNamed(Routes.MAIN_SCREEN);
+                  submitCallBack: () async {
+                    if (getIt<TimerService>().is40SecCompleted) {
+                      await getIt<AdService>()
+                          .getAd(adType: AdService.interstitialAd)
+                          .then((value) {
+                        if (!value) {
+                          getIt<TimerService>().verifyTimer();
+                          SystemChrome.setEnabledSystemUIMode(
+                              SystemUiMode.edgeToEdge);
+                          Get.offAllNamed(Routes.MAIN_SCREEN);
+                        }
+                      });
+                    } else {
+                      Get.offAndToNamed(Routes.MAIN_SCREEN);
+                    }
                   },
                   cancelCallback: () {
                     Get.back();
@@ -49,22 +66,39 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
                       ? AppBar(
                           backgroundColor: appTheme.primaryTheme,
                           elevation: 0,
-                          leading:  GestureDetector(
+                          leading: GestureDetector(
                             onTap: () {
                               showConfirmationDialog(
                                   context: context,
-                                  text: "Are you sure you want to lost your progress!.",
+                                  text:
+                                      "Are you sure you want to lost your progress!.",
                                   submitText: "Yes",
                                   cancelText: "Cancel",
-                                  submitCallBack: () {
-                                    Get.offAllNamed(Routes.MAIN_SCREEN);
+                                  submitCallBack: () async {
+                                    if (getIt<TimerService>()
+                                        .is40SecCompleted) {
+                                      await getIt<AdService>()
+                                          .getAd(
+                                              adType: AdService.interstitialAd)
+                                          .then((value) {
+                                        if (!value) {
+                                          getIt<TimerService>().verifyTimer();
+                                          SystemChrome.setEnabledSystemUIMode(
+                                              SystemUiMode.edgeToEdge);
+                                          Get.offAllNamed(Routes.MAIN_SCREEN);
+                                        }
+                                      });
+                                    } else {
+                                      Get.offAndToNamed(Routes.MAIN_SCREEN);
+                                    }
                                   },
                                   cancelCallback: () {
                                     Get.back();
                                   });
                             },
                             child: Container(
-                              padding: EdgeInsets.only(left: MySize.getWidth(10)),
+                              padding:
+                                  EdgeInsets.only(left: MySize.getWidth(10)),
                               child: Icon(Icons.arrow_back),
                             ),
                           ),
@@ -108,13 +142,7 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
                                     // });
                                     controller.addImageToDataBase(
                                         imageFile: file.path);
-                                    Get.offAndToNamed(Routes.SHARE_FILE,
-                                        arguments: {
-                                          ArgumentConstant.capuredImage: file,
-                                          ArgumentConstant.isFromMyCollection:
-                                              false,
-                                          ArgumentConstant.isFromHome: false,
-                                        });
+
                                     file.writeAsBytesSync(imageInUnit8List);
                                   }
                                 });
@@ -185,7 +213,8 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
                               children: [
                                 Container(
                                   height: MySize.screenHeight -
-                                      MediaQuery.of(context).padding.top,
+                                      MediaQuery.of(context).padding.top -
+                                      MediaQuery.of(context).padding.bottom,
                                   decoration: BoxDecoration(
                                     color: Colors.transparent.withOpacity(0.9),
                                     image: DecorationImage(
@@ -283,7 +312,7 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
                                         color: (controller.is2d.isFalse)
                                             ? appTheme.buttonColor
                                             : appTheme.textGrayColor,
-                                        name: "Art-01",
+                                        name: "2D",
                                         context: context,
                                       ),
                                       cartoonImage(
@@ -295,7 +324,7 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
                                         color: (controller.is2d.isTrue)
                                             ? appTheme.buttonColor
                                             : appTheme.textGrayColor,
-                                        name: "Art-02",
+                                        name: "3D ",
                                         isFrom3d: true,
                                         context: context,
                                       ),
@@ -334,7 +363,7 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
       onTap: onTap,
       child: Container(
         width: MySize.getWidth(72),
-        height: MySize.getHeight(125),
+        height: MySize.getHeight(120),
         decoration: BoxDecoration(
             color: color,
             borderRadius: BorderRadius.circular(MySize.getHeight(8))),
@@ -357,7 +386,9 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
                 ),
                 child: getImageByLink(
                   url: url,
-                  height: MySize.getHeight(100),
+                  height: (MySize.isMini)
+                      ? MySize.getHeight(90)
+                      : MySize.getHeight(80),
                   boxFit: BoxFit.fitHeight,
                   width: MySize.getHeight(68),
                 ),

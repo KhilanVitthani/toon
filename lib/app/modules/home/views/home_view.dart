@@ -6,11 +6,15 @@ import 'package:ai_image_enlarger/constants/color_constant.dart';
 import 'package:ai_image_enlarger/constants/sizeConstant.dart';
 import 'package:ai_image_enlarger/utilities/buttons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:yodo1mas/Yodo1MasNativeAd.dart';
+import 'package:yodo1mas/Yodo1MasBannerAd.dart';
 
+import '../../../../main.dart';
+import '../../../../utilities/ad_service.dart';
+import '../../../../utilities/timer_service.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetWidget<HomeController> {
@@ -21,7 +25,20 @@ class HomeView extends GetWidget<HomeController> {
     MySize().init(context);
     return WillPopScope(
       onWillPop: () async {
-        Get.offAndToNamed(Routes.MAIN_SCREEN);
+        if (getIt<TimerService>().is40SecCompleted) {
+          await getIt<AdService>()
+              .getAd(adType: AdService.interstitialAd)
+              .then((value) {
+            if (!value) {
+              getIt<TimerService>().verifyTimer();
+              SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+              Get.offAndToNamed(Routes.MAIN_SCREEN);
+            }
+          });
+        } else {
+          Get.offAndToNamed(Routes.MAIN_SCREEN);
+        }
+
         return await true;
       },
       child: SafeArea(
@@ -30,8 +47,22 @@ class HomeView extends GetWidget<HomeController> {
           appBar: AppBar(
             title: const Text('Name'),
             leading: GestureDetector(
-              onTap: () {
-                Get.offAllNamed(Routes.MAIN_SCREEN);
+              onTap: () async {
+                if (getIt<TimerService>().is40SecCompleted) {
+                  await getIt<AdService>()
+                      .getAd(adType: AdService.interstitialAd)
+                      .then((value) {
+                    if (!value) {
+                      getIt<TimerService>().verifyTimer();
+                      SystemChrome.setEnabledSystemUIMode(
+                          SystemUiMode.edgeToEdge);
+                      Get.offAndToNamed(Routes.MAIN_SCREEN);
+                    }
+                  });
+                } else {
+                  Get.offAndToNamed(Routes.MAIN_SCREEN);
+                }
+
                 // box.erase();
               },
               child: Container(
@@ -68,14 +99,14 @@ class HomeView extends GetWidget<HomeController> {
                       context: context,
                       title: "AI Enhancer",
                       image: "AiEnhancer.png"),
-                  Yodo1MASNativeAd(
-                    size: NativeSize.NativeLarge,
-                    backgroundColor: "WHITE",
-                    onLoad: () => print('Native Ad loaded:'),
-                    onClosed: () => print('Native Ad clicked:'),
-                    onLoadFailed: (message) => print('Native Ad $message'),
+                  SizedBox(
+                    height: MySize.getHeight(20),
                   ),
-
+                  (controller.connectivityResult == ConnectionState.none)
+                      ? SizedBox()
+                      : Yodo1MASBannerAd(
+                          size: BannerSize.Banner,
+                        ),
                   SizedBox(
                     height: MySize.getHeight(20),
                   ),
@@ -142,6 +173,14 @@ class HomeView extends GetWidget<HomeController> {
                       context: context,
                       title: "AI Denoiser",
                       image: "AiDenoiser.png"),
+                  SizedBox(
+                    height: MySize.getHeight(20),
+                  ),
+                  (controller.connectivityResult == ConnectionState.none)
+                      ? SizedBox()
+                      : Yodo1MASBannerAd(
+                          size: BannerSize.Banner,
+                        ),
                   SizedBox(
                     height: MySize.getHeight(20),
                   ),

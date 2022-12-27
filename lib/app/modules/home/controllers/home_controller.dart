@@ -6,11 +6,14 @@ import 'package:ai_image_enlarger/constants/color_constant.dart';
 import 'package:ai_image_enlarger/main.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
+import 'package:yodo1mas/Yodo1MAS.dart';
 
 import '../../../../constants/connectivityHelper.dart';
 import '../../../../utilities/progress_dialog_utils.dart';
+import '../../../../utilities/timer_service.dart';
 
 class HomeController extends GetxController {
   CroppedFile? _croppedFile;
@@ -25,10 +28,12 @@ class HomeController extends GetxController {
   RxBool isFromBGRemover = false.obs;
   RxBool isFromColorizer = false.obs;
   RxBool isFromMagicEraser = false.obs;
+  var connectivityResult;
   Map source = {ConnectivityResult.none: false};
   final ConnetctivityHelper connectivity = ConnetctivityHelper.instance;
   @override
-  void onInit() {
+  Future<void> onInit() async {
+    connectivityResult = await Connectivity().checkConnectivity();
     connectivity.initialise();
     connectivity.myStream.listen((event) {
       source = event;
@@ -37,9 +42,24 @@ class HomeController extends GetxController {
           title: "Error",
           desc: "No Internet Connection",
           onTap: () {
-            Get.offAndToNamed(Routes.MAIN_SCREEN);
+            Get.offAllNamed(Routes.MAIN_SCREEN);
           },
         );
+      }
+    });
+    Yodo1MAS.instance.setInterstitialListener((event, message) {
+      switch (event) {
+        case Yodo1MAS.AD_EVENT_OPENED:
+          print('Interstitial AD_EVENT_OPENED');
+          break;
+        case Yodo1MAS.AD_EVENT_ERROR:
+          print('Interstitial AD_EVENT_ERROR' + message);
+          break;
+        case Yodo1MAS.AD_EVENT_CLOSED:
+          getIt<TimerService>().verifyTimer();
+          SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+          Get.offAndToNamed(Routes.MAIN_SCREEN);
+          break;
       }
     });
     super.onInit();
@@ -93,6 +113,7 @@ class HomeController extends GetxController {
             ArgumentConstant.isFromImageUpscaler: false,
             ArgumentConstant.isFromSharpener: false,
             ArgumentConstant.isFromBGRemover: false,
+            ArgumentConstant.isFromHome: true,
           });
         } else if (isFromDenoiser.isTrue) {
           Get.toNamed(Routes.IMAGE_SCREEN, arguments: {
@@ -102,6 +123,7 @@ class HomeController extends GetxController {
             ArgumentConstant.isFromDenoiser: true,
             ArgumentConstant.isFromAnime: false,
             ArgumentConstant.isFromFaceRetouch: false,
+            ArgumentConstant.isFromHome: true,
             ArgumentConstant.isFromColorizer: false,
             ArgumentConstant.isFromImageEnlarger: false,
             ArgumentConstant.isFromImageUpscaler: false,
@@ -116,6 +138,7 @@ class HomeController extends GetxController {
             ArgumentConstant.isFromDenoiser: false,
             ArgumentConstant.isFromAnime: true,
             ArgumentConstant.isFromImageEnlarger: false,
+            ArgumentConstant.isFromHome: true,
             ArgumentConstant.isFromFaceRetouch: false,
             ArgumentConstant.isFromImageUpscaler: false,
             ArgumentConstant.isFromSharpener: false,
@@ -130,6 +153,7 @@ class HomeController extends GetxController {
             ArgumentConstant.isFromDenoiser: false,
             ArgumentConstant.isFromFaceRetouch: false,
             ArgumentConstant.isFromAnime: false,
+            ArgumentConstant.isFromHome: true,
             ArgumentConstant.isFromImageEnlarger: true,
             ArgumentConstant.isFromImageUpscaler: false,
             ArgumentConstant.isFromSharpener: false,
@@ -147,6 +171,7 @@ class HomeController extends GetxController {
             ArgumentConstant.isFromImageEnlarger: false,
             ArgumentConstant.isFromImageUpscaler: true,
             ArgumentConstant.isFromSharpener: false,
+            ArgumentConstant.isFromHome: true,
             ArgumentConstant.isFromColorizer: false,
             ArgumentConstant.isFromBGRemover: false,
           });
@@ -158,6 +183,7 @@ class HomeController extends GetxController {
             ArgumentConstant.isFromDenoiser: false,
             ArgumentConstant.isFromFaceRetouch: false,
             ArgumentConstant.isFromAnime: false,
+            ArgumentConstant.isFromHome: true,
             ArgumentConstant.isFromImageEnlarger: false,
             ArgumentConstant.isFromImageUpscaler: false,
             ArgumentConstant.isFromSharpener: true,
@@ -172,6 +198,7 @@ class HomeController extends GetxController {
             ArgumentConstant.isFromDenoiser: false,
             ArgumentConstant.isFromAnime: false,
             ArgumentConstant.isFromImageEnlarger: false,
+            ArgumentConstant.isFromHome: true,
             ArgumentConstant.isFromImageUpscaler: false,
             ArgumentConstant.isFromSharpener: false,
             ArgumentConstant.isFromFaceRetouch: true,
@@ -186,6 +213,7 @@ class HomeController extends GetxController {
             ArgumentConstant.isFromDenoiser: false,
             ArgumentConstant.isFromAnime: false,
             ArgumentConstant.isFromImageEnlarger: false,
+            ArgumentConstant.isFromHome: true,
             ArgumentConstant.isFromImageUpscaler: false,
             ArgumentConstant.isFromSharpener: false,
             ArgumentConstant.isFromFaceRetouch: false,
@@ -200,6 +228,7 @@ class HomeController extends GetxController {
             ArgumentConstant.isFromDenoiser: false,
             ArgumentConstant.isFromAnime: false,
             ArgumentConstant.isFromImageEnlarger: false,
+            ArgumentConstant.isFromHome: true,
             ArgumentConstant.isFromImageUpscaler: false,
             ArgumentConstant.isFromSharpener: false,
             ArgumentConstant.isFromFaceRetouch: false,
@@ -214,6 +243,7 @@ class HomeController extends GetxController {
             ArgumentConstant.isFromDenoiser: false,
             ArgumentConstant.isFromAnime: false,
             ArgumentConstant.isFromImageEnlarger: false,
+            ArgumentConstant.isFromHome: true,
             ArgumentConstant.isFromImageUpscaler: false,
             ArgumentConstant.isFromSharpener: false,
             ArgumentConstant.isFromFaceRetouch: false,
