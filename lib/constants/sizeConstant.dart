@@ -19,7 +19,7 @@ class MySize {
     screenWidth = _mediaQueryData.size.width;
     screenHeight = _mediaQueryData.size.height;
     print("ScreenHight ${screenHeight}");
-    isMini = _mediaQueryData.size.height < 750;
+    isMini = _mediaQueryData.size.height < 786;
     double _safeAreaWidth =
         _mediaQueryData.padding.left + _mediaQueryData.padding.right;
     double _safeAreaHeight =

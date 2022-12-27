@@ -296,7 +296,7 @@ class HomeView extends GetWidget<HomeController> {
         builder: (context) {
           return Container(
             color: appTheme.textGrayColor,
-            height: MySize.getHeight(100),
+            height: MySize.getHeight(150),
             width: double.infinity,
             child: Column(
               children: [

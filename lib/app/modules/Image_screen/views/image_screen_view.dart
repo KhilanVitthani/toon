@@ -33,6 +33,7 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
         builder: (controller) {
           return WillPopScope(
             onWillPop: () async {
+              controller.isFromBack.value = true;
               showConfirmationDialog(
                   context: context,
                   text: "Are you sure you want to lost your progress!.",
@@ -69,6 +70,7 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
                           elevation: 0,
                           leading: GestureDetector(
                             onTap: () {
+                              controller.isFromBack.value = true;
                               showConfirmationDialog(
                                   context: context,
                                   text:
@@ -76,6 +78,8 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
                                   submitText: "Yes",
                                   cancelText: "Cancel",
                                   submitCallBack: () async {
+                                    controller.isFromBack.value = true;
+
                                     if (getIt<TimerService>()
                                         .is40SecCompleted) {
                                       await getIt<AdService>()
@@ -166,9 +170,11 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
                       : null,
                   body: Column(
                     children: [
-                      Yodo1MASBannerAd(
-                        size: BannerSize.Banner,
-                      ),
+                      (controller.hasDate.isTrue)
+                          ? Yodo1MASBannerAd(
+                              size: BannerSize.Banner,
+                            )
+                          : SizedBox(),
                       Spacer(),
                       (controller.hasDate.isTrue)
                           ? Screenshot(

@@ -157,8 +157,8 @@ class MainScreenView extends GetWidget<MainScreenController> {
                         padding: EdgeInsets.symmetric(
                             horizontal: MySize.getWidth(8)),
                         height: (MySize.isMini)
-                            ? MySize.getHeight(130)
-                            : MySize.getHeight(125),
+                            ? MySize.getHeight(112)
+                            : MySize.getHeight(130),
                         child: GridView.builder(
                           padding: EdgeInsets.only(bottom: 10),
                           itemCount: controller.myImage.length,
@@ -282,7 +282,7 @@ class MainScreenView extends GetWidget<MainScreenController> {
                   ),
                   Positioned(
                     bottom: MySize.getHeight(44),
-                    left: MySize.getWidth(145),
+                    left: MySize.getWidth(151),
                     child: GestureDetector(
                       onTap: () {
                         controller.check().then((intenet) {
