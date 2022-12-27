@@ -3,11 +3,15 @@ import 'package:ai_image_enlarger/constants/api_constants.dart';
 import 'package:ai_image_enlarger/constants/color_constant.dart';
 import 'package:ai_image_enlarger/constants/sizeConstant.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../../main.dart';
+import '../../../../utilities/ad_service.dart';
+import '../../../../utilities/timer_service.dart';
 import '../controllers/setting_page_controller.dart';
 
 class SettingPageView extends GetView<SettingPageController> {
@@ -16,7 +20,19 @@ class SettingPageView extends GetView<SettingPageController> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        Get.offAndToNamed(Routes.MAIN_SCREEN);
+        if (getIt<TimerService>().is40SecCompleted) {
+          await getIt<AdService>()
+              .getAd(adType: AdService.interstitialAd)
+              .then((value) {
+            if (!value) {
+              getIt<TimerService>().verifyTimer();
+              SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+              Get.offAndToNamed(Routes.MAIN_SCREEN);
+            }
+          });
+        } else {
+          Get.offAndToNamed(Routes.MAIN_SCREEN);
+        }
         return await true;
       },
       child: SafeArea(
@@ -26,8 +42,21 @@ class SettingPageView extends GetView<SettingPageController> {
               backgroundColor: appTheme.primaryTheme,
               elevation: 0,
               leading: GestureDetector(
-                onTap: () {
-                  Get.offAndToNamed(Routes.MAIN_SCREEN);
+                onTap: () async {
+                  if (getIt<TimerService>().is40SecCompleted) {
+                    await getIt<AdService>()
+                        .getAd(adType: AdService.interstitialAd)
+                        .then((value) {
+                      if (!value) {
+                        getIt<TimerService>().verifyTimer();
+                        SystemChrome.setEnabledSystemUIMode(
+                            SystemUiMode.edgeToEdge);
+                        Get.offAndToNamed(Routes.MAIN_SCREEN);
+                      }
+                    });
+                  } else {
+                    Get.offAndToNamed(Routes.MAIN_SCREEN);
+                  }
                 },
                 child: Container(
                   padding: EdgeInsets.only(left: MySize.getWidth(10)),

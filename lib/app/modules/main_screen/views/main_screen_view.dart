@@ -113,16 +113,36 @@ class MainScreenView extends GetWidget<MainScreenController> {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: MySize.getWidth(8)),
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    "My Collection",
-                    style: GoogleFonts.karla(
-                      fontSize: MySize.getHeight(20),
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white,
+                child: Row(
+                  children: [
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        "My Collection",
+                        style: GoogleFonts.karla(
+                          fontSize: MySize.getHeight(20),
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
-                  ),
+                    Spacer(),
+                    InkWell(
+                      onTap: () {
+                        Get.offAndToNamed(Routes.MY_COLLECTION_PAGE);
+                      },
+                      child: Container(
+                        // color: Colors.amber,
+                        alignment: Alignment.topRight,
+                        width: MySize.getWidth(50),
+                        child: Icon(
+                          Icons.arrow_forward_outlined,
+                          color: Colors.white,
+                          size: MySize.getHeight(25),
+                        ),
+                      ),
+                    )
+                  ],
                 ),
               ),
               Padding(
