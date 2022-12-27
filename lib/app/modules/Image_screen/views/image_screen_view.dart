@@ -15,6 +15,7 @@ import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:screenshot/screenshot.dart';
+import 'package:yodo1mas/Yodo1MasBannerAd.dart';
 
 import '../../../../main.dart';
 import '../../../../utilities/ad_service.dart';
@@ -165,6 +166,9 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
                       : null,
                   body: Column(
                     children: [
+                      Yodo1MASBannerAd(
+                        size: BannerSize.Banner,
+                      ),
                       Spacer(),
                       (controller.hasDate.isTrue)
                           ? Screenshot(

@@ -154,7 +154,11 @@ class MainScreenView extends GetWidget<MainScreenController> {
                             width: MySize.getWidth(215)),
                       )
                     : Container(
-                        height: MySize.getHeight(130),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: MySize.getWidth(8)),
+                        height: (MySize.isMini)
+                            ? MySize.getHeight(130)
+                            : MySize.getHeight(125),
                         child: GridView.builder(
                           padding: EdgeInsets.only(bottom: 10),
                           itemCount: controller.myImage.length,

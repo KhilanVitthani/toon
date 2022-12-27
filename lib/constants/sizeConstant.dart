@@ -1,8 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../main.dart';
-import 'api_constants.dart';
 
 class MySize {
   static late MediaQueryData _mediaQueryData;
@@ -20,6 +18,7 @@ class MySize {
 
     screenWidth = _mediaQueryData.size.width;
     screenHeight = _mediaQueryData.size.height;
+    print("ScreenHight ${screenHeight}");
     isMini = _mediaQueryData.size.height < 750;
     double _safeAreaWidth =
         _mediaQueryData.padding.left + _mediaQueryData.padding.right;
