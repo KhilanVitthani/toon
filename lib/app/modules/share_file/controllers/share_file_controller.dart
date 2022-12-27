@@ -45,6 +45,8 @@ class ShareFileController extends GetxController {
                       submitText: "Yes",
                       cancelText: "Cancel",
                       submitCallBack: () {
+                        SystemChrome.setEnabledSystemUIMode(
+                            SystemUiMode.edgeToEdge);
                         Get.offAllNamed(Routes.MAIN_SCREEN);
                       },
                       cancelCallback: () {

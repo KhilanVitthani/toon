@@ -22,6 +22,8 @@ class MainScreenController extends GetxController {
   CarouselController carouselController = CarouselController();
   @override
   void onInit() {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+
     if (!isNullEmptyOrFalse(box.read(ArgumentConstant.myCollection))) {
       RxList myImage1 = RxList([]);
       myImage1.value = jsonDecode(box.read(ArgumentConstant.myCollection));
