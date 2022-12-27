@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:ai_image_enlarger/constants/app_module.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:yodo1mas/Yodo1MAS.dart';
 
 import 'app/routes/app_pages.dart';
 
@@ -22,10 +22,13 @@ class MyHttpOverrides extends HttpOverrides {
 final getIt = GetIt.instance;
 GetStorage box = GetStorage();
 Future<void> main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
   HttpOverrides.global = new MyHttpOverrides();
   await GetStorage.init();
   setUp();
+  Yodo1MAS.instance.init("dRRXU9VIRb", true, (successful) {});
+
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,

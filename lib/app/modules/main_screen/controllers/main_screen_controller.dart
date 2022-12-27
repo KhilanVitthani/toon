@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:ai_image_enlarger/constants/api_constants.dart';
 import 'package:carousel_slider/carousel_controller.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get/get.dart';
 
 import '../../../../constants/sizeConstant.dart';
@@ -18,7 +19,6 @@ class MainScreenController extends GetxController {
   void onInit() {
     if (!isNullEmptyOrFalse(box.read(ArgumentConstant.myCollection))) {
       RxList myImage1 = RxList([]);
-
       myImage1.value = jsonDecode(box.read(ArgumentConstant.myCollection));
       print(myImage);
       myImage.value = myImage1.reversed.toList();
@@ -36,6 +36,16 @@ class MainScreenController extends GetxController {
     effectImage.add("${imagePath}AiAnime16K.png");
     effectImage.add("${imagePath}AiSketch.png");
     effectImage.add("${imagePath}AiEnhancer.png");
+  }
+
+  Future<bool> check() async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.mobile) {
+      return true;
+    } else if (connectivityResult == ConnectivityResult.wifi) {
+      return true;
+    }
+    return false;
   }
 
   @override

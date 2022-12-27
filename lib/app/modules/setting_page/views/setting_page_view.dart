@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../controllers/setting_page_controller.dart';
 
@@ -67,11 +68,24 @@ class SettingPageView extends GetView<SettingPageController> {
                     name: "Rate Us!",
                   ),
                   settingTile(
+                    onTap: () async {
+                      const url =
+                          "https://sites.google.com/view/mobapp-privacy-policy/policy";
+                      await launch(url);
+                    },
                     context: context,
                     image: "policy.svg",
                     name: "Privacy Policy",
                   ),
                   settingTile(
+                    onTap: () async {
+                      final Uri params = Uri(
+                        scheme: 'mailto',
+                        path: '${feedBackEmail}',
+                      );
+                      var url = params.toString();
+                      await launch(url);
+                    },
                     context: context,
                     image: "feedback.svg",
                     name: "Feedback & Suggestions",
@@ -86,32 +100,36 @@ class SettingPageView extends GetView<SettingPageController> {
   settingTile(
       {required BuildContext context,
       required String name,
-      required String image}) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: MySize.getHeight(8)),
-      child: Container(
-        height: (MySize.isMini) ? MySize.getHeight(55) : MySize.getHeight(50),
-        width: MySize.getWidth(320),
-        decoration: BoxDecoration(
-            color: Color(0xff3B3943),
-            borderRadius: BorderRadius.circular(MySize.getHeight(8))),
-        child: Row(
-          children: [
-            SizedBox(
-              width: MySize.getWidth(23),
-            ),
-            SvgPicture.asset(imagePath + image),
-            SizedBox(
-              width: MySize.getWidth(18),
-            ),
-            Text(
-              "${name}",
-              style: GoogleFonts.karla(
-                  fontWeight: FontWeight.w500,
-                  color: Colors.white,
-                  fontSize: MySize.getHeight(18)),
-            ),
-          ],
+      required String image,
+      VoidCallback? onTap}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Padding(
+        padding: EdgeInsets.only(bottom: MySize.getHeight(8)),
+        child: Container(
+          height: (MySize.isMini) ? MySize.getHeight(55) : MySize.getHeight(50),
+          width: MySize.getWidth(320),
+          decoration: BoxDecoration(
+              color: Color(0xff3B3943),
+              borderRadius: BorderRadius.circular(MySize.getHeight(8))),
+          child: Row(
+            children: [
+              SizedBox(
+                width: MySize.getWidth(23),
+              ),
+              SvgPicture.asset(imagePath + image),
+              SizedBox(
+                width: MySize.getWidth(18),
+              ),
+              Text(
+                "${name}",
+                style: GoogleFonts.karla(
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                    fontSize: MySize.getHeight(18)),
+              ),
+            ],
+          ),
         ),
       ),
     );

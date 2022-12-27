@@ -10,6 +10,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../constants/api_constants.dart';
+import '../../../../main.dart';
+import '../../../../utilities/progress_dialog_utils.dart';
 import '../controllers/main_screen_controller.dart';
 
 class MainScreenView extends GetWidget<MainScreenController> {
@@ -260,7 +262,16 @@ class MainScreenView extends GetWidget<MainScreenController> {
                     left: MySize.getWidth(145),
                     child: GestureDetector(
                       onTap: () {
-                        Get.offAndToNamed(Routes.HOME);
+                        controller.check().then((intenet) {
+                          if (intenet != null && intenet) {
+                            Get.offAndToNamed(Routes.HOME);
+                          } else {
+                            getIt<CustomDialogs>().getDialog(
+                              title: "Error",
+                              desc: "No Internet Connection",
+                            );
+                          }
+                        });
                       },
                       child: Container(
                         child: Image.asset(

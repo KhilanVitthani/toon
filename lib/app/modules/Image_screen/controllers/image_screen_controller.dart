@@ -2,12 +2,14 @@ import 'dart:convert';
 
 import 'package:ai_image_enlarger/main.dart';
 import 'package:ai_image_enlarger/utilities/progress_dialog_utils.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide MultipartFile, FormData;
 import 'package:http/http.dart' as http;
 import 'package:screenshot/screenshot.dart';
 
 import '../../../../constants/api_constants.dart';
+import '../../../../constants/connectivityHelper.dart';
 import '../../../../constants/sizeConstant.dart';
 import '../../../routes/app_pages.dart';
 
@@ -32,6 +34,8 @@ class ImageScreenController extends GetxController {
   RxBool isFromFaceRetouch = false.obs;
   RxBool isFromBGRemover = false.obs;
   RxBool isFromColorizer = false.obs;
+  Map source = {ConnectivityResult.none: false};
+  final ConnetctivityHelper connectivity = ConnetctivityHelper.instance;
   @override
   void onInit() {
     if (Get.arguments != null) {
@@ -54,31 +58,45 @@ class ImageScreenController extends GetxController {
       imageList.value = jsonDecode(box.read(ArgumentConstant.myCollection));
     }
     print(selectedImagePath);
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      if (selectedImagePath.value.isNotEmpty) {
-        if (isFromEnhancer.isTrue) {
-          callApiForEnhancer(context: Get.context!);
-        } else if (isFromDenoiser.isTrue) {
-          callApiForDenoiser(context: Get.context!);
-        } else if (isFromAnime.isTrue) {
-          callApiForAnime(context: Get.context!);
-        } else if (isFromImageEnlarger.isTrue) {
-          callApiForImageEnlarger(context: Get.context!);
-        } else if (isFromImageUpscaler.isTrue) {
-          callApiForImageUpscaler(context: Get.context!);
-        } else if (isFromSharpener.isTrue) {
-          callApiForImageSharpener(context: Get.context!);
-        } else if (isFromFaceRetouch.isTrue) {
-          callApiForFaceRetouch(context: Get.context!);
-        } else if (isFromBGRemover.isTrue) {
-          callApiForBGRemover(context: Get.context!);
-        } else if (isFromColorizer.isTrue) {
-          callApiForColorizer(context: Get.context!);
-        } else {
-          callApiForCartoonImage(context: Get.context!);
-        }
+    connectivity.initialise();
+    connectivity.myStream.listen((event) {
+      source = event;
+      if (source.keys.toList()[0] == ConnectivityResult.none) {
+        getIt<CustomDialogs>().getDialog(
+          title: "Error",
+          desc: "No Internet Connection",
+          onTap: () {
+            Get.offAllNamed(Routes.MAIN_SCREEN);
+          },
+        );
+      } else {
+        WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+          if (selectedImagePath.value.isNotEmpty) {
+            if (isFromEnhancer.isTrue) {
+              callApiForEnhancer(context: Get.context!);
+            } else if (isFromDenoiser.isTrue) {
+              callApiForDenoiser(context: Get.context!);
+            } else if (isFromAnime.isTrue) {
+              callApiForAnime(context: Get.context!);
+            } else if (isFromImageEnlarger.isTrue) {
+              callApiForImageEnlarger(context: Get.context!);
+            } else if (isFromImageUpscaler.isTrue) {
+              callApiForImageUpscaler(context: Get.context!);
+            } else if (isFromSharpener.isTrue) {
+              callApiForImageSharpener(context: Get.context!);
+            } else if (isFromFaceRetouch.isTrue) {
+              callApiForFaceRetouch(context: Get.context!);
+            } else if (isFromBGRemover.isTrue) {
+              callApiForBGRemover(context: Get.context!);
+            } else if (isFromColorizer.isTrue) {
+              callApiForColorizer(context: Get.context!);
+            } else {
+              callApiForCartoonImage(context: Get.context!);
+            }
+          }
+          super.onInit();
+        });
       }
-      super.onInit();
     });
   }
 

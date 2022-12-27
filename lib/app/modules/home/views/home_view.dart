@@ -9,10 +9,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:yodo1mas/Yodo1MasNativeAd.dart';
 
 import '../controllers/home_controller.dart';
 
-class HomeView extends GetView<HomeController> {
+class HomeView extends GetWidget<HomeController> {
   final imgPicker = ImagePicker();
 
   @override
@@ -67,6 +68,14 @@ class HomeView extends GetView<HomeController> {
                       context: context,
                       title: "AI Enhancer",
                       image: "AiEnhancer.png"),
+                  Yodo1MASNativeAd(
+                    size: NativeSize.NativeLarge,
+                    backgroundColor: "WHITE",
+                    onLoad: () => print('Native Ad loaded:'),
+                    onClosed: () => print('Native Ad clicked:'),
+                    onLoadFailed: (message) => print('Native Ad $message'),
+                  ),
+
                   SizedBox(
                     height: MySize.getHeight(20),
                   ),

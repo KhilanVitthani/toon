@@ -5,6 +5,7 @@ import '../app/routes/app_pages.dart';
 const imagePath = "assets/images/";
 const baseUrl = "https://member.imglarger.com/api/";
 const imageCartton = "https://access2.imglarger.com:8997/";
+const feedBackEmail = "mobileappxperts3@gmail.com";
 
 class ApiConstant {
   static const login = "User/Login";

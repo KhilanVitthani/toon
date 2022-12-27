@@ -1,13 +1,15 @@
 import 'dart:io';
+
 import 'package:ai_image_enlarger/app/routes/app_pages.dart';
 import 'package:ai_image_enlarger/constants/api_constants.dart';
 import 'package:ai_image_enlarger/constants/color_constant.dart';
 import 'package:ai_image_enlarger/main.dart';
-import 'package:image_cropper/image_cropper.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:image_cropper/image_cropper.dart';
 
+import '../../../../constants/connectivityHelper.dart';
 import '../../../../utilities/progress_dialog_utils.dart';
 
 class HomeController extends GetxController {
@@ -23,8 +25,23 @@ class HomeController extends GetxController {
   RxBool isFromBGRemover = false.obs;
   RxBool isFromColorizer = false.obs;
   RxBool isFromMagicEraser = false.obs;
+  Map source = {ConnectivityResult.none: false};
+  final ConnetctivityHelper connectivity = ConnetctivityHelper.instance;
   @override
   void onInit() {
+    connectivity.initialise();
+    connectivity.myStream.listen((event) {
+      source = event;
+      if (source.keys.toList()[0] == ConnectivityResult.none) {
+        getIt<CustomDialogs>().getDialog(
+          title: "Error",
+          desc: "No Internet Connection",
+          onTap: () {
+            Get.offAndToNamed(Routes.MAIN_SCREEN);
+          },
+        );
+      }
+    });
     super.onInit();
   }
 
@@ -35,6 +52,7 @@ class HomeController extends GetxController {
 
   @override
   void onClose() {
+    source.clear();
     super.onClose();
   }
 
