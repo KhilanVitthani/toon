@@ -41,7 +41,7 @@ class ImageScreenController extends GetxController {
   RxBool isFromColorizer = false.obs;
   RxString saveImage = "".obs;
   RxBool isFromHome = false.obs;
-  RxBool isFromBack = false.obs;
+  RxBool isFromSave = false.obs;
   Map source = {ConnectivityResult.none: false};
   final ConnetctivityHelper connectivity = ConnetctivityHelper.instance;
   @override
@@ -77,13 +77,13 @@ class ImageScreenController extends GetxController {
         case Yodo1MAS.AD_EVENT_CLOSED:
           getIt<TimerService>().verifyTimer();
           SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-          (isFromBack.isTrue)
-              ? Get.offAllNamed(Routes.MAIN_SCREEN)
-              : Get.offAndToNamed(Routes.SHARE_FILE, arguments: {
+          (isFromSave.isTrue)
+              ? Get.offAndToNamed(Routes.SHARE_FILE, arguments: {
                   ArgumentConstant.capuredImage: File(saveImage.value),
                   ArgumentConstant.isFromMyCollection: false,
                   ArgumentConstant.isFromHome: false,
-                });
+                })
+              : Get.offAndToNamed(Routes.MAIN_SCREEN);
           break;
       }
     });

@@ -49,7 +49,7 @@ class MainScreenController extends GetxController {
       },
     );
     addImage();
-    loadAdd();
+    // loadAdd();
     super.onInit();
   }
 

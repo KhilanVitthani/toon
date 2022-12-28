@@ -33,7 +33,6 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
         builder: (controller) {
           return WillPopScope(
             onWillPop: () async {
-              controller.isFromBack.value = true;
               showConfirmationDialog(
                   context: context,
                   text: "Are you sure you want to lost your progress!.",
@@ -70,7 +69,6 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
                           elevation: 0,
                           leading: GestureDetector(
                             onTap: () {
-                              controller.isFromBack.value = true;
                               showConfirmationDialog(
                                   context: context,
                                   text:
@@ -78,8 +76,6 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
                                   submitText: "Yes",
                                   cancelText: "Cancel",
                                   submitCallBack: () async {
-                                    controller.isFromBack.value = true;
-
                                     if (getIt<TimerService>()
                                         .is40SecCompleted) {
                                       await getIt<AdService>()
@@ -110,6 +106,7 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
                           actions: [
                             GestureDetector(
                               onTap: () {
+                                controller.isFromSave.value = true;
                                 controller.screenshotController
                                     .capture(
                                         delay: Duration(
@@ -266,8 +263,29 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
                                               "Are you sure you want to lost your progress!.",
                                           submitText: "Yes",
                                           cancelText: "Cancel",
-                                          submitCallBack: () {
-                                            Get.offAllNamed(Routes.MAIN_SCREEN);
+                                          submitCallBack: () async {
+                                            if (getIt<TimerService>()
+                                                .is40SecCompleted) {
+                                              await getIt<AdService>()
+                                                  .getAd(
+                                                      adType: AdService
+                                                          .interstitialAd)
+                                                  .then((value) {
+                                                if (!value) {
+                                                  getIt<TimerService>()
+                                                      .verifyTimer();
+                                                  SystemChrome
+                                                      .setEnabledSystemUIMode(
+                                                          SystemUiMode
+                                                              .edgeToEdge);
+                                                  Get.offAllNamed(
+                                                      Routes.MAIN_SCREEN);
+                                                }
+                                              });
+                                            } else {
+                                              Get.offAndToNamed(
+                                                  Routes.MAIN_SCREEN);
+                                            }
                                           },
                                           cancelCallback: () {
                                             Get.back();
