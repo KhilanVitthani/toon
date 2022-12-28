@@ -245,7 +245,7 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
                                         ),
                                         Container(
                                           child: Image.asset(
-                                            imagePath + "loading.gif",
+                                            imagePath + "1.gif",
                                           ),
                                         )
                                       ],
