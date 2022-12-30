@@ -13,6 +13,7 @@ abstract class Routes {
   static const SETTING_PAGE = _Paths.SETTING_PAGE;
   static const MY_COLLECTION_PAGE = _Paths.MY_COLLECTION_PAGE;
   static const MAIN_SCREEN = _Paths.MAIN_SCREEN;
+  static const SPLASH_SCREEN = _Paths.SPLASH_SCREEN;
 }
 
 abstract class _Paths {
@@ -27,4 +28,5 @@ abstract class _Paths {
   static const SETTING_PAGE = '/setting-page';
   static const MY_COLLECTION_PAGE = '/my-collection-page';
   static const MAIN_SCREEN = '/main-screen';
+  static const SPLASH_SCREEN = '/splash-screen';
 }

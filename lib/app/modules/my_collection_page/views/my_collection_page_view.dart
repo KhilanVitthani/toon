@@ -77,37 +77,39 @@ class MyCollectionPageView extends GetWidget<MyCollectionPageController> {
           child: Column(
             children: [
               Expanded(
-                child: GridView.builder(
-                  padding: EdgeInsets.only(bottom: 10),
-                  itemCount: controller.myImage.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: MySize.getHeight(10.0),
-                      mainAxisSpacing: MySize.getHeight(10.0)),
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: () {
-                        Get.offAndToNamed(Routes.SHARE_FILE, arguments: {
-                          ArgumentConstant.capuredImage:
-                              File(controller.myImage[index]),
-                          ArgumentConstant.isFromMyCollection: true,
-                          ArgumentConstant.isFromHome: false,
-                        });
-                      },
-                      child: Container(
-                        child: ClipRRect(
-                          borderRadius:
-                              BorderRadius.circular(MySize.getHeight(8)),
-                          child: Image.file(
-                            File(
-                              controller.myImage[index],
+                child: Container(
+                  child: GridView.builder(
+                    padding: EdgeInsets.only(bottom: 10),
+                    itemCount: controller.myImage.length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: MySize.getHeight(10.0),
+                        mainAxisSpacing: MySize.getHeight(10.0)),
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () {
+                          Get.offAndToNamed(Routes.SHARE_FILE, arguments: {
+                            ArgumentConstant.capuredImage:
+                                File(controller.myImage[index]),
+                            ArgumentConstant.isFromMyCollection: true,
+                            ArgumentConstant.isFromHome: false,
+                          });
+                        },
+                        child: Container(
+                          child: ClipRRect(
+                            borderRadius:
+                                BorderRadius.circular(MySize.getHeight(8)),
+                            child: Image.file(
+                              File(
+                                controller.myImage[index],
+                              ),
+                              fit: BoxFit.cover,
                             ),
-                            fit: BoxFit.cover,
                           ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
               ),
               (controller.connectivityResult == ConnectionState.none)

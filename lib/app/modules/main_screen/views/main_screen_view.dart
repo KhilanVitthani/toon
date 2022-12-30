@@ -133,21 +133,6 @@ class MainScreenView extends GetWidget<MainScreenController> {
                       ),
                     ),
                     Spacer(),
-                    InkWell(
-                      onTap: () {
-                        Get.offAndToNamed(Routes.MY_COLLECTION_PAGE);
-                      },
-                      child: Container(
-                        // color: Colors.amber,
-                        alignment: Alignment.topRight,
-                        width: MySize.getWidth(50),
-                        child: Icon(
-                          Icons.arrow_forward_outlined,
-                          color: Colors.white,
-                          size: MySize.getHeight(25),
-                        ),
-                      ),
-                    )
                   ],
                 ),
               ),
@@ -229,26 +214,32 @@ class MainScreenView extends GetWidget<MainScreenController> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      Icons.star_border,
-                                      size: MySize.getHeight(20),
-                                      color: Colors.white,
-                                    ),
-                                    Text(
-                                      "Rate us!",
-                                      style: GoogleFonts.karla(
-                                          fontSize: MySize.getHeight(15),
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.white),
-                                    )
-                                  ],
+                                GestureDetector(
+                                  onTap: () {
+                                    Get.offAndToNamed(
+                                        Routes.MY_COLLECTION_PAGE);
+                                  },
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SvgPicture.asset(
+                                        imagePath + "gallery.svg",
+                                        width: MySize.getWidth(24),
+                                        height: MySize.getWidth(24),
+                                      ),
+                                      Text(
+                                        "My Creations",
+                                        style: GoogleFonts.karla(
+                                            fontSize: MySize.getHeight(13),
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.white),
+                                      )
+                                    ],
+                                  ),
                                 ),
                                 Padding(
                                   padding: EdgeInsets.only(
-                                      top: MySize.getHeight(20)),
+                                      top: MySize.getHeight(23)),
                                   child: Text(
                                     "Create effect",
                                     style: GoogleFonts.karla(
@@ -257,6 +248,7 @@ class MainScreenView extends GetWidget<MainScreenController> {
                                         color: Colors.white),
                                   ),
                                 ),
+                                SizedBox(),
                                 GestureDetector(
                                   onTap: () {
                                     Get.offAndToNamed(Routes.SETTING_PAGE);
@@ -266,7 +258,7 @@ class MainScreenView extends GetWidget<MainScreenController> {
                                     children: [
                                       Icon(
                                         Icons.settings_outlined,
-                                        size: MySize.getHeight(20),
+                                        size: MySize.getHeight(24),
                                         color: Colors.white,
                                       ),
                                       Text(

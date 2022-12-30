@@ -31,37 +31,8 @@ class MainScreenController extends GetxController {
       myImage.value = myImage1.reversed.toList();
     }
 
-    Yodo1MAS.instance.setInterstitialListener(
-      (event, message) {
-        switch (event) {
-          case Yodo1MAS.AD_EVENT_OPENED:
-            print('Interstitial AD_EVENT_OPENED');
-            break;
-          case Yodo1MAS.AD_EVENT_ERROR:
-            print('Interstitial AD_EVENT_ERROR' + message);
-            break;
-          case Yodo1MAS.AD_EVENT_CLOSED:
-            getIt<TimerService>().verifyTimer();
-            SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-            Get.back();
-            break;
-        }
-      },
-    );
     addImage();
-    // loadAdd();
     super.onInit();
-  }
-
-  loadAdd() async {
-    await getIt<AdService>()
-        .getAd(adType: AdService.interstitialAd)
-        .then((value) {
-      if (!value) {
-        SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-        Get.offAndToNamed(Routes.MAIN_SCREEN);
-      }
-    });
   }
 
   addImage() {

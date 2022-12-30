@@ -12,13 +12,15 @@ import '../modules/setting_page/bindings/setting_page_binding.dart';
 import '../modules/setting_page/views/setting_page_view.dart';
 import '../modules/share_file/bindings/share_file_binding.dart';
 import '../modules/share_file/views/share_file_view.dart';
+import '../modules/splash_screen/bindings/splash_screen_binding.dart';
+import '../modules/splash_screen/views/splash_screen_view.dart';
 
 part 'app_routes.dart';
 
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.MAIN_SCREEN;
+  static const INITIAL = Routes.SPLASH_SCREEN;
 
   static final routes = [
     GetPage(
@@ -50,6 +52,11 @@ class AppPages {
       name: _Paths.MAIN_SCREEN,
       page: () => const MainScreenView(),
       binding: MainScreenBinding(),
+    ),
+    GetPage(
+      name: _Paths.SPLASH_SCREEN,
+      page: () => const SplashScreenView(),
+      binding: SplashScreenBinding(),
     ),
   ];
 }
