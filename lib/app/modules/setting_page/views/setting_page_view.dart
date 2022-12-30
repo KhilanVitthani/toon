@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:ai_image_enlarger/app/routes/app_pages.dart';
 import 'package:ai_image_enlarger/constants/api_constants.dart';
 import 'package:ai_image_enlarger/constants/color_constant.dart';
@@ -7,6 +9,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rate_my_app/rate_my_app.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../main.dart';
@@ -87,11 +91,52 @@ class SettingPageView extends GetView<SettingPageController> {
                     height: MySize.getHeight(20),
                   ),
                   settingTile(
+                    onTap: () {
+                      Share.share(
+                          'check out my website https://play.google.com/store/apps/details?id=com.mobileappxperts.aieffects.toonphotoeditor');
+                    },
                     context: context,
                     image: "shareicon.svg",
                     name: "Share",
                   ),
                   settingTile(
+                    onTap: () {
+                      controller.rateMyApp.init().then((value) {
+                        controller.rateMyApp.showRateDialog(
+                          context,
+                          title: 'Rate this app', // The dialog title.0
+                          message:
+                              'If you like this app, please take a little bit of your time to review it !\nIt really helps us and it shouldn\'t take you more than one minute.', // The dialog message.
+                          rateButton: 'RATE', // The dialog "rate" button text.
+                          noButton: 'NO THANKS', // The dialog "no" button text.
+                          laterButton:
+                              'MAYBE LATER', // The dialog "later" button text.
+                          listener: (button) {
+                            // The button click listener (useful if you want to cancel the click event).
+                            switch (button) {
+                              case RateMyAppDialogButton.rate:
+                                print('Clicked on "Rate".');
+                                break;
+                              case RateMyAppDialogButton.later:
+                                print('Clicked on "Later".');
+                                break;
+                              case RateMyAppDialogButton.no:
+                                print('Clicked on "No".');
+                                break;
+                            }
+
+                            return true; // Return false if you want to cancel the click event.
+                          },
+                          ignoreNativeDialog: Platform
+                              .isAndroid, // Set to false if you want to show the Apple's native app rating dialog on iOS or Google's native app rating dialog (depends on the current Platform).
+                          dialogStyle:
+                              const DialogStyle(), // Custom dialog styles.
+                          onDismissed: () => controller.rateMyApp.callEvent(
+                              RateMyAppEventType
+                                  .laterButtonPressed), // Called when the user dismissed the dialog (either by taping outside or by pressing the "back" button).
+                        );
+                      });
+                    },
                     context: context,
                     image: "rateus.svg",
                     name: "Rate Us!",

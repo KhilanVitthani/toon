@@ -27,7 +27,13 @@ class MainScreenView extends GetWidget<MainScreenController> {
           appBar: AppBar(
             backgroundColor: appTheme.primaryTheme,
             elevation: 0,
-            title: const Text('Name'),
+            title: Text(
+              'Toon Photo Editor',
+              style: GoogleFonts.karla(
+                fontSize: MySize.getHeight(24),
+                fontWeight: FontWeight.w500,
+              ),
+            ),
             centerTitle: true,
           ),
           body: Column(
@@ -158,7 +164,7 @@ class MainScreenView extends GetWidget<MainScreenController> {
                             horizontal: MySize.getWidth(8)),
                         height: (MySize.isMini)
                             ? MySize.getHeight(112)
-                            : MySize.getHeight(130),
+                            : MySize.getHeight(124),
                         child: GridView.builder(
                           padding: EdgeInsets.only(bottom: 10),
                           itemCount: controller.myImage.length,
@@ -286,7 +292,7 @@ class MainScreenView extends GetWidget<MainScreenController> {
                     child: GestureDetector(
                       onTap: () {
                         controller.check().then((intenet) {
-                          if (intenet != null && intenet) {
+                          if (intenet) {
                             Get.offAndToNamed(Routes.HOME);
                           } else {
                             getIt<CustomDialogs>().getDialog(

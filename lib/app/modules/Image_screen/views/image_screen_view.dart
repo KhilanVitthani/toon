@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:ai_image_enlarger/app/routes/app_pages.dart';
 import 'package:ai_image_enlarger/constants/api_constants.dart';
@@ -65,6 +64,7 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
                   backgroundColor: appTheme.primaryTheme,
                   appBar: (controller.hasDate.isTrue)
                       ? AppBar(
+                          centerTitle: true,
                           backgroundColor: appTheme.primaryTheme,
                           elevation: 0,
                           leading: GestureDetector(
@@ -149,20 +149,35 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
                                   }
                                 });
                               },
-                              child: Container(
-                                width: MySize.getWidth(70),
-                                height: MySize.getHeight(50),
+                              child: Padding(
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: MySize.getHeight(8.0)),
-                                alignment: Alignment.center,
-                                child: Text(
-                                  "Save",
-                                  style: GoogleFonts.karla(
-                                      fontSize: MySize.getHeight(18)),
+                                    horizontal: MySize.getWidth(5),
+                                    vertical: MySize.getHeight(10)),
+                                child: Container(
+                                  width: MySize.getWidth(70),
+                                  height: MySize.getHeight(33),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: MySize.getHeight(8.0)),
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                      color: appTheme.buttonColor,
+                                      borderRadius: BorderRadius.circular(
+                                          MySize.getHeight(4))),
+                                  child: Text(
+                                    "Save",
+                                    style: GoogleFonts.karla(
+                                        fontSize: MySize.getHeight(18)),
+                                  ),
                                 ),
                               ),
                             )
                           ],
+                          title: Text(
+                            "Toon Photo Editor",
+                            style: GoogleFonts.karla(
+                                fontWeight: FontWeight.w500,
+                                fontSize: MySize.getHeight(20)),
+                          ),
                         )
                       : null,
                   body: Column(

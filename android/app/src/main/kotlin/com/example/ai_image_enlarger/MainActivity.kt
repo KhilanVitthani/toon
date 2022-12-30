@@ -1,4 +1,4 @@
-package com.example.ai_image_enlarger
+package com.mobileappxperts.aieffects.toonphotoeditor
 
 import io.flutter.embedding.android.FlutterActivity
 

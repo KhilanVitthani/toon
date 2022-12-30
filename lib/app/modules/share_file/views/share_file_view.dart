@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_share_me/file_type.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../../constants/color_constant.dart';
@@ -67,7 +68,13 @@ class ShareFileView extends GetView<ShareFileController> {
           appBar: AppBar(
             backgroundColor: appTheme.primaryTheme,
             centerTitle: true,
-            title: Text("Name"),
+            title: Text(
+              "Toon Photo Editor",
+              style: GoogleFonts.karla(
+                fontSize: MySize.getHeight(24),
+                fontWeight: FontWeight.w500,
+              ),
+            ),
             leading: GestureDetector(
               onTap: () async {
                 (controller.isFromMyCollection.isTrue)
@@ -205,6 +212,7 @@ class ShareFileView extends GetView<ShareFileController> {
                       Spacer(),
                       GestureDetector(
                         onTap: () {
+                          // ignore: deprecated_member_use
                           Share.shareFiles([controller.capturedImage!.path])
                               .catchError((error) {
                             print(error);

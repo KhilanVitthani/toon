@@ -46,7 +46,13 @@ class HomeView extends GetWidget<HomeController> {
         child: Scaffold(
           backgroundColor: appTheme.primaryTheme,
           appBar: AppBar(
-            title: const Text('Name'),
+            title: Text(
+              'Toon Photo Editor',
+              style: GoogleFonts.karla(
+                fontSize: MySize.getHeight(24),
+                fontWeight: FontWeight.w500,
+              ),
+            ),
             leading: GestureDetector(
               onTap: () async {
                 if (getIt<TimerService>().is40SecCompleted) {

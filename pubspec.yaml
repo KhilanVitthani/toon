@@ -16,6 +16,7 @@ dependencies:
   get_storage:
   dio:
   http:
+  rate_my_app:
   image_picker: ^0.8.0+4
   gallery_saver: ^2.3.2
   url_launcher: ^6.1.7

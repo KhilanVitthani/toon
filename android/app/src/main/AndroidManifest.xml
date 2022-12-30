@@ -1,13 +1,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.ai_image_enlarger">
+    package="com.mobileappxperts.aieffects.toonphotoeditor">
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.hardware.camera.autofocus"/>
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="ai_image_enlarger"
+        android:label="Toon Photo Editor"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
        <activity
@@ -48,14 +48,14 @@
                android:name="android.support.FILE_PROVIDER_PATHS"
                android:resource="@xml/filepaths" />
        </provider>
-       <meta-data
-           android:name="com.facebook.sdk.ApplicationId"
-           android:value="@string/facebook_app_id" />
+<!--       <meta-data-->
+<!--           android:name="com.facebook.sdk.ApplicationId"-->
+<!--           android:value="@string/facebook_app_id" />-->
 
-       <provider
-           android:name="com.facebook.FacebookContentProvider"
-           android:authorities="com.facebook.app.FacebookContentProvider[facebook_app_id]"
-           android:exported="false" />
+<!--       <provider-->
+<!--           android:name="com.facebook.FacebookContentProvider"-->
+<!--           android:authorities="com.facebook.app.FacebookContentProvider[facebook_app_id]"-->
+<!--           android:exported="false" />-->
 
 
        <!-- Don't delete the meta-data below.

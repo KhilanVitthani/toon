@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:ai_image_enlarger/constants/api_constants.dart';
 import 'package:ai_image_enlarger/constants/sizeConstant.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:yodo1mas/Yodo1MAS.dart';
@@ -12,11 +13,13 @@ import '../../../routes/app_pages.dart';
 
 class MyCollectionPageController extends GetxController {
   RxList myImage = RxList([]);
+  var connectivityResult;
+
   @override
-  void onInit() {
+  Future<void> onInit() async {
     if (!isNullEmptyOrFalse(box.read(ArgumentConstant.myCollection))) {
       RxList myImage1 = RxList([]);
-
+      connectivityResult = await Connectivity().checkConnectivity();
       myImage1.value = jsonDecode(box.read(ArgumentConstant.myCollection));
       print(myImage);
       myImage.value = myImage1.reversed.toList();
