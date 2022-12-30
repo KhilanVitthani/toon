@@ -23,6 +23,7 @@ class SettingPageView extends GetView<SettingPageController> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
+      //
       onWillPop: () async {
         if (getIt<TimerService>().is40SecCompleted) {
           await getIt<AdService>()
