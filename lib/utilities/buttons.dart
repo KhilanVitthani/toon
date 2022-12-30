@@ -1,10 +1,9 @@
-import 'package:ai_image_enlarger/constants/api_constants.dart';
+import '../../../../constants/api_constants.dart';
+import '../../../../constants/color_constant.dart';
+import '../../../../constants/sizeConstant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-
-import '../constants/color_constant.dart';
-import '../constants/sizeConstant.dart';
 
 Widget getButton({
   required String title,

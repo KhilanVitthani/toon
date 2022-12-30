@@ -1,7 +1,5 @@
 import 'dart:io';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 
-import 'package:ai_image_enlarger/constants/app_module.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -10,6 +8,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:yodo1mas/Yodo1MAS.dart';
 
 import 'app/routes/app_pages.dart';
+import 'constants/app_module.dart';
 
 class MyHttpOverrides extends HttpOverrides {
   @override
@@ -24,7 +23,6 @@ final getIt = GetIt.instance;
 GetStorage box = GetStorage();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.removeAfter(afterInit);
   HttpOverrides.global = new MyHttpOverrides();
   await GetStorage.init();
   setUp();
@@ -41,8 +39,4 @@ Future<void> main() async {
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
-}
-
-Future<void> afterInit(_) async {
-  await Future.delayed(Duration(microseconds: 1));
 }

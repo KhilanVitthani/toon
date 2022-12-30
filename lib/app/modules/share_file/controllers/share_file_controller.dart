@@ -1,6 +1,5 @@
 import 'dart:io';
-
-import 'package:ai_image_enlarger/constants/api_constants.dart';
+import '../../../../constants/api_constants.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_share_me/flutter_share_me.dart';
 import 'package:get/get.dart';

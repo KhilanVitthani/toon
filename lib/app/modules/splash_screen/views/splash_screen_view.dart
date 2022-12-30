@@ -1,12 +1,11 @@
-import 'package:ai_image_enlarger/constants/api_constants.dart';
-import 'package:ai_image_enlarger/constants/color_constant.dart';
-import 'package:ai_image_enlarger/constants/sizeConstant.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../constants/api_constants.dart';
+import '../../../../constants/color_constant.dart';
+import '../../../../constants/sizeConstant.dart';
 import '../controllers/splash_screen_controller.dart';
 
 class SplashScreenView extends GetWidget<SplashScreenController> {

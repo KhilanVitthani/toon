@@ -1,17 +1,19 @@
 import 'dart:io';
 
-import 'package:ai_image_enlarger/app/routes/app_pages.dart';
-import 'package:ai_image_enlarger/constants/color_constant.dart';
-import 'package:ai_image_enlarger/constants/sizeConstant.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import '../../../../constants/api_constants.dart';
+import '../../../../constants/color_constant.dart';
+import '../../../../constants/sizeConstant.dart';
+import '../../../../main.dart';
+import '../../../../utilities/progress_dialog_utils.dart';
+import '../../../routes/app_pages.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../constants/api_constants.dart';
-import '../../../../main.dart';
-import '../../../../utilities/progress_dialog_utils.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_svg/svg.dart';
+
 import '../controllers/main_screen_controller.dart';
 
 class MainScreenView extends GetWidget<MainScreenController> {
@@ -133,6 +135,21 @@ class MainScreenView extends GetWidget<MainScreenController> {
                       ),
                     ),
                     Spacer(),
+                    InkWell(
+                      onTap: () {
+                        Get.offAndToNamed(Routes.MY_COLLECTION_PAGE);
+                      },
+                      child: Container(
+                        // color: Colors.amber,
+                        alignment: Alignment.topRight,
+                        width: MySize.getWidth(50),
+                        child: Icon(
+                          Icons.arrow_forward_outlined,
+                          color: Colors.white,
+                          size: MySize.getHeight(25),
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),
@@ -214,32 +231,26 @@ class MainScreenView extends GetWidget<MainScreenController> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    Get.offAndToNamed(
-                                        Routes.MY_COLLECTION_PAGE);
-                                  },
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SvgPicture.asset(
-                                        imagePath + "gallery.svg",
-                                        width: MySize.getWidth(24),
-                                        height: MySize.getWidth(24),
-                                      ),
-                                      Text(
-                                        "My Creations",
-                                        style: GoogleFonts.karla(
-                                            fontSize: MySize.getHeight(13),
-                                            fontWeight: FontWeight.w500,
-                                            color: Colors.white),
-                                      )
-                                    ],
-                                  ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.star_border,
+                                      size: MySize.getHeight(20),
+                                      color: Colors.white,
+                                    ),
+                                    Text(
+                                      "Rate us!",
+                                      style: GoogleFonts.karla(
+                                          fontSize: MySize.getHeight(15),
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.white),
+                                    )
+                                  ],
                                 ),
                                 Padding(
                                   padding: EdgeInsets.only(
-                                      top: MySize.getHeight(23)),
+                                      top: MySize.getHeight(20)),
                                   child: Text(
                                     "Create effect",
                                     style: GoogleFonts.karla(
@@ -248,7 +259,6 @@ class MainScreenView extends GetWidget<MainScreenController> {
                                         color: Colors.white),
                                   ),
                                 ),
-                                SizedBox(),
                                 GestureDetector(
                                   onTap: () {
                                     Get.offAndToNamed(Routes.SETTING_PAGE);
@@ -258,7 +268,7 @@ class MainScreenView extends GetWidget<MainScreenController> {
                                     children: [
                                       Icon(
                                         Icons.settings_outlined,
-                                        size: MySize.getHeight(24),
+                                        size: MySize.getHeight(20),
                                         color: Colors.white,
                                       ),
                                       Text(

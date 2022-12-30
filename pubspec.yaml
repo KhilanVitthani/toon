@@ -1,11 +1,11 @@
-name: ai_image_enlarger
+name: toon_photo_editor
 version: 1.0.0+1
 publish_to: none
 description: A new Flutter project.
 environment: 
-  sdk: '>=2.17.6 <3.0.0'
+  sdk: '>=2.18.6 <3.0.0'
 
-dependencies: 
+dependencies:
   cupertino_icons: ^1.0.2
   connectivity_plus:
   cached_network_image:
@@ -31,22 +31,14 @@ dependencies:
   vector_math:
   share_plus:
   path_provider:
-
   get: 4.6.5
-  flutter:
+  flutter: 
     sdk: flutter
 
 dev_dependencies: 
   flutter_lints: ^2.0.0
   flutter_test: 
     sdk: flutter
-  flutter_native_splash:
-
-flutter_native_splash:
-  color: "#ffffff"
-  fullscreen: true
-  android: false
-  ios: true
 
 flutter: 
   uses-material-design: true

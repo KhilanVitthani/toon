@@ -1,4 +1,3 @@
-import 'package:ai_image_enlarger/app/routes/app_pages.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:rate_my_app/rate_my_app.dart';
@@ -6,6 +5,7 @@ import 'package:yodo1mas/Yodo1MAS.dart';
 
 import '../../../../main.dart';
 import '../../../../utilities/timer_service.dart';
+import '../../../routes/app_pages.dart';
 
 class SettingPageController extends GetxController {
   RateMyApp rateMyApp = RateMyApp(
