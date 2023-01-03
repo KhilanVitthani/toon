@@ -6,7 +6,7 @@
     <uses-permission android:name="android.hardware.camera.autofocus"/>
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="toon_photo_editor"
+        android:label="Toon Photo Editor"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

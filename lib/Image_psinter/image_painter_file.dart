@@ -2,13 +2,14 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
-import 'package:ai_image_enlarger/Image_psinter/vactor_file.dart';
 import 'package:flutter/gestures.dart';
+import 'package:toon_photo_editor/Image_psinter/vactor_file.dart';
 import 'package:vector_math/vector_math.dart' as ve;
-import 'package:ai_image_enlarger/Image_psinter/image_painter.dart';
 import 'package:flutter/material.dart' hide Image;
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+
+import 'image_painter.dart';
 
 ///[ImagePainter] widget.
 @immutable
