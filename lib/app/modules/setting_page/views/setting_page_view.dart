@@ -94,7 +94,7 @@ class SettingPageView extends GetView<SettingPageController> {
                   settingTile(
                     onTap: () {
                       Share.share(
-                          'check out my website https://play.google.com/store/apps/details?id=com.mobileappxperts.aieffects.toonphotoeditor');
+                          'check out my app https://play.google.com/store/apps/details?id=com.mobileappxperts.aieffects.toonphotoeditor');
                     },
                     context: context,
                     image: "shareicon.svg",
