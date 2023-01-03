@@ -1,6 +1,6 @@
 {
-    "name": "ai_image_enlarger",
-    "short_name": "ai_image_enlarger",
+    "name": "toon_photo_editor",
+    "short_name": "toon_photo_editor",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

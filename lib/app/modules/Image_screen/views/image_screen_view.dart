@@ -1,25 +1,34 @@
 import 'dart:io';
 
-import 'package:ai_image_enlarger/app/routes/app_pages.dart';
-import 'package:ai_image_enlarger/constants/api_constants.dart';
-import 'package:ai_image_enlarger/constants/color_constant.dart';
-import 'package:ai_image_enlarger/constants/sizeConstant.dart';
+
+
+import '../../../../constants/api_constants.dart';
+import '../../../../constants/color_constant.dart';
+import '../../../../constants/connectivityHelper.dart';
+import '../../../../constants/sizeConstant.dart';
+import '../../../../main.dart';
+import '../../../../utilities/buttons.dart';
+import '../../../../utilities/progress_dialog_utils.dart';
+import '../../../../utilities/timer_service.dart';
+import '../../../routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:yodo1mas/Yodo1MasBannerAd.dart';
+import 'package:yodo1mas/Yodo1MasNativeAd.dart';
+
+import '../../../../main.dart';
+import '../../../../utilities/ad_service.dart';
+import '../../../../utilities/timer_service.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:screenshot/screenshot.dart';
-import 'package:yodo1mas/Yodo1MasBannerAd.dart';
 
-import '../../../../main.dart';
-import '../../../../utilities/ad_service.dart';
-import '../../../../utilities/buttons.dart';
-import '../../../../utilities/timer_service.dart';
 import '../controllers/image_screen_controller.dart';
 
 class ImageScreenView extends GetWidget<ImageScreenController> {

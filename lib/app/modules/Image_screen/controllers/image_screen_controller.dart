@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:ai_image_enlarger/utilities/progress_dialog_utils.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,6 +14,7 @@ import '../../../../constants/connectivityHelper.dart';
 import '../../../../constants/sizeConstant.dart';
 import '../../../../main.dart';
 import '../../../../utilities/ad_service.dart';
+import '../../../../utilities/progress_dialog_utils.dart';
 import '../../../../utilities/timer_service.dart';
 import '../../../routes/app_pages.dart';
 

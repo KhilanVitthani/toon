@@ -1,7 +1,6 @@
-import 'package:ai_image_enlarger/app/routes/app_pages.dart';
-import 'package:ai_image_enlarger/constants/api_constants.dart';
-import 'package:ai_image_enlarger/constants/sizeConstant.dart';
-import 'package:ai_image_enlarger/utilities/timer_service.dart';
+import '../../../../constants/api_constants.dart';
+import '../../../../constants/color_constant.dart';
+import '../../../../constants/sizeConstant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_share_me/file_type.dart';
@@ -15,6 +14,8 @@ import '../../../../main.dart';
 import '../../../../utilities/ad_service.dart';
 import '../../../../utilities/buttons.dart';
 import '../../../../utilities/progress_dialog_utils.dart';
+import '../../../../utilities/timer_service.dart';
+import '../../../routes/app_pages.dart';
 import '../controllers/share_file_controller.dart';
 
 class ShareFileView extends GetView<ShareFileController> {

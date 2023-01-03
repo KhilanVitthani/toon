@@ -1,18 +1,19 @@
 import 'dart:io';
 
-import 'package:ai_image_enlarger/app/routes/app_pages.dart';
-import 'package:ai_image_enlarger/constants/api_constants.dart';
-import 'package:ai_image_enlarger/constants/color_constant.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:yodo1mas/Yodo1MasBannerAd.dart';
 
+import '../../../../constants/api_constants.dart';
+import '../../../../constants/color_constant.dart';
 import '../../../../constants/sizeConstant.dart';
 import '../../../../main.dart';
 import '../../../../utilities/ad_service.dart';
 import '../../../../utilities/timer_service.dart';
+import '../../../routes/app_pages.dart';
 import '../controllers/my_collection_page_controller.dart';
 
 class MyCollectionPageView extends GetWidget<MyCollectionPageController> {

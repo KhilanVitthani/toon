@@ -1,5 +1,6 @@
-import 'package:ai_image_enlarger/constants/sizeConstant.dart';
+
 import 'package:flutter/material.dart';
+import 'package:toon_photo_editor/constants/sizeConstant.dart';
 
 class BaseTheme {
   Color get primaryTheme => fromHex('#23262F');

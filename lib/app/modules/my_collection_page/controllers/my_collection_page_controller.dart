@@ -1,12 +1,12 @@
 import 'dart:convert';
 
-import 'package:ai_image_enlarger/constants/api_constants.dart';
-import 'package:ai_image_enlarger/constants/sizeConstant.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:yodo1mas/Yodo1MAS.dart';
 
+import '../../../../constants/api_constants.dart';
+import '../../../../constants/sizeConstant.dart';
 import '../../../../main.dart';
 import '../../../../utilities/timer_service.dart';
 import '../../../routes/app_pages.dart';
