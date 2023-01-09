@@ -1,7 +1,4 @@
 import 'dart:io';
-
-
-
 import '../../../../constants/api_constants.dart';
 import '../../../../constants/color_constant.dart';
 import '../../../../constants/connectivityHelper.dart';
@@ -59,7 +56,7 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
                         }
                       });
                     } else {
-                      Get.offAndToNamed(Routes.MAIN_SCREEN);
+                      Get.offAllNamed(Routes.MAIN_SCREEN);
                     }
                   },
                   cancelCallback: () {
@@ -99,7 +96,7 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
                                         }
                                       });
                                     } else {
-                                      Get.offAndToNamed(Routes.MAIN_SCREEN);
+                                      Get.offAllNamed(Routes.MAIN_SCREEN);
                                     }
                                   },
                                   cancelCallback: () {

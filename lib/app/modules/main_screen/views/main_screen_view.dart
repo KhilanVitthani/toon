@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:rate_my_app/rate_my_app.dart';
+
 import '../../../../constants/api_constants.dart';
 import '../../../../constants/color_constant.dart';
 import '../../../../constants/sizeConstant.dart';
@@ -54,10 +56,15 @@ class MainScreenView extends GetWidget<MainScreenController> {
                   },
                 ),
                 itemBuilder: (BuildContext context, int index, int realIndex) {
-                  return Image.asset(
-                    controller.image[index],
-                    width: MySize.getWidth(320),
-                    fit: BoxFit.fill,
+                  return GestureDetector(
+                    onTap: () {
+                      controller.uploadImage(context: context);
+                    },
+                    child: Image.asset(
+                      controller.image[index],
+                      width: MySize.getWidth(320),
+                      fit: BoxFit.fill,
+                    ),
                   );
                 },
               ),
@@ -108,10 +115,23 @@ class MainScreenView extends GetWidget<MainScreenController> {
                   ),
                   itemBuilder:
                       (BuildContext context, int index, int realIndex) {
-                    return Image.asset(
-                      controller.effectImage[index],
-                      width: MySize.getWidth(320),
-                      fit: BoxFit.fill,
+                    return GestureDetector(
+                      onTap: () {
+                        if (controller.effectImage[index]
+                            .toString()
+                            .contains("AiImageEnlarger")) {
+                          controller.uploadImage(
+                              context: context, isFromImageEnlarger: true);
+                        } else {
+                          controller.uploadImage(
+                              context: context, isFromEnhancer: true);
+                        }
+                      },
+                      child: Image.asset(
+                        controller.effectImage[index],
+                        width: MySize.getWidth(320),
+                        fit: BoxFit.fill,
+                      ),
                     );
                   },
                 ),
@@ -228,26 +248,32 @@ class MainScreenView extends GetWidget<MainScreenController> {
                               ),
                             ),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      Icons.star_border,
-                                      size: MySize.getHeight(20),
-                                      color: Colors.white,
-                                    ),
-                                    Text(
-                                      "Rate us!",
-                                      style: GoogleFonts.karla(
-                                          fontSize: MySize.getHeight(15),
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.white),
-                                    )
-                                  ],
+                                Spacer(),
+                                GestureDetector(
+                                  onTap: () {
+                                    Get.offAllNamed(Routes.MY_COLLECTION_PAGE);
+                                  },
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SvgPicture.asset(
+                                        imagePath + "collection.svg",
+                                        height: MySize.getHeight(20),
+                                        width: MySize.getWidth(20),
+                                      ),
+                                      Text(
+                                        "My Creations",
+                                        style: GoogleFonts.karla(
+                                            fontSize: MySize.getHeight(13),
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.white),
+                                      )
+                                    ],
+                                  ),
                                 ),
+                                Spacing.width(25),
                                 Padding(
                                   padding: EdgeInsets.only(
                                       top: MySize.getHeight(20)),
@@ -259,6 +285,7 @@ class MainScreenView extends GetWidget<MainScreenController> {
                                         color: Colors.white),
                                   ),
                                 ),
+                                Spacer(),
                                 GestureDetector(
                                   onTap: () {
                                     Get.offAndToNamed(Routes.SETTING_PAGE);
@@ -274,13 +301,14 @@ class MainScreenView extends GetWidget<MainScreenController> {
                                       Text(
                                         "Setting",
                                         style: GoogleFonts.karla(
-                                            fontSize: MySize.getHeight(15),
+                                            fontSize: MySize.getHeight(13),
                                             fontWeight: FontWeight.w500,
                                             color: Colors.white),
                                       )
                                     ],
                                   ),
                                 ),
+                                Spacer(),
                               ],
                             ),
                           ),
@@ -290,7 +318,8 @@ class MainScreenView extends GetWidget<MainScreenController> {
                   ),
                   Positioned(
                     bottom: MySize.getHeight(44),
-                    left: MySize.getWidth(151),
+                    left: MySize.getWidth(155),
+                    right: MySize.getWidth(155),
                     child: GestureDetector(
                       onTap: () {
                         controller.check().then((intenet) {

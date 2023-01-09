@@ -37,30 +37,32 @@ class ShareFileView extends GetView<ShareFileController> {
                     }
                   })
                 : Get.offAllNamed(Routes.MY_COLLECTION_PAGE)
-            : showConfirmationDialog(
-                context: context,
-                text: "Are you sure you want to go home.",
-                submitText: "Yes",
-                cancelText: "Cancel",
-                submitCallBack: () async {
-                  if (getIt<TimerService>().is40SecCompleted) {
-                    await getIt<AdService>()
-                        .getAd(adType: AdService.interstitialAd)
-                        .then((value) {
-                      if (!value) {
-                        getIt<TimerService>().verifyTimer();
-                        SystemChrome.setEnabledSystemUIMode(
-                            SystemUiMode.edgeToEdge);
+            : (controller.isFromHome.isTrue)
+                ? Get.offAllNamed(Routes.MAIN_SCREEN)
+                : showConfirmationDialog(
+                    context: context,
+                    text: "Are you sure you want to go home.",
+                    submitText: "Yes",
+                    cancelText: "Cancel",
+                    submitCallBack: () async {
+                      if (getIt<TimerService>().is40SecCompleted) {
+                        await getIt<AdService>()
+                            .getAd(adType: AdService.interstitialAd)
+                            .then((value) {
+                          if (!value) {
+                            getIt<TimerService>().verifyTimer();
+                            SystemChrome.setEnabledSystemUIMode(
+                                SystemUiMode.edgeToEdge);
+                            Get.offAllNamed(Routes.MAIN_SCREEN);
+                          }
+                        });
+                      } else {
                         Get.offAllNamed(Routes.MAIN_SCREEN);
                       }
+                    },
+                    cancelCallback: () {
+                      Get.back();
                     });
-                  } else {
-                    Get.offAllNamed(Routes.MAIN_SCREEN);
-                  }
-                },
-                cancelCallback: () {
-                  Get.back();
-                });
         return await true;
       },
       child: SafeArea(
@@ -89,30 +91,32 @@ class ShareFileView extends GetView<ShareFileController> {
                           Get.offAllNamed(Routes.MY_COLLECTION_PAGE);
                         }
                       })
-                    : showConfirmationDialog(
-                        context: context,
-                        text: "Are you sure you want to go home.",
-                        submitText: "Yes",
-                        cancelText: "Cancel",
-                        submitCallBack: () async {
-                          if (getIt<TimerService>().is40SecCompleted) {
-                            await getIt<AdService>()
-                                .getAd(adType: AdService.interstitialAd)
-                                .then((value) {
-                              if (!value) {
-                                getIt<TimerService>().verifyTimer();
-                                SystemChrome.setEnabledSystemUIMode(
-                                    SystemUiMode.edgeToEdge);
+                    : (controller.isFromHome.isTrue)
+                        ? Get.offAllNamed(Routes.MAIN_SCREEN)
+                        : showConfirmationDialog(
+                            context: context,
+                            text: "Are you sure you want to go home.",
+                            submitText: "Yes",
+                            cancelText: "Cancel",
+                            submitCallBack: () async {
+                              if (getIt<TimerService>().is40SecCompleted) {
+                                await getIt<AdService>()
+                                    .getAd(adType: AdService.interstitialAd)
+                                    .then((value) {
+                                  if (!value) {
+                                    getIt<TimerService>().verifyTimer();
+                                    SystemChrome.setEnabledSystemUIMode(
+                                        SystemUiMode.edgeToEdge);
+                                    Get.offAllNamed(Routes.MAIN_SCREEN);
+                                  }
+                                });
+                              } else {
                                 Get.offAllNamed(Routes.MAIN_SCREEN);
                               }
+                            },
+                            cancelCallback: () {
+                              Get.back();
                             });
-                          } else {
-                            Get.offAllNamed(Routes.MAIN_SCREEN);
-                          }
-                        },
-                        cancelCallback: () {
-                          Get.back();
-                        });
               },
               child: Container(
                 width: MySize.getWidth(70),

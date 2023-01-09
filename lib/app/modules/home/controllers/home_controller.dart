@@ -96,13 +96,10 @@ class HomeController extends GetxController {
             title: 'Edit Photo',
           ),
         ],
-      );
-      if (croppedFile != null) {
-        _croppedFile = croppedFile;
-        print("CropFile ${_croppedFile!.path}");
+      ).then((value) {
         if (isFromEnhancer.isTrue) {
-          Get.toNamed(Routes.IMAGE_SCREEN, arguments: {
-            ArgumentConstant.imageFile: _croppedFile!.path,
+          Get.offAndToNamed(Routes.IMAGE_SCREEN, arguments: {
+            ArgumentConstant.imageFile: value!.path,
             ArgumentConstant.isFromEnhancer: true,
             ArgumentConstant.isFromCatoonizer: false,
             ArgumentConstant.isFromDenoiser: false,
@@ -116,8 +113,8 @@ class HomeController extends GetxController {
             ArgumentConstant.isFromHome: true,
           });
         } else if (isFromDenoiser.isTrue) {
-          Get.toNamed(Routes.IMAGE_SCREEN, arguments: {
-            ArgumentConstant.imageFile: _croppedFile!.path,
+          Get.offAndToNamed(Routes.IMAGE_SCREEN, arguments: {
+            ArgumentConstant.imageFile: value!.path,
             ArgumentConstant.isFromEnhancer: false,
             ArgumentConstant.isFromCatoonizer: false,
             ArgumentConstant.isFromDenoiser: true,
@@ -131,8 +128,8 @@ class HomeController extends GetxController {
             ArgumentConstant.isFromBGRemover: false,
           });
         } else if (isFromAnime.isTrue) {
-          Get.toNamed(Routes.IMAGE_SCREEN, arguments: {
-            ArgumentConstant.imageFile: _croppedFile!.path,
+          Get.offAndToNamed(Routes.IMAGE_SCREEN, arguments: {
+            ArgumentConstant.imageFile: value!.path,
             ArgumentConstant.isFromEnhancer: false,
             ArgumentConstant.isFromCatoonizer: false,
             ArgumentConstant.isFromDenoiser: false,
@@ -146,8 +143,8 @@ class HomeController extends GetxController {
             ArgumentConstant.isFromBGRemover: false,
           });
         } else if (isFromImageEnlarger.isTrue) {
-          Get.toNamed(Routes.IMAGE_SCREEN, arguments: {
-            ArgumentConstant.imageFile: _croppedFile!.path,
+          Get.offAndToNamed(Routes.IMAGE_SCREEN, arguments: {
+            ArgumentConstant.imageFile: value!.path,
             ArgumentConstant.isFromEnhancer: false,
             ArgumentConstant.isFromCatoonizer: false,
             ArgumentConstant.isFromDenoiser: false,
@@ -161,8 +158,8 @@ class HomeController extends GetxController {
             ArgumentConstant.isFromColorizer: false,
           });
         } else if (isFromImageUpscaler.isTrue) {
-          Get.toNamed(Routes.IMAGE_SCREEN, arguments: {
-            ArgumentConstant.imageFile: _croppedFile!.path,
+          Get.offAndToNamed(Routes.IMAGE_SCREEN, arguments: {
+            ArgumentConstant.imageFile: value!.path,
             ArgumentConstant.isFromEnhancer: false,
             ArgumentConstant.isFromCatoonizer: false,
             ArgumentConstant.isFromDenoiser: false,
@@ -176,8 +173,8 @@ class HomeController extends GetxController {
             ArgumentConstant.isFromBGRemover: false,
           });
         } else if (isFromSharpener.isTrue) {
-          Get.toNamed(Routes.IMAGE_SCREEN, arguments: {
-            ArgumentConstant.imageFile: _croppedFile!.path,
+          Get.offAndToNamed(Routes.IMAGE_SCREEN, arguments: {
+            ArgumentConstant.imageFile: value!.path,
             ArgumentConstant.isFromEnhancer: false,
             ArgumentConstant.isFromCatoonizer: false,
             ArgumentConstant.isFromDenoiser: false,
@@ -191,8 +188,8 @@ class HomeController extends GetxController {
             ArgumentConstant.isFromColorizer: false,
           });
         } else if (isFromFaceRetouch.isTrue) {
-          Get.toNamed(Routes.IMAGE_SCREEN, arguments: {
-            ArgumentConstant.imageFile: _croppedFile!.path,
+          Get.offAndToNamed(Routes.IMAGE_SCREEN, arguments: {
+            ArgumentConstant.imageFile: value!.path,
             ArgumentConstant.isFromEnhancer: false,
             ArgumentConstant.isFromCatoonizer: false,
             ArgumentConstant.isFromDenoiser: false,
@@ -206,8 +203,8 @@ class HomeController extends GetxController {
             ArgumentConstant.isFromColorizer: false,
           });
         } else if (isFromBGRemover.isTrue) {
-          Get.toNamed(Routes.IMAGE_SCREEN, arguments: {
-            ArgumentConstant.imageFile: _croppedFile!.path,
+          Get.offAndToNamed(Routes.IMAGE_SCREEN, arguments: {
+            ArgumentConstant.imageFile: value!.path,
             ArgumentConstant.isFromEnhancer: false,
             ArgumentConstant.isFromCatoonizer: false,
             ArgumentConstant.isFromDenoiser: false,
@@ -221,8 +218,8 @@ class HomeController extends GetxController {
             ArgumentConstant.isFromColorizer: false,
           });
         } else if (isFromColorizer.isTrue) {
-          Get.toNamed(Routes.IMAGE_SCREEN, arguments: {
-            ArgumentConstant.imageFile: _croppedFile!.path,
+          Get.offAndToNamed(Routes.IMAGE_SCREEN, arguments: {
+            ArgumentConstant.imageFile: value!.path,
             ArgumentConstant.isFromEnhancer: false,
             ArgumentConstant.isFromCatoonizer: false,
             ArgumentConstant.isFromDenoiser: false,
@@ -236,8 +233,8 @@ class HomeController extends GetxController {
             ArgumentConstant.isFromColorizer: true,
           });
         } else {
-          Get.toNamed(Routes.IMAGE_SCREEN, arguments: {
-            ArgumentConstant.imageFile: _croppedFile!.path,
+          Get.offAndToNamed(Routes.IMAGE_SCREEN, arguments: {
+            ArgumentConstant.imageFile: value!.path,
             ArgumentConstant.isFromEnhancer: false,
             ArgumentConstant.isFromCatoonizer: true,
             ArgumentConstant.isFromDenoiser: false,
@@ -251,6 +248,161 @@ class HomeController extends GetxController {
             ArgumentConstant.isFromColorizer: false,
           });
         }
+      });
+      if (croppedFile != null) {
+        _croppedFile = croppedFile;
+        print("CropFile ${_croppedFile!.path}");
+        // if (isFromEnhancer.isTrue) {
+        //   Get.offAndToNamed(Routes.IMAGE_SCREEN, arguments: {
+        //     ArgumentConstant.imageFile: _croppedFile!.path,
+        //     ArgumentConstant.isFromEnhancer: true,
+        //     ArgumentConstant.isFromCatoonizer: false,
+        //     ArgumentConstant.isFromDenoiser: false,
+        //     ArgumentConstant.isFromAnime: false,
+        //     ArgumentConstant.isFromFaceRetouch: false,
+        //     ArgumentConstant.isFromImageEnlarger: false,
+        //     ArgumentConstant.isFromColorizer: false,
+        //     ArgumentConstant.isFromImageUpscaler: false,
+        //     ArgumentConstant.isFromSharpener: false,
+        //     ArgumentConstant.isFromBGRemover: false,
+        //     ArgumentConstant.isFromHome: true,
+        //   });
+        // } else if (isFromDenoiser.isTrue) {
+        //   Get.offAndToNamed(Routes.IMAGE_SCREEN, arguments: {
+        //     ArgumentConstant.imageFile: _croppedFile!.path,
+        //     ArgumentConstant.isFromEnhancer: false,
+        //     ArgumentConstant.isFromCatoonizer: false,
+        //     ArgumentConstant.isFromDenoiser: true,
+        //     ArgumentConstant.isFromAnime: false,
+        //     ArgumentConstant.isFromFaceRetouch: false,
+        //     ArgumentConstant.isFromHome: true,
+        //     ArgumentConstant.isFromColorizer: false,
+        //     ArgumentConstant.isFromImageEnlarger: false,
+        //     ArgumentConstant.isFromImageUpscaler: false,
+        //     ArgumentConstant.isFromSharpener: false,
+        //     ArgumentConstant.isFromBGRemover: false,
+        //   });
+        // } else if (isFromAnime.isTrue) {
+        //   Get.offAndToNamed(Routes.IMAGE_SCREEN, arguments: {
+        //     ArgumentConstant.imageFile: _croppedFile!.path,
+        //     ArgumentConstant.isFromEnhancer: false,
+        //     ArgumentConstant.isFromCatoonizer: false,
+        //     ArgumentConstant.isFromDenoiser: false,
+        //     ArgumentConstant.isFromAnime: true,
+        //     ArgumentConstant.isFromImageEnlarger: false,
+        //     ArgumentConstant.isFromHome: true,
+        //     ArgumentConstant.isFromFaceRetouch: false,
+        //     ArgumentConstant.isFromImageUpscaler: false,
+        //     ArgumentConstant.isFromSharpener: false,
+        //     ArgumentConstant.isFromColorizer: false,
+        //     ArgumentConstant.isFromBGRemover: false,
+        //   });
+        // } else if (isFromImageEnlarger.isTrue) {
+        //   Get.offAndToNamed(Routes.IMAGE_SCREEN, arguments: {
+        //     ArgumentConstant.imageFile: _croppedFile!.path,
+        //     ArgumentConstant.isFromEnhancer: false,
+        //     ArgumentConstant.isFromCatoonizer: false,
+        //     ArgumentConstant.isFromDenoiser: false,
+        //     ArgumentConstant.isFromFaceRetouch: false,
+        //     ArgumentConstant.isFromAnime: false,
+        //     ArgumentConstant.isFromHome: true,
+        //     ArgumentConstant.isFromImageEnlarger: true,
+        //     ArgumentConstant.isFromImageUpscaler: false,
+        //     ArgumentConstant.isFromSharpener: false,
+        //     ArgumentConstant.isFromBGRemover: false,
+        //     ArgumentConstant.isFromColorizer: false,
+        //   });
+        // } else if (isFromImageUpscaler.isTrue) {
+        //   Get.offAndToNamed(Routes.IMAGE_SCREEN, arguments: {
+        //     ArgumentConstant.imageFile: _croppedFile!.path,
+        //     ArgumentConstant.isFromEnhancer: false,
+        //     ArgumentConstant.isFromCatoonizer: false,
+        //     ArgumentConstant.isFromDenoiser: false,
+        //     ArgumentConstant.isFromAnime: false,
+        //     ArgumentConstant.isFromFaceRetouch: false,
+        //     ArgumentConstant.isFromImageEnlarger: false,
+        //     ArgumentConstant.isFromImageUpscaler: true,
+        //     ArgumentConstant.isFromSharpener: false,
+        //     ArgumentConstant.isFromHome: true,
+        //     ArgumentConstant.isFromColorizer: false,
+        //     ArgumentConstant.isFromBGRemover: false,
+        //   });
+        // } else if (isFromSharpener.isTrue) {
+        //   Get.offAndToNamed(Routes.IMAGE_SCREEN, arguments: {
+        //     ArgumentConstant.imageFile: _croppedFile!.path,
+        //     ArgumentConstant.isFromEnhancer: false,
+        //     ArgumentConstant.isFromCatoonizer: false,
+        //     ArgumentConstant.isFromDenoiser: false,
+        //     ArgumentConstant.isFromFaceRetouch: false,
+        //     ArgumentConstant.isFromAnime: false,
+        //     ArgumentConstant.isFromHome: true,
+        //     ArgumentConstant.isFromImageEnlarger: false,
+        //     ArgumentConstant.isFromImageUpscaler: false,
+        //     ArgumentConstant.isFromSharpener: true,
+        //     ArgumentConstant.isFromBGRemover: false,
+        //     ArgumentConstant.isFromColorizer: false,
+        //   });
+        // } else if (isFromFaceRetouch.isTrue) {
+        //   Get.offAndToNamed(Routes.IMAGE_SCREEN, arguments: {
+        //     ArgumentConstant.imageFile: _croppedFile!.path,
+        //     ArgumentConstant.isFromEnhancer: false,
+        //     ArgumentConstant.isFromCatoonizer: false,
+        //     ArgumentConstant.isFromDenoiser: false,
+        //     ArgumentConstant.isFromAnime: false,
+        //     ArgumentConstant.isFromImageEnlarger: false,
+        //     ArgumentConstant.isFromHome: true,
+        //     ArgumentConstant.isFromImageUpscaler: false,
+        //     ArgumentConstant.isFromSharpener: false,
+        //     ArgumentConstant.isFromFaceRetouch: true,
+        //     ArgumentConstant.isFromBGRemover: false,
+        //     ArgumentConstant.isFromColorizer: false,
+        //   });
+        // } else if (isFromBGRemover.isTrue) {
+        //   Get.offAndToNamed(Routes.IMAGE_SCREEN, arguments: {
+        //     ArgumentConstant.imageFile: _croppedFile!.path,
+        //     ArgumentConstant.isFromEnhancer: false,
+        //     ArgumentConstant.isFromCatoonizer: false,
+        //     ArgumentConstant.isFromDenoiser: false,
+        //     ArgumentConstant.isFromAnime: false,
+        //     ArgumentConstant.isFromImageEnlarger: false,
+        //     ArgumentConstant.isFromHome: true,
+        //     ArgumentConstant.isFromImageUpscaler: false,
+        //     ArgumentConstant.isFromSharpener: false,
+        //     ArgumentConstant.isFromFaceRetouch: false,
+        //     ArgumentConstant.isFromBGRemover: true,
+        //     ArgumentConstant.isFromColorizer: false,
+        //   });
+        // } else if (isFromColorizer.isTrue) {
+        //   Get.offAndToNamed(Routes.IMAGE_SCREEN, arguments: {
+        //     ArgumentConstant.imageFile: _croppedFile!.path,
+        //     ArgumentConstant.isFromEnhancer: false,
+        //     ArgumentConstant.isFromCatoonizer: false,
+        //     ArgumentConstant.isFromDenoiser: false,
+        //     ArgumentConstant.isFromAnime: false,
+        //     ArgumentConstant.isFromImageEnlarger: false,
+        //     ArgumentConstant.isFromHome: true,
+        //     ArgumentConstant.isFromImageUpscaler: false,
+        //     ArgumentConstant.isFromSharpener: false,
+        //     ArgumentConstant.isFromFaceRetouch: false,
+        //     ArgumentConstant.isFromBGRemover: false,
+        //     ArgumentConstant.isFromColorizer: true,
+        //   });
+        // } else {
+        //   Get.offAndToNamed(Routes.IMAGE_SCREEN, arguments: {
+        //     ArgumentConstant.imageFile: _croppedFile!.path,
+        //     ArgumentConstant.isFromEnhancer: false,
+        //     ArgumentConstant.isFromCatoonizer: true,
+        //     ArgumentConstant.isFromDenoiser: false,
+        //     ArgumentConstant.isFromAnime: false,
+        //     ArgumentConstant.isFromImageEnlarger: false,
+        //     ArgumentConstant.isFromHome: true,
+        //     ArgumentConstant.isFromImageUpscaler: false,
+        //     ArgumentConstant.isFromSharpener: false,
+        //     ArgumentConstant.isFromFaceRetouch: false,
+        //     ArgumentConstant.isFromBGRemover: false,
+        //     ArgumentConstant.isFromColorizer: false,
+        //   });
+        // }
       }
     }
   }

@@ -78,12 +78,12 @@ class ImageScreenController extends GetxController {
           getIt<TimerService>().verifyTimer();
           SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
           (isFromSave.isTrue)
-              ? Get.offAndToNamed(Routes.SHARE_FILE, arguments: {
+              ? Get.offAllNamed(Routes.SHARE_FILE, arguments: {
                   ArgumentConstant.capuredImage: File(saveImage.value),
                   ArgumentConstant.isFromMyCollection: false,
                   ArgumentConstant.isFromHome: false,
                 })
-              : Get.offAndToNamed(Routes.MAIN_SCREEN);
+              : Get.offAllNamed(Routes.MAIN_SCREEN);
           break;
       }
     });

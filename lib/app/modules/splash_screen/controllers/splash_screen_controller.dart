@@ -29,6 +29,7 @@ class SplashScreenController extends GetxController {
     });
     Timer(Duration(seconds: 3), () {
       loadAdd();
+      // Get.offAndToNamed(Routes.MAIN_SCREEN);
     });
     super.onInit();
   }

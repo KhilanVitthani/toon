@@ -2,11 +2,9 @@ import 'dart:io';
 
 import '../../../../constants/api_constants.dart';
 import '../../../../constants/color_constant.dart';
-import '../../../../constants/connectivityHelper.dart';
 import '../../../../constants/sizeConstant.dart';
 import '../../../../main.dart';
 import '../../../../utilities/buttons.dart';
-import '../../../../utilities/progress_dialog_utils.dart';
 import '../../../../utilities/timer_service.dart';
 import '../../../routes/app_pages.dart';
 import 'package:flutter/material.dart';
@@ -325,15 +323,17 @@ class HomeView extends GetWidget<HomeController> {
                     GestureDetector(
                       onTap: () {
                         openCamera().then((value) {
-                          if (controller.isFromMagicEraser.isFalse) {
-                            controller.cropImage(
-                                pickedFile: value, context: context);
-                          } else {
-                            Get.offAndToNamed(Routes.MAGIC_REMOVE_PAGE,
-                                arguments: {
-                                  ArgumentConstant.imageFile: value,
-                                });
-                          }
+                          controller.cropImage(
+                              pickedFile: value, context: context);
+                          // if (controller.isFromMagicEraser.isFalse) {
+                          //   controller.cropImage(
+                          //       pickedFile: value, context: context);
+                          // } else {
+                          //   Get.offAndToNamed(Routes.MAGIC_REMOVE_PAGE,
+                          //       arguments: {
+                          //         ArgumentConstant.imageFile: value,
+                          //       });
+                          // }
                         }).catchError((error) {
                           print(error);
                         });
@@ -347,16 +347,18 @@ class HomeView extends GetWidget<HomeController> {
                     GestureDetector(
                       onTap: () {
                         openGallery().then((value) {
-                          if (controller.isFromMagicEraser.isFalse) {
-                            controller.cropImage(
-                                pickedFile: value, context: context);
-                          } else {
-                            Get.offAndToNamed(Routes.MAGIC_REMOVE_PAGE,
-                                arguments: {
-                                  ArgumentConstant.imageFile: value,
-                                });
-                          }
-                          ;
+                          controller.cropImage(
+                              pickedFile: value, context: context);
+                          // if (controller.isFromMagicEraser.isFalse) {
+                          //   controller.cropImage(
+                          //       pickedFile: value, context: context);
+                          // } else {
+                          //   Get.offAndToNamed(Routes.MAGIC_REMOVE_PAGE,
+                          //       arguments: {
+                          //         ArgumentConstant.imageFile: value,
+                          //       });
+                          // }
+                          // ;
                         });
                         Navigator.of(context).pop();
                       },
