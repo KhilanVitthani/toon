@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:connectivity_plus/connectivity_plus.dart';
+
 import '../../../../constants/api_constants.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_share_me/flutter_share_me.dart';
@@ -14,15 +16,19 @@ class ShareFileController extends GetxController {
   File? capturedImage;
   RxBool isFromMyCollection = false.obs;
   RxBool isFromHome = false.obs;
+  var connectivityResult;
+
   final FlutterShareMe flutterShareMe = FlutterShareMe();
   @override
-  void onInit() {
+  Future<void> onInit() async {
     if (Get.arguments != null) {
       capturedImage = Get.arguments[ArgumentConstant.capuredImage];
       isFromMyCollection.value =
           Get.arguments[ArgumentConstant.isFromMyCollection];
       isFromHome.value = Get.arguments[ArgumentConstant.isFromHome];
     }
+    connectivityResult = await Connectivity().checkConnectivity();
+
     Yodo1MAS.instance.setInterstitialListener((event, message) {
       switch (event) {
         case Yodo1MAS.AD_EVENT_OPENED:

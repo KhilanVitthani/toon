@@ -19,11 +19,12 @@ class MyCollectionPageController extends GetxController {
   Future<void> onInit() async {
     if (!isNullEmptyOrFalse(box.read(ArgumentConstant.myCollection))) {
       RxList myImage1 = RxList([]);
-      connectivityResult = await Connectivity().checkConnectivity();
+
       myImage1.value = jsonDecode(box.read(ArgumentConstant.myCollection));
-      print(myImage);
       myImage.value = myImage1.reversed.toList();
+      print(myImage);
     }
+    connectivityResult = await Connectivity().checkConnectivity();
     Yodo1MAS.instance.setInterstitialListener((event, message) {
       switch (event) {
         case Yodo1MAS.AD_EVENT_OPENED:

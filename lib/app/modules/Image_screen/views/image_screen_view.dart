@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 import '../../../../constants/api_constants.dart';
 import '../../../../constants/color_constant.dart';
 import '../../../../constants/connectivityHelper.dart';
@@ -55,6 +56,7 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
                           Get.offAllNamed(Routes.MAIN_SCREEN);
                         }
                       });
+                      return await false;
                     } else {
                       Get.offAllNamed(Routes.MAIN_SCREEN);
                     }
@@ -95,6 +97,7 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
                                           Get.offAllNamed(Routes.MAIN_SCREEN);
                                         }
                                       });
+                                      return await false;
                                     } else {
                                       Get.offAllNamed(Routes.MAIN_SCREEN);
                                     }

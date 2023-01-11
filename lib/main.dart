@@ -25,8 +25,8 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   HttpOverrides.global = new MyHttpOverrides();
   await GetStorage.init();
-  setUp();
   Yodo1MAS.instance.init("dRRXU9VIRb", true, (successful) {});
+  setUp();
 
   runApp(
     GetMaterialApp(

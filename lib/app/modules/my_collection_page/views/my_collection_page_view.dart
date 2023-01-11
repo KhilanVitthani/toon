@@ -29,11 +29,12 @@ class MyCollectionPageView extends GetWidget<MyCollectionPageController> {
             if (!value) {
               getIt<TimerService>().verifyTimer();
               SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-              Get.offAndToNamed(Routes.MAIN_SCREEN);
+              Get.offAllNamed(Routes.MAIN_SCREEN);
             }
           });
+          return await false;
         } else {
-          Get.offAndToNamed(Routes.MAIN_SCREEN);
+          Get.offAllNamed(Routes.MAIN_SCREEN);
         }
         return await true;
       },

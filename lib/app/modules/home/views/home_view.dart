@@ -38,6 +38,7 @@ class HomeView extends GetWidget<HomeController> {
               Get.offAndToNamed(Routes.MAIN_SCREEN);
             }
           });
+          return await false;
         } else {
           Get.offAndToNamed(Routes.MAIN_SCREEN);
         }

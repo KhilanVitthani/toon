@@ -49,14 +49,13 @@ class MainScreenController extends GetxController {
   @override
   void onInit() {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-
+    box.write(ArgumentConstant.isFirstTime, false);
     if (!isNullEmptyOrFalse(box.read(ArgumentConstant.myCollection))) {
       RxList myImage1 = RxList([]);
       myImage1.value = jsonDecode(box.read(ArgumentConstant.myCollection));
       print(myImage);
       myImage.value = myImage1.reversed.toList();
     }
-
     Yodo1MAS.instance.setInterstitialListener(
       (event, message) {
         switch (event) {
