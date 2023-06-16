@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:toon_photo_editor/constants/api_constants.dart';
-import 'package:toon_photo_editor/constants/sizeConstant.dart';
-import 'package:yodo1mas/Yodo1MAS.dart';
 
 import '../../../../main.dart';
 import '../../../../utilities/ad_service.dart';
@@ -18,21 +16,6 @@ class SplashScreenController extends GetxController {
   @override
   void onInit() {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-    Yodo1MAS.instance.setInterstitialListener((event, message) {
-      switch (event) {
-        case Yodo1MAS.AD_EVENT_OPENED:
-          print('Interstitial AD_EVENT_OPENED');
-          break;
-        case Yodo1MAS.AD_EVENT_ERROR:
-          print('Interstitial AD_EVENT_ERROR' + message);
-          break;
-        case Yodo1MAS.AD_EVENT_CLOSED:
-          getIt<TimerService>().verifyTimer();
-          SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-          Get.offAllNamed(Routes.MAIN_SCREEN);
-          break;
-      }
-    });
     if (box.read(ArgumentConstant.isFirstTime) != null) {
       isFirstTime.value = box.read(ArgumentConstant.isFirstTime);
     }
@@ -51,19 +34,7 @@ class SplashScreenController extends GetxController {
   }
 
   loadAdd() async {
-    await getIt<AdService>()
-        .getAd(adType: AdService.interstitialAd)
-        .then((value) {
-      if (!value) {
-        SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-        Get.offAllNamed(Routes.MAIN_SCREEN);
-      } else {
-        Future.delayed(Duration(seconds: 8)).then((value) {
-          SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-          Get.offAllNamed(Routes.MAIN_SCREEN);
-        });
-      }
-    });
+    Get.offAllNamed(Routes.MAIN_SCREEN);
   }
 
   @override

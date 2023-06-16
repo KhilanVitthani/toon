@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart' hide MultipartFile, FormData;
 import 'package:http/http.dart' as http;
 import 'package:screenshot/screenshot.dart';
-import 'package:yodo1mas/Yodo1MAS.dart';
+// import 'package:yodo1mas/Yodo1MAS.dart';
 
 import '../../../../constants/api_constants.dart';
 import '../../../../constants/connectivityHelper.dart';
@@ -66,27 +66,6 @@ class ImageScreenController extends GetxController {
     if (!isNullEmptyOrFalse(box.read(ArgumentConstant.myCollection))) {
       imageList.value = jsonDecode(box.read(ArgumentConstant.myCollection));
     }
-    Yodo1MAS.instance.setInterstitialListener((event, message) {
-      switch (event) {
-        case Yodo1MAS.AD_EVENT_OPENED:
-          print('Interstitial AD_EVENT_OPENED');
-          break;
-        case Yodo1MAS.AD_EVENT_ERROR:
-          print('Interstitial AD_EVENT_ERROR' + message);
-          break;
-        case Yodo1MAS.AD_EVENT_CLOSED:
-          getIt<TimerService>().verifyTimer();
-          SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-          (isFromSave.isTrue)
-              ? Get.offAllNamed(Routes.SHARE_FILE, arguments: {
-                  ArgumentConstant.capuredImage: File(saveImage.value),
-                  ArgumentConstant.isFromMyCollection: false,
-                  ArgumentConstant.isFromHome: false,
-                })
-              : Get.offAllNamed(Routes.MAIN_SCREEN);
-          break;
-      }
-    });
 
     print(selectedImagePath);
     connectivity.initialise();

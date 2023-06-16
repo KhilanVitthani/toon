@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:yodo1mas/Yodo1MAS.dart';
 
 import 'app/routes/app_pages.dart';
 import 'constants/app_module.dart';
@@ -25,7 +24,6 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   HttpOverrides.global = new MyHttpOverrides();
   await GetStorage.init();
-  Yodo1MAS.instance.init("dRRXU9VIRb", true, (successful) {});
   setUp();
 
   runApp(

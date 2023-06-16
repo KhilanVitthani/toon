@@ -1,6 +1,5 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/services.dart';
-import 'package:yodo1mas/Yodo1MAS.dart';
 
 class AdService {
   static const interstitialAd = "interstitialAd";
@@ -14,11 +13,11 @@ class AdService {
     } else {
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
       if (adType == AdService.interstitialAd) {
-        Yodo1MAS.instance.showInterstitialAd();
+        // Yodo1MAS.instance.showInterstitialAd();
       } else if (adType == AdService.bannerAd) {
-        Yodo1MAS.instance.showBannerAd();
+        // Yodo1MAS.instance.showBannerAd();
       } else {
-        Yodo1MAS.instance.showRewardAd();
+        // Yodo1MAS.instance.showRewardAd();
       }
       return true;
     }

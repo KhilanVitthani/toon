@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
-import 'package:yodo1mas/Yodo1MAS.dart';
 
 import '../../../../constants/api_constants.dart';
 import '../../../../constants/color_constant.dart';
@@ -45,21 +44,6 @@ class HomeController extends GetxController {
             Get.offAllNamed(Routes.MAIN_SCREEN);
           },
         );
-      }
-    });
-    Yodo1MAS.instance.setInterstitialListener((event, message) {
-      switch (event) {
-        case Yodo1MAS.AD_EVENT_OPENED:
-          print('Interstitial AD_EVENT_OPENED');
-          break;
-        case Yodo1MAS.AD_EVENT_ERROR:
-          print('Interstitial AD_EVENT_ERROR' + message);
-          break;
-        case Yodo1MAS.AD_EVENT_CLOSED:
-          getIt<TimerService>().verifyTimer();
-          SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-          Get.offAndToNamed(Routes.MAIN_SCREEN);
-          break;
       }
     });
     super.onInit();

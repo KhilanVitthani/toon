@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:yodo1mas/Yodo1MAS.dart';
 
 import '../../../../constants/api_constants.dart';
 import '../../../../constants/sizeConstant.dart';
@@ -25,21 +24,6 @@ class MyCollectionPageController extends GetxController {
       print(myImage);
     }
     connectivityResult = await Connectivity().checkConnectivity();
-    Yodo1MAS.instance.setInterstitialListener((event, message) {
-      switch (event) {
-        case Yodo1MAS.AD_EVENT_OPENED:
-          print('Interstitial AD_EVENT_OPENED');
-          break;
-        case Yodo1MAS.AD_EVENT_ERROR:
-          print('Interstitial AD_EVENT_ERROR' + message);
-          break;
-        case Yodo1MAS.AD_EVENT_CLOSED:
-          getIt<TimerService>().verifyTimer();
-          SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-          Get.offAndToNamed(Routes.MAIN_SCREEN);
-          break;
-      }
-    });
     super.onInit();
   }
 

@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:yodo1mas/Yodo1MasBannerAd.dart';
 
 import '../../../../constants/api_constants.dart';
 import '../../../../constants/color_constant.dart';
@@ -126,11 +125,11 @@ class MyCollectionPageView extends GetWidget<MyCollectionPageController> {
                           ),
                         ),
                       ),
-                (controller.connectivityResult == ConnectionState.none)
-                    ? SizedBox()
-                    : Yodo1MASBannerAd(
-                        size: BannerSize.Banner,
-                      ),
+                // (controller.connectivityResult == ConnectionState.none)
+                //     ? SizedBox()
+                //     : Yodo1MASBannerAd(
+                //         size: BannerSize.Banner,
+                //       ),
               ],
             ),
           ),

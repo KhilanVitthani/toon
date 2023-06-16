@@ -24,6 +24,18 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>This app needs access to camera to take profile photo or upload photos in this app.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app needs access to gallery for take your profile photo or upload photos in this app.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>This app needs access to gallery for take your profile photo or upload photos in this app.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+    <string>This app requires to save your images user gallery</string>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>itms</string>
+    </array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

@@ -1,5 +1,4 @@
 import 'package:pinch_zoom/pinch_zoom.dart';
-import 'package:yodo1mas/Yodo1MasBannerAd.dart';
 
 import '../../../../constants/api_constants.dart';
 import '../../../../constants/color_constant.dart';
@@ -259,11 +258,6 @@ class ShareFileView extends GetView<ShareFileController> {
                   ],
                 ),
                 Spacer(),
-                (controller.connectivityResult == ConnectionState.none)
-                    ? SizedBox()
-                    : Yodo1MASBannerAd(
-                        size: BannerSize.Banner,
-                      ),
               ],
             ),
           ),
