@@ -4,7 +4,10 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:http/http.dart';
 import 'package:image_cropper/image_cropper.dart';
+import 'package:toon_photo_editor/utilities/ad_service.dart';
 
 import '../../../../constants/api_constants.dart';
 import '../../../../constants/color_constant.dart';
@@ -28,6 +31,10 @@ class HomeController extends GetxController {
   RxBool isFromColorizer = false.obs;
   RxBool isFromMagicEraser = false.obs;
   var connectivityResult;
+  BannerAd? bannerAd;
+  RxBool isBannerLoaded = false.obs;
+  NativeAd? nativeAd;
+  RxBool nativeAdIsLoaded = false.obs;
   Map source = {ConnectivityResult.none: false};
   final ConnetctivityHelper connectivity = ConnetctivityHelper.instance;
   @override
@@ -46,6 +53,8 @@ class HomeController extends GetxController {
         );
       }
     });
+    getIt<AdService>().initBannerAds();
+    getIt<AdService>().NativeLoadAd();
     super.onInit();
   }
 
@@ -56,6 +65,7 @@ class HomeController extends GetxController {
 
   @override
   void onClose() {
+    getIt<AdService>().dispose();
     source.clear();
     super.onClose();
   }

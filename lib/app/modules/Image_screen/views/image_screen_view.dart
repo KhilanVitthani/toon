@@ -1,5 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+
 import '../../../../constants/api_constants.dart';
 import '../../../../constants/color_constant.dart';
 import '../../../../constants/connectivityHelper.dart';
@@ -189,11 +191,24 @@ class ImageScreenView extends GetWidget<ImageScreenController> {
                       : null,
                   body: Column(
                     children: [
-                      // (controller.hasDate.isTrue)
-                      //     ? Yodo1MASBannerAd(
-                      //         size: BannerSize.Banner,
-                      //       )
-                      //     : SizedBox(),
+                      getIt<AdService>().isBannerLoaded.isTrue
+                          ? Center(
+                              child: SizedBox(
+                                width: getIt<AdService>()
+                                    .bannerAd!
+                                    .size
+                                    .width
+                                    .toDouble(),
+                                height: getIt<AdService>()
+                                    .bannerAd!
+                                    .size
+                                    .height
+                                    .toDouble(),
+                                child:
+                                    AdWidget(ad: getIt<AdService>().bannerAd!),
+                              ),
+                            )
+                          : SizedBox(),
                       Spacer(),
                       (controller.hasDate.isTrue)
                           ? Screenshot(

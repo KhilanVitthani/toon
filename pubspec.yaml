@@ -32,6 +32,8 @@ dependencies:
   share_plus:
   path_provider:
   get: 4.6.5
+  google_mobile_ads: ^3.0.0
+
   flutter: 
     sdk: flutter
 

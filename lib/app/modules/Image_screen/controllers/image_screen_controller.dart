@@ -108,6 +108,8 @@ class ImageScreenController extends GetxController {
         });
       }
     });
+    getIt<AdService>().initBannerAds();
+    super.onInit();
   }
 
   @override
@@ -117,6 +119,7 @@ class ImageScreenController extends GetxController {
 
   @override
   void onClose() {
+    getIt<AdService>().dispose();
     super.onClose();
   }
 

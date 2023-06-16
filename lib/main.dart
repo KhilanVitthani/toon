@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import 'app/routes/app_pages.dart';
 import 'constants/app_module.dart';
@@ -24,6 +25,16 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   HttpOverrides.global = new MyHttpOverrides();
   await GetStorage.init();
+  await MobileAds.instance.initialize();
+  MobileAds.instance.updateRequestConfiguration(
+    RequestConfiguration(
+      tagForChildDirectedTreatment: TagForChildDirectedTreatment.unspecified,
+      testDeviceIds: <String>[
+        "713319C6698760F61C0D4A5598D476DE",
+        "A7BAC95CAEFAED25914DA356C49D147E",
+      ],
+    ),
+  );
   setUp();
 
   runApp(
