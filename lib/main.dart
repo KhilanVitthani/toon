@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:toon_photo_editor/google_ads_controller.dart';
 
 import 'app/routes/app_pages.dart';
 import 'constants/app_module.dart';
@@ -36,7 +37,7 @@ Future<void> main() async {
     ),
   );
   setUp();
-
+  Get.put(GoogleAdsController());
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,

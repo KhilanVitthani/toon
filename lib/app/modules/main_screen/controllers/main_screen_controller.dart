@@ -55,6 +55,8 @@ class MainScreenController extends GetxController {
     }
 
     addImage();
+    getIt<AdService>().loadInterstitialAd();
+
     // loadAdd();
     super.onInit();
   }

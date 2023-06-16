@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:toon_photo_editor/google_ads_controller.dart';
 
 class AdService {
   static const interstitialAd = "interstitialAd";
@@ -13,6 +14,8 @@ class AdService {
   RxBool isBannerLoaded = false.obs;
   NativeAd? nativeAd;
   RxBool nativeAdIsLoaded = false.obs;
+  RxBool isInterstitialLoaded = false.obs;
+  InterstitialAd? interstitialAds;
   Future<bool> getAd({required String adType}) async {
     var connectivityResult = await Connectivity().checkConnectivity();
     if (connectivityResult == ConnectivityResult.none) {
@@ -87,7 +90,37 @@ class AdService {
       ..load();
   }
 
+  Future<void> loadInterstitialAd() async {
+    InterstitialAd.load(
+        adUnitId: "ca-app-pub-3940256099942544/1033173712",
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          onAdLoaded: (ad) {
+            ad.fullScreenContentCallback = FullScreenContentCallback(
+              onAdWillDismissFullScreenContent: (ad) {
+                GoogleAdsController.pausedByInterstitial = false;
+                ad.dispose();
+              },
+              onAdDismissedFullScreenContent: (ad) {
+                GoogleAdsController.pausedByInterstitial = false;
+                ad.dispose();
+              },
+            );
+            GoogleAdsController.pausedByInterstitial = true;
+            interstitialAds = ad;
+            isInterstitialLoaded.value = true;
+            loadInterstitialAd();
+          },
+          onAdFailedToLoad: (LoadAdError error) {
+            interstitialAds!.dispose();
+          },
+        ));
+  }
+
   void dispose() {
+    interstitialAds
+        ?.dispose()
+        .then((value) => isInterstitialLoaded.value = false);
     bannerAd?.dispose().then((value) => isBannerLoaded.value = false);
     nativeAd?.dispose().then((value) => nativeAdIsLoaded.value = false);
   }
