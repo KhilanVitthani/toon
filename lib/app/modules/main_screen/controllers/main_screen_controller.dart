@@ -112,7 +112,7 @@ class MainScreenController extends GetxController {
           return Container(
             color: appTheme.textGrayColor,
             height:
-                (MySize.isMini) ? MySize.getHeight(150) : MySize.getHeight(100),
+                (MySize.isMini) ? MySize.getHeight(150) : MySize.getHeight(150),
             width: double.infinity,
             child: Column(
               children: [

@@ -108,7 +108,7 @@ class ImageScreenController extends GetxController {
         });
       }
     });
-    getIt<AdService>().initBannerAds();
+    // getIt<AdService>().initBannerAds();
     super.onInit();
   }
 
@@ -152,8 +152,19 @@ class ImageScreenController extends GetxController {
     request.files.add(
         await http.MultipartFile.fromPath('myfile', selectedImagePath.value));
 
-    http.StreamedResponse response = await request.send();
-
+    http.StreamedResponse response = await request.send().then((value) {
+      print(value.statusCode);
+      return value;
+    }).catchError((e) {
+      return getIt<CustomDialogs>().getDialog(
+        title: "Something Went Wrong, Please Try Again",
+        desc: "${e.toString()}",
+        onTap: () {
+          Get.offAllNamed(Routes.MAIN_SCREEN);
+          selectedImagePath.value = "";
+        },
+      );
+    });
     if (response.statusCode == 200) {
       imageID.value = await response.stream.bytesToString();
       print(imageID);
@@ -185,7 +196,19 @@ class ImageScreenController extends GetxController {
     request.files.add(
         await http.MultipartFile.fromPath('myfile', selectedImagePath.value));
 
-    http.StreamedResponse response = await request.send();
+    http.StreamedResponse response = await request.send().then((value) {
+      print(value.statusCode);
+      return value;
+    }).catchError((e) {
+      return getIt<CustomDialogs>().getDialog(
+        title: "Something Went Wrong, Please Try Again",
+        desc: "${e.toString()}",
+        onTap: () {
+          Get.offAllNamed(Routes.MAIN_SCREEN);
+          selectedImagePath.value = "";
+        },
+      );
+    });
 
     if (response.statusCode == 200) {
       imageID.value = await response.stream.bytesToString();
@@ -221,7 +244,19 @@ class ImageScreenController extends GetxController {
     request.files.add(
         await http.MultipartFile.fromPath('myfile', selectedImagePath.value));
 
-    http.StreamedResponse response = await request.send();
+    http.StreamedResponse response = await request.send().then((value) {
+      print(value.statusCode);
+      return value;
+    }).catchError((e) {
+      return getIt<CustomDialogs>().getDialog(
+        title: "Something Went Wrong, Please Try Again",
+        desc: "${e.toString()}",
+        onTap: () {
+          Get.offAllNamed(Routes.MAIN_SCREEN);
+          selectedImagePath.value = "";
+        },
+      );
+    });
     if (response.statusCode == 200) {
       imageID.value = await response.stream.bytesToString();
       image2D.value = "http://get.imglarger.com:8662/results/${imageID}.jpg";
@@ -254,7 +289,19 @@ class ImageScreenController extends GetxController {
     request.files.add(
         await http.MultipartFile.fromPath('myfile', selectedImagePath.value));
 
-    http.StreamedResponse response = await request.send();
+    http.StreamedResponse response = await request.send().then((value) {
+      print(value.statusCode);
+      return value;
+    }).catchError((e) {
+      return getIt<CustomDialogs>().getDialog(
+        title: "Something Went Wrong, Please Try Again",
+        desc: "${e.toString()}",
+        onTap: () {
+          Get.offAllNamed(Routes.MAIN_SCREEN);
+          selectedImagePath.value = "";
+        },
+      );
+    });
     if (response.statusCode == 200) {
       imageID.value = await response.stream.bytesToString();
       print(imageID);
@@ -293,7 +340,19 @@ class ImageScreenController extends GetxController {
     request.files.add(
         await http.MultipartFile.fromPath('myfile', selectedImagePath.value));
 
-    http.StreamedResponse response = await request.send();
+    http.StreamedResponse response = await request.send().then((value) {
+      print(value.statusCode);
+      return value;
+    }).catchError((e) {
+      return getIt<CustomDialogs>().getDialog(
+        title: "Something Went Wrong, Please Try Again",
+        desc: "${e.toString()}",
+        onTap: () {
+          Get.offAllNamed(Routes.MAIN_SCREEN);
+          selectedImagePath.value = "";
+        },
+      );
+    });
     if (response.statusCode == 200) {
       imageID.value = await response.stream.bytesToString();
       print(imageID);
@@ -327,7 +386,19 @@ class ImageScreenController extends GetxController {
     request.files.add(
         await http.MultipartFile.fromPath('myfile', selectedImagePath.value));
 
-    http.StreamedResponse response = await request.send();
+    http.StreamedResponse response = await request.send().then((value) {
+      print(value.statusCode);
+      return value;
+    }).catchError((e) {
+      return getIt<CustomDialogs>().getDialog(
+        title: "Something Went Wrong, Please Try Again",
+        desc: "${e.toString()}",
+        onTap: () {
+          Get.offAllNamed(Routes.MAIN_SCREEN);
+          selectedImagePath.value = "";
+        },
+      );
+    });
     if (response.statusCode == 200) {
       imageID.value = await response.stream.bytesToString();
       print(imageID);
@@ -361,7 +432,19 @@ class ImageScreenController extends GetxController {
     request.files.add(
         await http.MultipartFile.fromPath('myfile', selectedImagePath.value));
 
-    http.StreamedResponse response = await request.send();
+    http.StreamedResponse response = await request.send().then((value) {
+      print(value.statusCode);
+      return value;
+    }).catchError((e) {
+      return getIt<CustomDialogs>().getDialog(
+        title: "Something Went Wrong, Please Try Again",
+        desc: "${e.toString()}",
+        onTap: () {
+          Get.offAllNamed(Routes.MAIN_SCREEN);
+          selectedImagePath.value = "";
+        },
+      );
+    });
     if (response.statusCode == 200) {
       imageID.value = await response.stream.bytesToString();
       print(imageID);
@@ -395,7 +478,19 @@ class ImageScreenController extends GetxController {
     request.files.add(
         await http.MultipartFile.fromPath('myfile', selectedImagePath.value));
 
-    http.StreamedResponse response = await request.send();
+    http.StreamedResponse response = await request.send().then((value) {
+      print(value.statusCode);
+      return value;
+    }).catchError((e) {
+      return getIt<CustomDialogs>().getDialog(
+        title: "Something Went Wrong, Please Try Again",
+        desc: "${e.toString()}",
+        onTap: () {
+          Get.offAllNamed(Routes.MAIN_SCREEN);
+          selectedImagePath.value = "";
+        },
+      );
+    });
     if (response.statusCode == 200) {
       imageID.value = await response.stream.bytesToString();
 
@@ -436,7 +531,19 @@ class ImageScreenController extends GetxController {
     request.files.add(
         await http.MultipartFile.fromPath('myfile', selectedImagePath.value));
 
-    http.StreamedResponse response = await request.send();
+    http.StreamedResponse response = await request.send().then((value) {
+      print(value.statusCode);
+      return value;
+    }).catchError((e) {
+      return getIt<CustomDialogs>().getDialog(
+        title: "Something Went Wrong, Please Try Again",
+        desc: "${e.toString()}",
+        onTap: () {
+          Get.offAllNamed(Routes.MAIN_SCREEN);
+          selectedImagePath.value = "";
+        },
+      );
+    });
     if (response.statusCode == 200) {
       imageID.value = await response.stream.bytesToString();
 
@@ -472,7 +579,19 @@ class ImageScreenController extends GetxController {
     request.files.add(
         await http.MultipartFile.fromPath('myfile', selectedImagePath.value));
 
-    http.StreamedResponse response = await request.send();
+    http.StreamedResponse response = await request.send().then((value) {
+      print(value.statusCode);
+      return value;
+    }).catchError((e) {
+      return getIt<CustomDialogs>().getDialog(
+        title: "Something Went Wrong, Please Try Again",
+        desc: "${e.toString()}",
+        onTap: () {
+          Get.offAllNamed(Routes.MAIN_SCREEN);
+          selectedImagePath.value = "";
+        },
+      );
+    });
     if (response.statusCode == 200) {
       imageID.value = await response.stream.bytesToString();
 
@@ -501,7 +620,19 @@ class ImageScreenController extends GetxController {
                 'https://access2.imglarger.com:${urlId}/status/$imageID');
     var request = http.Request('GET', url);
 
-    http.StreamedResponse response = await request.send();
+    http.StreamedResponse response = await request.send().then((value) {
+      print(value.statusCode);
+      return value;
+    }).catchError((e) {
+      return getIt<CustomDialogs>().getDialog(
+        title: "Something Went Wrong, Please Try Again",
+        desc: "${e.toString()}",
+        onTap: () {
+          Get.offAllNamed(Routes.MAIN_SCREEN);
+          selectedImagePath.value = "";
+        },
+      );
+    });
     if (response.statusCode == 200) {
       RxString imageResponse = "".obs;
       imageResponse.value = await response.stream.bytesToString();

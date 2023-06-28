@@ -33,6 +33,7 @@ Future<void> main() async {
       testDeviceIds: <String>[
         "713319C6698760F61C0D4A5598D476DE",
         "A7BAC95CAEFAED25914DA356C49D147E",
+        "D2A62EDFBB37ECB428AE605418B90F40"
       ],
     ),
   );
